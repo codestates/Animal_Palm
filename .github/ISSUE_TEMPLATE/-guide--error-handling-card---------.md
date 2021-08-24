@@ -2,7 +2,7 @@
 name: "[Guide] Error Handling Card 마크다운 템플릿"
 about: " Error Handling Card"
 title: "[error] Error Handling Card"
-labels: ''
+labels: error
 assignees: ''
 
 ---
