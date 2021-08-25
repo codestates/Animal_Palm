@@ -1,8 +1,9 @@
-const {pages,writecontext} = require('../controllers/boardController')
+const {context,writecontext,contextDelete} = require('../controllers/boardController')
 const exress = require('express');
 const router = exress.Router();
 
-router.get('/pages',pages)
-router.post('/write',writecontext)
+router.get('/:id/:context',context)
+router.post('/:id',writecontext)
+router.put('/:id',contextDelete)
 
 module.exports = router
