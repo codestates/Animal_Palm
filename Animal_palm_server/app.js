@@ -1,41 +1,36 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const express = require('express');
+const https = require("http")
+const cors = require('cors');
+const app = express();
+const cookieParser = require("cookie-parser");
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+//const controllers = require("./controllers")
 
-var app = express();
+const boardRouter = require("./router/boardRouter")
+const commentRouter = require("./router/commentRouter")
+const mypagesRouter = require("./router/mypagesRouter")
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.json())
+app.use(express.urlencoded({extended:false}));
+app.use('/:id',boardRouter)
+app.get('/',(req,res,next)=>{
+  res.send("main") 
+})
+// app.use(
+//   cors({
+//     origin:["http://localhost:3000"],
+//     credentials : true,
+//     methods:["GET","POST","OPTIONS"],
+//   })
+// )
+app.use(cookieParser())
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+const HTTP_PORT = process.env.HTTP_PORT|| 4000
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
+app.listen(HTTP_PORT, () => {
+  console.log(`[RUN] StatesAirline Server... | http://localhost:${HTTP_PORT}`);
 });
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
 
 module.exports = app;
