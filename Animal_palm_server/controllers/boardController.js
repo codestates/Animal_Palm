@@ -1,11 +1,11 @@
 module.exports ={
     context: (req,res)=>{
-        res.send('context')
+        return res.send('context')
     },
     writecontext:(req,res)=>{
-        res.send("writecontext")
+        return res.send("writecontext")
     },
     contextDelete:(req,res)=>{
-        res.send("contextDelete")
+        return res.send("contextDelete")
     }
 }

@@ -1,11 +1,11 @@
 module.exports ={
     update: (req,res)=>{
-         res.send('updata')
+        return res.send('updata')
     },
     check:(req,res)=>{
-         res.send("check")
+        return res.send("check")
     },
     info :(req,res)=>{
-         res.send("info")
+        return res.send("info")
     }
 }

@@ -1,15 +1,15 @@
 module.exports ={
   signin: (req,res)=>{
-     res.send('signin')
+    return res.send('signin')
   },
   signup:(req,res)=>{
-     res.send("signup")
+    return res.send("signup")
   },
   signout:(req,res)=>{
-     res.send("signout")
+    return res.send("signout")
   },
   userDelete:(req,res)=>{
-     res.send("userDelete")
+    return res.send("userDelete")
   }
 
 }
