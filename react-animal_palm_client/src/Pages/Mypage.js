@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Profile } from './component/Profile';
-import { MyContents } from './component/MyContents';
-import { MyComments } from './component/MyComments';
-import { MySetting } from './component/MySetting';
+import { Profile } from './components/Profile';
+import { MyContents } from './components/MyContents';
+import { MyComments } from './components/MyComments';
+import { MySetting } from './components/MySetting';
 
 export const Mypage = () => {
   // 프로필 컴포넌트
