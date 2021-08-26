@@ -1,14 +1,14 @@
 import React from 'react';
 
-export const Login = () => {
+export function Login() {
   return (
-    <div>
+    <>
       <center>
-        <h1>로그인</h1>
+        <h1>Sign In</h1>
         <form>
           <div>
             <span>아이디</span>
-            <input />
+            <input/>
           </div>
           <div>
             <span>비밀번호</span>
@@ -16,13 +16,13 @@ export const Login = () => {
               type='password'/>
           </div>
           <button>
-            로그인
+            회원가입
           </button>
           <button>
-            회원가입
+            로그인
           </button>
         </form>
       </center>
-    </div>
+    </>
   );
 };
