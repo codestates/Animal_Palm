@@ -26,7 +26,7 @@ app.get('/',(req,res,next)=>{
 // )
 app.use(cookieParser())
 
-const HTTP_PORT = process.env.HTTP_PORT|| 4000
+const HTTP_PORT = process.env.HTTP_PORT || 4000
 
 app.listen(HTTP_PORT, () => {
   console.log(`[RUN] StatesAirline Server... | http://localhost:${HTTP_PORT}`);

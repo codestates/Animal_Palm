@@ -1,4 +1,4 @@
-const {pages,writecontext} = require('../controllers/boardController')
+const { pages,writecontext } = require('../controllers/boardController')
 const exress = require('express');
 const router = exress.Router();
 
