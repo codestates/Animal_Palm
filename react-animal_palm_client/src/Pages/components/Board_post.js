@@ -1,12 +1,14 @@
 import '../Board.css'
 
-function Board_post() {
+function Board_post({ context, comment }) {
   return (
     
     <div className="Board_post">
         <div className="Header">
             <h1>제목입니다</h1>
+            {/* <h1>{context.title}</h1> */}
         </div>
+        <button>글삭제</button>
         <div className="Container">
             <div className="Content">
                 게시글 <br></br>
@@ -14,6 +16,7 @@ function Board_post() {
                 게시글 <br></br>
                 게시글 <br></br>
                 게시글 <br></br>
+                {/* {context.content} */}
             
             </div>
             <div className="Replybox"></div>

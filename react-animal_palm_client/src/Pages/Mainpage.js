@@ -1,12 +1,16 @@
 import './Mainpage.css';
 import Navigaitionbar from './components/navigationbar';
-function Mainpage() {
+import { Link } from 'react-router-dom'
+
+export default function Mainpage() {
   return (
     <div className="Mainpage">
      <Navigaitionbar />
-     <a className='welcome'>환영합니다</a>
+     <Link to='/board'>
+     <div className='welcome'>환영합니다</div>
+     </Link>
     </div>
   );
 }
 
-export default Mainpage;
+
