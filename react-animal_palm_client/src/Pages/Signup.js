@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom'
 export const Signup = () => {
   return (
     <div>
@@ -29,9 +29,13 @@ export const Signup = () => {
             <span>전화번호</span>
             <input type='tel'/>
           </div>
+          
           <div>
+          <Link to="/login">
               이미 아이디가 있으신가요?
+              </Link>
           </div>
+          
           <button type='submit'>
             회원가입
           </button>
