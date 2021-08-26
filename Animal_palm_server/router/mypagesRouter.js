@@ -3,7 +3,7 @@ const exress = require('express');
 const router = exress.Router();
 
 router.patch('/update',update)
-router.get('/check',check)
+router.post('/check',check)
 router.get('/info',info)
 
 

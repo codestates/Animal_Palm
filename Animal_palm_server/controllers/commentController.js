@@ -1,11 +1,11 @@
 module.exports ={
     comment: (req,res)=>{
-        return res.send('comment')
+         res.send('comment')
     },
     writecomment:(req,res)=>{
-        return res.send("writecomment")
+         res.send("writecomment")
     },
     commentDelete:(req,res)=>{
-        return res.send("commentDelete")
+         res.send("commentDelete")
     }
 }

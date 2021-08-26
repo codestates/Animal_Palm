@@ -5,6 +5,6 @@ const router = exress.Router();
 router.post('/signin',signin)
 router.post('/signup',signup)
 router.put('/signout',signout)
-router.puh('/userDelete',userDelete)
+router.delete('/userDelete',userDelete)
 
 module.exports = router
