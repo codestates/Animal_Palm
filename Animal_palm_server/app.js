@@ -9,11 +9,15 @@ const cookieParser = require("cookie-parser");
 const boardRouter = require("./router/boardRouter")
 const commentRouter = require("./router/commentRouter")
 const mypagesRouter = require("./router/mypagesRouter")
+const userRouter = require("./router/UserRouter")
 
 
 app.use(express.json())
 app.use(express.urlencoded({extended:false}));
-app.use('/:id',boardRouter)
+app.use('/board',boardRouter)
+app.use('/user',userRouter)
+app.use('/comment',commentRouter)
+app.use('/mypage',mypagesRouter)
 app.get('/',(req,res,next)=>{
   res.send("main") 
 })
