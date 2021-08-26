@@ -7,20 +7,25 @@
     background-color: darkslategrey;
     width: 100%;
     display: flex;
-    align-content: space-between;
+    justify-content: space-between;
     margin:0;
     padding: 0;
-    flex-direction: column;
+    
     font-size: 2em;
     padding: 10px;
     flex-direction: row;
     list-style-type: none;
 }
-.logo{
-    flex: 2 0 0;
-}
-a {
-    background-color: white;
+
+.right-top {
+    padding: 0.2em;
     border: 1px solid black;
+    display:flex;
     cursor: pointer;
+}
+
+a {
+    border:1px solid black;
+    background-color: white;
+    
 }
