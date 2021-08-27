@@ -6,9 +6,9 @@ const cookieParser = require("cookie-parser");
 
 //const controllers = require("./controllers")
 
-const boardRouter = require("./router/boardRouter")
-const commentRouter = require("./router/commentRouter")
-const mypagesRouter = require("./router/mypagesRouter")
+const boardRouter = require("./router/BoardRouter")
+const commentRouter = require("./router/CommentRouter")
+const mypagesRouter = require("./router/MypagesRouter")
 const userRouter = require("./router/UserRouter")
 
 
