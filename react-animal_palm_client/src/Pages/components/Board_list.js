@@ -1,12 +1,49 @@
 import '../Board.css'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
+import { useEffect, useState } from 'react'
+
      
-     function Board_list({ contentList, loadComment, loadContent }) {
-        const num = [1,2,3]
+     function Board_list({animalId}) {
+        const num = [1,2,3] //dummy
+        let count = 0
+        const [contentList, setContentList] = useState([])
+
+        useEffect(()=>{
+            loadContentList(animalId)
+        },[])
+
+        const loadContentList = (animalId) => {
+            axios
+             .get(
+              `http://localhost:4000/boards/${animalId}`
+             ).then( data => {
+               setContentList(data)
+             })
+             .catch((err)=>{
+               alert(err)
+                count = 1
+               console.log(count)
+               if(contentList.length===0){
+               setContentList([{
+                   animalId:1,
+                postId:'1',
+                title:'내용이',
+                userId:'없네요',
+                time:'에러',
+                hashtag:'입니다',
+               }])}
+             })
+          }
+
+        
 
        return (
          
          <div className="Board_list">
+             {/* {alert('1')} */}
+             {/* {count===0 ?
+             loadContentList(animalId):null} */}
          <table className="table">
          <thead>
          <tr>
@@ -17,13 +54,13 @@ import { Link } from 'react-router-dom'
              <th>태그</th>
          </tr>
          </thead>
-         {num.map(el=>{
+         {/* {num.map(el=>{
              return <tbody>
-             <tr>
+             <tr> */}
                  {/* .map 으로 구현해야함 */}
-                 <td>{el}</td>
+                 {/* <td>{el}</td>
                  <td>
-                     <Link to='board/post'  onClick={loadContent} onClick={loadComment}>
+                     <Link to='board/post'  onClick={()=>loadContentComment(el.animalId, el.contextId, el.postId)} context={'context'} comment={'comment'} postId={el.postId} >
                      제목입니다
                      </Link>
                 </td>
@@ -32,11 +69,11 @@ import { Link } from 'react-router-dom'
                  <td>맛집, 뭐뭐뭐</td>
              </tr>
              </tbody>
-         })}
-         {/* {contentList.map(el=>{
+         })} */}
+         {contentList.map(el=>{
              return (
              <tbody>
-                 <Link to='board/post' onClick={loadContent} onClick={loadComment}>
+                 <Link to='board/post' >
                  <tr>
                      <td>{el.postId}</td>
                      <td>{el.title}</td>
@@ -47,7 +84,7 @@ import { Link } from 'react-router-dom'
                  </Link>
              </tbody>
              )
-         })} */}
+         })}
      </table>
      <Link to='board/write'>
      <button>
