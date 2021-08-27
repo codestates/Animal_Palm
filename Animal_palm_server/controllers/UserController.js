@@ -18,6 +18,7 @@ module.exports ={
 
     return res.send('signin')
   },
+
   signup:(req,res)=>{
     //*POST method / endpoint: https://localhost:4000/user/signup
     //*req.body에 유저 정보 담겨있음
@@ -29,6 +30,7 @@ module.exports ={
 
     return res.send("signup")
   },
+  
   signout:(req,res)=>{
     //*PUT method / endpoint https://localhost:4000/user/signout
     //TODO: 로그아웃 기능 구현
@@ -39,6 +41,7 @@ module.exports ={
     //req.body로 받아온 access token, 쿠키에 담겨있던 refresh token 둘 다 삭제
     return res.send("signout")
   },
+
   userDelete:(req,res)=>{
     //*DELETE method / endpoint http://localhost:4000/user/
     //TODO: 회원 탈퇴 기능 구현
@@ -47,6 +50,10 @@ module.exports ={
     //destroy method 사용
     //-> 현재 로그인 되어있는 유저를 DB에서 찾은 뒤 그 유저를 destory
     return res.send("userDelete")
+  },
+
+  MBTI_signup: (req, res) => {
+
   }
 
 }

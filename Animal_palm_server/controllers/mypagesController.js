@@ -8,7 +8,7 @@ module.exports ={
 
     //업데이트 된 데이터 돌려줄 필요? -> client에서 필요하다고 하면 돌려줌
     //비밀번호도 수정할 수 있으니까 body에 hashing된 비밀번호까지 받아도 되지 않을까?
-    return res.send('updata')
+    return res.send('update')
   },
 
   check:(req,res)=>{

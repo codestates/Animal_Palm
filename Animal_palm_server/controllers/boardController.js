@@ -1,13 +1,24 @@
 module.exports ={
-  context: (req,res)=>{
-    //*GET / endpoint: http://localhost:4000/boards/:id
-    //TODO: 현재 게시판의 글 가져오기
+  animalBoard_post_list: (req,res)=>{
+    //*GET / endpoint: http://localhost:4000/boards/:board_id
+    //TODO: 현재 게시판의 글 목록 가져오기
 
     //req.params에 담긴 id로 postDB 조회
     //post.board_name이 req.params.id와 같은 데이터 검색
     //findAll -> 배열로 받은 값을 client에서 필요한 형태로 map해서 응답
     
-    return res.send('context')
+    return res.send('animalBoard_post_list')
+  },
+
+  get_post: (req, res) => {
+    //*GET / endpoint: http://localhost:4000/boards/:post_id
+    //TODO: 현재 클릭된 글 가져오기
+
+    //req.params에 담긴 id로 postDB 조회
+    //post.Id가 req.params.id와 같은 데이터 검색
+    //어차피 한 개밖에 없음 findOne으로 탐색 -> 받은 데이터를 client에서 필요한 형태로 응답
+
+    return res.send('get_post')
   },
 
   writecontext:(req,res)=>{
