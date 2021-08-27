@@ -1,16 +1,40 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import { Modal } from './Modal';
 import { UserInfo } from './UserInfo';
 
-export const MySetting = () => {
+export const MySetting = ({
+  userInfo
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [wannaUpdate, setWannaUpdate] = useState(false);
   const [wannaDelete, setWannaDelete] = useState(false);
+  const [entireInfo, setEntireInfo] = useState(null);
 
   const openModalHandler = () => {
     setIsOpen(!isOpen);
   };
   const wannaUpdateHandler = () => {
+    const userinfoURL = 'http://3.34.133.160:4000/mypage/info';
+    axios.get(userinfoURL, {
+      headers : {
+        'Content-type' : 'application/json'
+      },
+      withCredentials : true
+    })
+    .then((res) => {
+      //! 유저 풀 정보 받아옴
+      const message = res.data.message
+      if(message === 'ok') {
+        // 작업
+        const {id, animalName, email, phone} = res.data.user_info;
+        const info = {id, animalName, email, phone};
+        setEntireInfo(info);
+      } else {
+        // 에러
+        alert('비밀번호 오류')
+      }
+    })
     setIsOpen(false)
     setWannaDelete(false)
     setWannaUpdate(!wannaUpdate);
@@ -34,6 +58,7 @@ export const MySetting = () => {
         <div>
           <div >
             <UserInfo
+              entireInfo = {entireInfo}
               wannaUpdateHandler={wannaUpdateHandler}
               changeHandler={allSetHandler}
             />
@@ -42,6 +67,7 @@ export const MySetting = () => {
           {wannaDelete?
             <div>
               <Modal
+                userInfo = {userInfo}
                 header='정말 탈퇴하시겠습니까?'
                 noBtnHandler={deleteButtonHandler}
                 yesBtnHandler={deleteMemberHandler}
@@ -54,9 +80,10 @@ export const MySetting = () => {
       : <>{isOpen?
         <div>
           <Modal
+            userInfo = {userInfo}
             header='회원정보를 수정하시려면 비밀번호를 입력해주세요'
             noBtnHandler={openModalHandler}
-            yesBtnHandler={wannaUpdateHandler}
+            wannaUpdateHandler={wannaUpdateHandler}
             yesBtn='확인'
           />
         </div>

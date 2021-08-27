@@ -10,17 +10,22 @@ export function Login({
     password:''
   })
   const handleInputValue = (e) => {
-    setLoginInfo({[e.target.name] : e.target.value})
-    console.log(loginInfo)
+    setLoginInfo({...loginInfo, [e.target.name] : e.target.value})
+    // console.log(loginInfo)
   }
   const LoginHandler = () => {
-    const signInURl = 'http://localhost:4000/user/signin';
+    if(loginInfo.id === '' || loginInfo.password === '') {
+      alert('아이디와 비밀번호를 제대로 입력해주세요')
+      return;
+    }
+    const signInURl = 'http://3.34.133.160:4000/user/signin';
     axios.post(signInURl,
       { loginInfo }, 
       { headers : {'Content-type' : 'application/json'},
         withCredentials : true }
       )
     .then((res) => {
+      console.log(1)
       const message = res.data.message;
 
       if(message === 'ok') {
@@ -32,10 +37,14 @@ export function Login({
         history.push('/')
       } else {
         alert('아이디 혹은 비밀번호를 잘못 입력하셨습니다.')
-        history.push('/')
+        return;
+        // history.push('/')
       }
     })
     .catch((err) => alert(err))
+    // const signInURl = 'http://3.34.133.160:4000/';
+    // axios.get(signInURl)
+    // .then(() => console.log(1))
   }
 
   return (

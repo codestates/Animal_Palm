@@ -1,6 +1,8 @@
 import React from 'react';
 
-export const Profile = () => {
+export const Profile = ({
+  userInfo
+}) => {
   // 프로필 동물사진
   // 동물이름
   return (
@@ -11,7 +13,7 @@ export const Profile = () => {
       </div>
       <div>
         재빠른 나무늘보
-        {/* {동물 이름} */}
+        {/* {userInfo.animalName} */}
       </div>
     </>
   );
