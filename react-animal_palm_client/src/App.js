@@ -12,8 +12,7 @@ function App() {
   const history = useHistory();
   const [isLogin, setIsLogin] = useState(false);
   const [userInfo, setUserInfo] = useState({
-    animalName: '',
-    accessToken: ''
+    animalName: ''
   })
   const handleUserInfo = (data) => {
     setIsLogin(true)
@@ -29,11 +28,14 @@ function App() {
       <Route exact path="/">
           <Mainpage
             isLogin={isLogin}
+            handleLogout={handleLogout}
           />
         </Route>
       <Switch>
         <Route path="/mypage">
-          <Mypage />
+          <Mypage
+            userInfo = {userInfo}
+          />
         </Route>
         <Route path="/login">
           <Login 
