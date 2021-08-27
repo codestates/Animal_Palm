@@ -36,7 +36,7 @@ module.exports ={
     //req에 담긴 현재 댓글을 commentDB에서 검색해서 삭제
     //마찬가지로 token에 담긴 유저가 유효한 유저인지
     //-> commentId가 존재하는 댓글인지
-    //->해당 댓글의 작성자가 token에 담긴 유저인지
+    //-> 해당 댓글의 작성자가 token에 담긴 유저인지
     //  위의 유효성을 체크하고 진행할것
     return res.send("commentDelete")
   }
