@@ -16,12 +16,7 @@ export const MySetting = ({
   };
   const wannaUpdateHandler = () => {
     const userinfoURL = 'http://3.34.133.160:4000/mypage/info';
-    axios.get(userinfoURL, {
-      headers : {
-        'Content-type' : 'application/json'
-      },
-      withCredentials : true
-    })
+    axios.get(userinfoURL)
     .then((res) => {
       //! 유저 풀 정보 받아옴
       const message = res.data.message

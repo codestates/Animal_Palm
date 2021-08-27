@@ -19,13 +19,7 @@ export const Modal = ({
       return;
     }
     const checkPwURL = 'http://3.34.133.160:4000/mypage/passwd';
-    axios.post(checkPwURL,
-      { pwInput },
-      { headers : {
-          'Content-type' : 'application/json',
-          Authorization : `Bearer ${userInfo.accessToken}`
-        }, withCredentials : true
-      })
+    axios.post(checkPwURL, { pwInput })
       .then((res) => {
         const message = res.data.message;
         if(message = 'correct passwd') {

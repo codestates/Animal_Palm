@@ -20,9 +20,7 @@ export function Login({
     }
     const signInURl = 'http://3.34.133.160:4000/user/signin';
     axios.post(signInURl,
-      { loginInfo }, 
-      { headers : {'Content-type' : 'application/json'},
-        withCredentials : true }
+      { loginInfo }
       )
     .then((res) => {
       console.log(1)
@@ -42,9 +40,6 @@ export function Login({
       }
     })
     .catch((err) => alert(err))
-    // const signInURl = 'http://3.34.133.160:4000/';
-    // axios.get(signInURl)
-    // .then(() => console.log(1))
   }
 
   return (
