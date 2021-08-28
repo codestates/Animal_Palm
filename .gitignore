@@ -2,4 +2,8 @@ node_modules
 *.log
 *.bak
 .env
+<<<<<<< HEAD
+=======
+//db 설정 파일
+>>>>>>> 21734c12791fdfed2e43937fb7c5f46b0c2e53b6
 config.json
