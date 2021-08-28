@@ -13,7 +13,12 @@
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
     "morgan": "~1.9.1",
+    "mysql2": "^2.3.0",
     "nodemon": "^2.0.12",
     "npm": "^7.13.0"
+  },
+  "devDependencies": {
+    "sequelize": "^6.6.5",
+    "sequelize-cli": "^6.2.0"
   }
 }
