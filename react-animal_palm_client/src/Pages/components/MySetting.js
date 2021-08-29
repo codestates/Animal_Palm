@@ -1,11 +1,12 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useState, useHistory } from 'react';
 import { Modal } from './Modal';
 import { UserInfo } from './UserInfo';
 
 export const MySetting = ({
   userInfo
 }) => {
+  const history = useHistory();
   const [isOpen, setIsOpen] = useState(false);
   const [wannaUpdate, setWannaUpdate] = useState(false);
   const [wannaDelete, setWannaDelete] = useState(false);
@@ -40,7 +41,19 @@ export const MySetting = ({
     alert('회원정보가 변경되었습니다.')
   }
   const deleteMemberHandler = () => {
-    alert('탈퇴 되었습니다. => api 연결 후 홈으로 redirect')
+    const deleteUserURL = 'http://3.34.133.160:4000/user';
+    axios.delete(deleteUserURL)
+    .then((res) => {
+      const message = res.data.message;
+      if(message === 'ok') {
+        alert('탈퇴 되었습니다.');
+        history.push('/') // 홈으로 이동
+      } else {
+        alert('잘못된 접근입니다.')
+        return;
+      }
+    })
+    .catch((err) => alert(err))
   }
   const deleteButtonHandler = () => {
     setWannaDelete(!wannaDelete);

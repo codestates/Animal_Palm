@@ -1,79 +1,42 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'
+import { BrowserRouter, Route, Switch, useHistory } from 'react-router-dom';
+import { AnimalTest } from './components/SignupComponent/AnimalTest';
+import { SignupComponent } from './components/SignupComponent/Signup';
+import { Success } from './components/SignupComponent/Success';
+import './Signup.css'
+require('dotenv').config();
+
 export const Signup = () => {
-  const [signupInfo,setSignupInfo] = useState({
-    id:'',
-    password:'',
-    email:'',
-    mobile:''
-  })
-
-  const handleInputValue = (key) => (e) => {
-    setSignupInfo({...signupInfo, [key]: e.target.value })
-  }
-
-  const signupHandler = () => {
-    if(signupInfo.id===''|| signupInfo.password===''){
-      alert('아이디와 패스워드는 필수 입니다.')
+    const [isState,setIsState] = useState('one')
+    const history = useHistory()
+    const moveLogin = () =>{
+      history.push('/login')
     }
-    else{
-    axios
-      .post(
-        `http://localhost:4000/user/signup`,
-        {
-          id: signupInfo.id,
-          password: signupInfo.password,
-          email: signupInfo.email,
-          phonenumber: signupInfo.mobile
-        }
-      )
-      .catch(err => {
-        alert(err)
-      })
-    }
-  }
-
-  return (
-    <div>
+    return (
+    <div className="container">
         
-        <div>
+        <div className="stepContainer">
              {/*진행상황*/} 
-            <span>1</span>
-            <span>2</span>
-            <span>3</span>
+            <span className={`step ${isState==='one' ?'stepComplete':''}`}>1</span>
+            <span className={`step ${isState==='two' ?'stepComplete':''}`}>2</span>
+            <span className={`step ${isState==='three' ?'stepComplete':''}`}>3</span>
         </div>
-      <center>
-        <h1>회원가입</h1>
-        <form>
-          <div>
-            <span>아이디</span>
-            <input onChange={handleInputValue('id')} value={signupInfo.id} />
-          </div>
-          <div>
-            <span>비밀번호</span>
-            <input type='password' onChange={handleInputValue('password')} value={signupInfo.password}/>
-          </div>
-          <div>
-            <span>이메일</span>
-            <input type='email' onChange={handleInputValue('email')} value={signupInfo.email}/>
-          </div>
-          <div>
-            <span>전화번호</span>
-            <input type='tel' onChange={handleInputValue('mobile')} value={signupInfo.mobile}/>
-          </div>
-          
-          <div>
-          <Link to="/login">
-              이미 아이디가 있으신가요?
-              </Link>
-          </div>
-          
-          
-        </form>
-        <button onClick={signupHandler}>
-            회원가입
-          </button>
+      
+      <center className="signupBox">
+        <BrowserRouter>
+        <Switch>
+        <Route exact path="/signup">
+          <SignupComponent setIsState={setIsState} moveLogin={moveLogin}/>
+        </Route>
+        <Route path="/signup/animalTest">
+          <AnimalTest setIsState={setIsState} />
+        </Route>
+        <Route path="/signup/success">
+          <Success moveLogin={moveLogin} />
+        </Route>
+        </Switch>
+        </BrowserRouter>
       </center>
     </div>
   );
