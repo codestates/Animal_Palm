@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   comments.init({
-    context: DataTypes.STRING
+    content: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'comments',

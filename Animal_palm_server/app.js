@@ -17,7 +17,7 @@ app.use(express.urlencoded({extended:false}));
 app.use(cors())
 app.use('/boards',boardRouter)
 app.use('/user',userRouter)
-app.use('/comment',commentRouter)
+app.use('/comments',commentRouter)
 app.use('/mypage',mypagesRouter)
 app.get('/',(req,res,next)=>{
   res.send("main") 

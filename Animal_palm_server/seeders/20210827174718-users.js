@@ -6,7 +6,7 @@ module.exports = {
       "users",
       [
         {
-          animal_name: "거북이",
+          animal_id: 1,
           user_id: "test1",
           password:"test1",
           phone_number:"1234",
@@ -15,7 +15,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          animal_name: "뱀",
+          animal_id: 2,
           user_id: "test2",
           password:"test2",
           phone_number:"5678",
@@ -24,7 +24,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          animal_name: "코뿔소",
+          animal_id: 3,
           user_id: "test3",
           password:"test3",
           phone_number:"9012",
@@ -33,7 +33,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          animal_name: "고양이",
+          animal_id: 4,
           user_id: "test4",
           password:"test4",
           phone_number:"2345",
@@ -42,7 +42,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          animal_name: "호랑이",
+          animal_id: 5,
           user_id: "test5",
           password:"test5",
           phone_number:"6789",
@@ -51,7 +51,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          animal_name: "올빼미",
+          animal_id: 6,
           user_id: "test6",
           password:"test6",
           phone_number:"0123",
@@ -60,7 +60,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          animal_name: "판다",
+          animal_id: 7,
           user_id: "test7",
           password:"test7",
           phone_number:"4567",
@@ -69,7 +69,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          animal_name: "바다표범",
+          animal_id: 8,
           user_id: "test8",
           password:"test8",
           phone_number:"8901",
@@ -78,7 +78,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          animal_name: "늑대",
+          animal_id: 9,
           user_id: "test9",
           password:"test9",
           phone_number:"2345",
@@ -87,7 +87,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          animal_name: "하이에나",
+          animal_id: 10,
           user_id: "test10",
           password:"test10",
           phone_number:"6789",
@@ -96,7 +96,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          animal_name: "코끼리",
+          animal_id: 11,
           user_id: "test11",
           password:"test11",
           phone_number:"0123",
@@ -105,7 +105,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          animal_name: "돌고래",
+          animal_id: 12,
           user_id: "test12",
           password:"test12",
           phone_number:"4567",
@@ -114,7 +114,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          animal_name: "사자",
+          animal_id: 13,
           user_id: "test13",
           password:"test13",
           phone_number:"8901",
@@ -123,7 +123,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          animal_name: "앵무새",
+          animal_id: 14,
           user_id: "test14",
           password:"test14",
           phone_number:"2345",
@@ -132,7 +132,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          animal_name: "강아지",
+          animal_id: 15,
           user_id: "test15",
           password:"test15",
           phone_number:"6789",
@@ -141,7 +141,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          animal_name: "오랑우탄",
+          animal_id: 16,
           user_id: "test16",
           password:"test16",
           phone_number:"0123",
