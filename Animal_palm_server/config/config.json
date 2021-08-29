@@ -1,11 +1,11 @@
 {
   "development": {
-    "username": null,
-    "password": null,
-    "database": null,
-    "host": null,
+    "username": "admin",
+    "password": "animalpalm",
+    "database": "animal_palm",
+    "host": "database-1.cp26h1mdc3mb.ap-northeast-2.rds.amazonaws.com",
     "dialect": "mysql",
-     "port":null
+    "port":"13306"
   },
   "test": {
     "username": "root",
