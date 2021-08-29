@@ -28,13 +28,14 @@ module.exports ={
 
       const accessToken = jwt.sign(tokenPayload, 'accessKey', { expiresIn: '1h' });
       const refreshToken = jwt.sign(tokenPayload, 'refreshKey', { expiresIn: '14d' });
-      
-      //req.headers.authorization = `baerer ${refreshToken}`
-      //userData.update({ refresh_token: refreshToken });
 
       return res.status(200)
-        .cookie("accessToken", accessToken) //쿠키 옵션 줘야됨 httpOnly, secure
-        .cookie("refreshToken", refreshToken)
+        .cookie("accessToken", accessToken, {
+          httpOnly: true
+        }) //쿠키 옵션 줘야됨 httpOnly, secure
+        .cookie("refreshToken", refreshToken, {
+          httpOnly: true
+        })
         .send({
           "animalName" : userData.animal_name,
           "message" : "ok"
