@@ -5,7 +5,7 @@
     "database": "animal_palm",
     "host": "database-1.cp26h1mdc3mb.ap-northeast-2.rds.amazonaws.com",
     "dialect": "mysql",
-    "port":"13306"
+    "port":"null"
   },
   "test": {
     "username": "root",
