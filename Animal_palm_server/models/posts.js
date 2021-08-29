@@ -16,8 +16,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   posts.init({
-    animal_name: DataTypes.STRING,
-    context: DataTypes.STRING,
+    animal_id: DataTypes.INTEGER,
+    content: DataTypes.STRING,
     title: DataTypes.STRING
   }, {
     sequelize,

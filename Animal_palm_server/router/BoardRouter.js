@@ -2,10 +2,10 @@ const { getPostList, getPost, writeContext, contextDelete } = require('../contro
 const exress = require('express');
 const router = exress.Router();
 //게시판
-router.get('/:board_id', getPostList)
-router.get('/:board_id/:post_id', getPost)
-router.post('/:board_id/', writeContext)
-router.delete('/:post_id', contextDelete)
+router.get('/:boardId', getPostList)
+router.get('/:boardId/:postId', getPost)
+router.post('/:boardId/', writeContext)
+router.delete('/:postId', contextDelete)
 
 
 module.exports = router
