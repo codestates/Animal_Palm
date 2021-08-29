@@ -34,8 +34,8 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-const {user,post,post_hashtag,hashtag,comments} = sequelize.models;
-user.
+//const {user,post,post_hashtag,hashtag,comments} = sequelize.models;
+
 
 
 module.exports = db;

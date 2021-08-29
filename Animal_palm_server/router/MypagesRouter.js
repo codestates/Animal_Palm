@@ -1,4 +1,4 @@
-const { update, passwordCheck, info, myPageComment, myPagePost } = require('../controllers/MypagesController')
+const {update,check,info,passwordCheck,myPageComment,myPagePost} = require('../controllers/MypagesController')
 const exress = require('express');
 const router = exress.Router();
 //마이페이지
