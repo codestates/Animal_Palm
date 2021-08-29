@@ -1,41 +1,42 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useState } from 'react';
+import { BrowserRouter, Route, Switch, useHistory } from 'react-router-dom';
+import { AnimalTest } from './components/SignupComponent/AnimalTest';
+import { SignupComponent } from './components/SignupComponent/Signup';
+import { Success } from './components/SignupComponent/Success';
+import './Signup.css'
+require('dotenv').config();
 
 export const Signup = () => {
-  return (
-    <div>
+    const [isState,setIsState] = useState('one')
+    const history = useHistory()
+    const moveLogin = () =>{
+      history.push('/login')
+    }
+    return (
+    <div className="container">
         
-        <div>
+        <div className="stepContainer">
              {/*진행상황*/} 
-            <span>1</span>
-            <span>2</span>
-            <span>3</span>
+            <span className={`step ${isState==='one' ?'stepComplete':''}`}>1</span>
+            <span className={`step ${isState==='two' ?'stepComplete':''}`}>2</span>
+            <span className={`step ${isState==='three' ?'stepComplete':''}`}>3</span>
         </div>
-      <center>
-        <h1>회원가입</h1>
-        <form>
-          <div>
-            <span>아이디</span>
-            <input />
-          </div>
-          <div>
-            <span>비밀번호</span>
-            <input type='password'/>
-          </div>
-          <div>
-            <span>이메일</span>
-            <input type='email'/>
-          </div>
-          <div>
-            <span>전화번호</span>
-            <input type='tel'/>
-          </div>
-          <div>
-              이미 아이디가 있으신가요?
-          </div>
-          <button type='submit'>
-            회원가입
-          </button>
-        </form>
+      
+      <center className="signupBox">
+        <BrowserRouter>
+        <Switch>
+        <Route exact path="/signup">
+          <SignupComponent setIsState={setIsState} moveLogin={moveLogin}/>
+        </Route>
+        <Route path="/signup/animalTest">
+          <AnimalTest setIsState={setIsState} />
+        </Route>
+        <Route path="/signup/success">
+          <Success moveLogin={moveLogin} />
+        </Route>
+        </Switch>
+        </BrowserRouter>
       </center>
     </div>
   );
