@@ -6,6 +6,7 @@ import { Login } from './Pages/Login';
 import { Signup } from './Pages/Signup';
 import { Board } from './Pages/Board';
 import { useState } from 'react';
+import axios from 'axios';
 
 
 function App() {
@@ -19,6 +20,19 @@ function App() {
     setUserInfo(data);
   }
   const handleLogout = () => {
+    const signOutURL = 'http://3.34.133.160:4000/user/signout';
+    axios.put(signOutURL)
+    .then((res) => {
+      const message = res.data.message;
+      if(message === 'successfully signout') {
+        alert('로그아웃 되었습니다.');
+        history.push('/');
+      } else {
+        alert('잘못된 접근입니다.');
+        return;
+      }
+    })
+    .catch((err) => alert(err))
     setIsLogin(false)
   }
 
