@@ -35,7 +35,7 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 const {user,post,post_hashtag,hashtag,comments} = sequelize.models;
-user.
+
 
 
 module.exports = db;
