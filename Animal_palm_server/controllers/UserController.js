@@ -1,6 +1,8 @@
 const Users = require('../models/').users;
 const jwt = require('jsonwebtoken');
 
+const { verifyToken } = require('./VerifyToken');
+
 module.exports ={
   signIn: async (req, res) => {
     //*POST / endpoint: http://localhost:4000/user/signin
@@ -23,8 +25,10 @@ module.exports ={
       //-> token 생성
       //-> access, refresh 둘 다 헤더 authorization에 저장
 
-      const { user_id, animal_name, phone_number, createdAt, updatedAt } = userData;
-      const tokenPayload = { user_id, animal_name, phone_number, createdAt, updatedAt };
+      //token으로는 현재 접속중인 유저가 누구인지만 식별
+      const tokenPayload = {
+        id: userData.id
+      }
 
       const accessToken = jwt.sign(tokenPayload, 'accessKey', { expiresIn: '1h' });
       const refreshToken = jwt.sign(tokenPayload, 'refreshKey', { expiresIn: '14d' });
@@ -72,46 +76,24 @@ module.exports ={
     //현재 가지고 있는 token이 유효한 token일 경우에만 로그아웃 진행
     //  유효 여부 판별: 디코딩한 데이터가 DB에 포함되어 있는지 확인
     //  DB에 포함되어있지 않은 data -> 401
-    const reqAccessToken = req.headers.cookie.split(';')[0].split('=')[1];
-    const reqRefreshToken = req.headers.cookie.split(';')[1].split('=')[1];
 
-    jwt.verify(reqAccessToken, 'accessKey', async (err, data) => {
-      if(err) { //만료된 토큰일 경우
-        //1. refresh가 유효한지 검증
-        jwt.verify(reqRefreshToken, 'refreshKey', async (err, data) => {
-          if(err) {
-            //1-1. refresh까지 만료된 경우
-            return res.status(401).send("invalid user token");
-          }
-          else {
-            //1-2. refresh는 아직 유효하고 access만 만료된 경우
-            //-> refresh 디코딩해서 유효한 데이터인지 확인하고 유효하면 로그아웃
-            const user = await Users.findOne({ where: { user_id : data.user_id } });
+    const [accessToken, refreshToken] = await verifyToken(req);
 
-            if(!user) return res.status(401).send("invalid user token");
-            else {
-              return res.status(200)
-                .clearCookie('accessToken')
-                .clearCookie('refreshToken')
-                .send("successfully signout");
-            }
-          }
-        })
-      }
-      else {
-        //2. access가 유효할 경우
+    if(accessToken) {
+      //유효한 토큰일 경우 -> 해당 유저가 존재하는지 확인
+      const curUser = jwt.verify(accessToken, 'accessKey');
+      const user = await Users.findOne({ where: { id : curUser.id} });
 
-        const user = await Users.findOne({ where: { user_id : data.user_id } });
-
-        if(!user) return res.status(401).send("invalid user token");
-        else {
-          return res.status(200)
-                .clearCookie('accessToken')
-                .clearCookie('refreshToken')
-                .send("successfully signout");
-        }
-      }
-    });
+      if(!user) return res.status(401).send("invalid user token");
+      else return res.status(200)
+              .clearCookie('accessToken')
+              .clearCookie('refreshToken')
+              .send('successfully signout');
+    }
+    else {
+      //토큰이 만료되어 없을 경우
+      return res.status(401).send("invalid user token");
+    }
   },
 
   userDelete: async (req, res) => {
@@ -125,45 +107,20 @@ module.exports ={
     //로그인 되어있는 유저 먼저 확인
     //이거 토큰 검증하는 과정 템플릿으로 빼놔도 될듯
 
-    const reqAccessToken = req.headers.cookie.split(';')[0].split('=')[1];
-    const reqRefreshToken = req.headers.cookie.split(';')[1].split('=')[1];
+    const [accessToken, refreshToken] = await verifyToken(req);
 
-    jwt.verify(reqAccessToken, 'accessKey', async (err, data) => {
-      if(err) { //만료된 토큰일 경우
-        //1. refresh가 유효한지 검증
-        jwt.verify(reqRefreshToken, 'refreshKey', async (err, data) => {
-          if(err) {
-            //1-1. refresh까지 만료된 경우
-            return res.status(401).send("invalid token");
-          }
-          else {
-            //1-2. refresh는 아직 유효하고 access만 만료된 경우
-            const user = await Users.findOne({ where: { user_id : data.user_id } });
+    if(accessToken) {
+      //유효한 토큰일 경우 -> 해당 유저가 존재하는지 확인
+      const curUser = jwt.verify(accessToken, 'accessKey');
+      const user = await Users.findOne({ where: { id: curUser.id } });
 
-            if(!user) return res.status(401).send("invalid token");
-            else {
-              //유저가 존재 -> 해당 유저 정보 삭제
-              user.destory();
-              return res.status(200).send("ok");
-            }
-          }
-        })
-      }
+      if(!user) return res.status(401).send("invalid token");
       else {
-        //2. access가 유효할 경우
-
-        const user = await Users.findOne({ where: { user_id : data.user_id } });
-
-        if(!user) return res.status(401).send("invalid user token");
-        else {
-          user.destory();
-          return res.status(200).send("ok");
-        }
+        user.destory();
+        return res.status(200).send("ok");
       }
-    });
-
-    
-    return res.send("userDelete");
+    }
+    else return res.status(401).send("invalid token");
   },
 
   MBTI_signUp: async (req, res) => {
