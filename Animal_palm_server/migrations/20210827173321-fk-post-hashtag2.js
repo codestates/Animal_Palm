@@ -2,11 +2,11 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.addColumn("post_hashtags", "hashtag_id", {
+    await queryInterface.addColumn("postHashtags", "hashtagId", {
       type: Sequelize.INTEGER,
     });
-    await queryInterface.addConstraint("post_hashtags", {
-      fields: ["hashtag_id"],
+    await queryInterface.addConstraint("postHashtags", {
+      fields: ["hashtagId"],
       type: "foreign key",
       name: "hashtags_post_hashtags_id_fk",
       references: {

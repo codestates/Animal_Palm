@@ -3,19 +3,20 @@ const {checkAnimal} = require('./check/')
 
 module.exports ={
   getPostList:async (req, res) => {
-    //*GET / endpoint: http://localhost:4000/boards/:board_id
+    //*GET / endpoint: http://localhost:4000/boards/:animalId 
     //TODO: 현재 게시판의 글 목록 가져오기
     
     
-    const boardId = req.params.boardId    
-    const allData = await models.posts.findAll({where:{animal_id:boardId},raw:true})
-    
+    const animalId = req.params.animalId    
     let data = []
+    
+    const allData = await models.posts.findAll({where:{animalId:animalId},raw:true})
+    
     for(let i =0; i<allData.length;i++){
       data.push({
         id: allData[i].id,
         title: allData[i].title,
-        user_id : allData[i].user_id,
+        userId : allData[i].userId,
         hashtag :allData[i].hashtag,
         createdAt: allData[i].createdAt,
         updatedAt: allData[i].updatedAt,  
@@ -35,12 +36,12 @@ module.exports ={
     //*GET / endpoint: http://localhost:4000/:boards/:post_id
     //TODO: 현재 클릭된 글 가져오기
     // /:board_id/:post_id
-    const boardId = req.params.boardId
+    const animalId = req.params.animalId
     const postId = req.params.postId
     
     const data =await models.posts.findOne({where:{
       id:postId,
-      animal_id:boardId
+      animalId:animalId
       }})
     //req.params에 담긴 id로 postDB 조회
     //post.Id가 req.params.id와 같은 데이터 검색
@@ -54,18 +55,18 @@ module.exports ={
     //TODO: 현재 게시판에 글쓰기
     //endpoint의 :id <- 게시판 id
     
-    const boardId = req.params.boardId
+    const animalId = req.params.animalId
     //const animal_name = checkAnimal(board_id)
 
     const title = req.body.title
     const content = req.body.content
-    const userId = req.body.user_id
+    const userId = req.body.userId
 
     //const user_id = await models.users.findOne({ where:{user_id: req.body.user_id}})
 
     await models.posts.create({
-      user_id :userId,
-      animal_id : boardId,
+      userId :userId,
+      animalId : animalId,
       content : content,
       title : title
     })

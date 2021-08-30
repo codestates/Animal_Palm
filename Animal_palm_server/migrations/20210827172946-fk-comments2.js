@@ -2,11 +2,11 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.addColumn("comments", "post_id", {
+    await queryInterface.addColumn("comments", "postId", {
       type: Sequelize.INTEGER,
     });
     await queryInterface.addConstraint("comments", {
-      fields: ["post_id"],
+      fields: ["postId"],
       type: "foreign key",
       name: "posts_comments_id_fk",
       references: {

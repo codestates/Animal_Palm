@@ -10,15 +10,15 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      models.users.hasMany(models.posts, {foreignKey: 'user_id'})
-      models.users.hasMany(models.comments, {foreignKey: 'user_id'})
+      models.users.hasMany(models.posts, {foreignKey: 'userId'})
+      models.users.hasMany(models.comments, {foreignKey: 'userId'})
     }
   };
   users.init({
-    animal_id: DataTypes.INTEGER,
-    user_id: DataTypes.STRING,
+    animalId: DataTypes.INTEGER,
+    userId: DataTypes.STRING,
     password: DataTypes.STRING,
-    phone_number: DataTypes.STRING,
+    phoneNumber: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'users',

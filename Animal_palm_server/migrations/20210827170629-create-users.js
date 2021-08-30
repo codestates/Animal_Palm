@@ -8,10 +8,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      animal_id: {
+      animalId: {
         type: Sequelize.INTEGER
       },
-      user_id: {
+      userId: {
         allowNull: false,
         type: Sequelize.STRING
       },
@@ -23,7 +23,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      phone_number: {
+      phoneNumber: {
         allowNull: false,
         type: Sequelize.STRING
       },

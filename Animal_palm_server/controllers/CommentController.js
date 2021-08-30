@@ -8,7 +8,7 @@ module.exports ={
     
     const postId = req.params.postId
     const data = await models.comments.findAll({where:{
-      post_id:postId
+      postId:postId
     },raw:true})
    
     
@@ -28,7 +28,7 @@ module.exports ={
     //postId: req.params, content: req.body, user_id: req.cookie(token에 담겨있음)
 
     const content = req.body.content
-    const userId = req.body.user_id
+    const userId = req.body.userId
     const postId = req.params.postId
     
     // const postId = await models.posts.findOne({where:{
@@ -41,9 +41,9 @@ module.exports ={
     
 
     await models.comments.create({
-      post_id:postId,
+      postId:postId,
       content:content,
-      user_id:userId
+      userId:userId
       // 토큰으로 받아서 유저 아이더 넣기
     })
 
