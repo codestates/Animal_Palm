@@ -3,7 +3,7 @@ import { useState } from 'react';
 import '../Board.css'
 
      
-     function Board_write({ animalId }) {
+     function Board_write({ animalId,server }) {
 
       const [context,setContext] = useState({
         title:'',
@@ -23,7 +23,7 @@ import '../Board.css'
         else{
         axios
           .post(
-            `http://localhost:4000/boards/${animalId}`,
+            `${server}boards/${animalId}`,
             {
               title: context.title,
               content: context.content,
