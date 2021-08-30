@@ -3,11 +3,11 @@ const Comments = require('../models/').comments;
 const Posts = require('../models/').posts;
 const jwt = require('jsonwebtoken');
 
-const { verifyToken } = require('./VerifyToken');
+const { verifyToken, decodeToken } = require('./VerifyToken');
 
 module.exports = {
   update: async (req, res) => {
-    //*PATCH / endpoint http://localhost:4000/mypage
+    //*PATCH / endpoint http://localhost:4000/mypage/update
     //TODO: 유저 정보 수정
     //req.body에 담긴 수정내용만 현재 유저 정보(DB에서 읽어옴)에 update
     //-> sequelize method중에 update method가 있음 이거 쓰면 됨!
@@ -15,18 +15,19 @@ module.exports = {
     //업데이트 된 데이터 돌려줄 필요 X
     //비밀번호도 수정할 수 있으니까 body에 hashing된 비밀번호까지 받아도 되지 않을까?
     //hashing은 advanced에서 최우선으로
+    console.log('1234')
     
     const [accessToken, refreshToken] = await verifyToken(req);
     if(!accessToken) return res.status(401).send("invalid token");
     else {
       //유효한 토큰일 경우 -> 해당 유저가 존재하는지 확인
-      const curUser = jwt.verify(accessToken, 'accessKey');
-      const user = Users.findOne({ where: { id : curUser.id } });
+      const user = await decodeToken(accessToken);
 
       if(!user) return res.status(401).send("invalid token");
       else {
         //해당 유저가 존재하면 update
         for(let key in req.body) user.update({ [key] : req.body[key] });
+        console.log(user)
         return res.status(201)
           .cookie('accessToken', accessToken, { httpOnly: true })
           .cookie('refreshToken', refreshToken, { httpOnly: true })
@@ -42,11 +43,13 @@ module.exports = {
     //-> 서버에서 입력받은 값과 현재 토큰에 담긴 유저의 비밀번호를 비교
     //일치하면 응답에 일치한다고 전달 -> 이거 보고 클라에서 회원정보 페이지로 넘어감
 
+    //!외않되?!?!?!!?!?!?!??!??
+    console.log(req.body)
+
     const [accessToken, refreshToken] = await verifyToken(req);
     if(!accessToken) return res.status(401).send("invalid token");
     else {
-      const curUser = jwt.verify(accessToken, 'accessKey');
-      const user = Users.findOne({ where: { id : curUser.id } });
+      const user = await decodeToken(accessToken);
 
       if(!user) return res.status(401).send("invalid token");
       else {
@@ -72,18 +75,18 @@ module.exports = {
     const [accessToken , refreshToken] = await verifyToken(req);
     if(!accessToken) return res.status(401).send("invalid token");
     else {
-      const curUser = jwt.verify(accessToken, 'accessKey');
-      const user = Users.findOne({ where: { id : curUser.id } });
+      const user = await decodeToken(accessToken);
 
       if(!user) return res.status(401).send("invalid token");
       else {
+        console.log(user)
         //해당 유저가 존재하면 -> client에서 필요한 정보만 뽑아서 넘김
         const userInfo = {
           id: user.id,
-          user_id: user.user_id,
-          animal_id: user.animal_id,
+          user_id: user.userId,
+          animal_id: user.animalId,
           email: user.email,
-          phone_number: user.phone_number
+          phone_number: user.phoneNumber
         }
 
         return res.status(200)
@@ -107,19 +110,18 @@ module.exports = {
     const [accessToken, refreshToken] = await verifyToken(req);
     if(!accessToken) return res.status(401).send("invalid token");
     else {
-      const curUser = jwt.verify(accessToken, 'accessKey');
-      const user = Users.findOne({ where: { id : curUser.id } });
+      const user = await decodeToken(accessToken);
 
       if(!user) return res.status(401).send("invalid token");
       else {
         //현재 토큰에 담긴 유저가 존재할 경우
-        const comments = Comments.findAll({ where: { user_id : user.id } });
+        const comments = await Comments.findAll({ where: { userId : user.id } });
         //comments가 없을 수도 있음 -> 댓글을 안 단 경우
         //-> 이 경우 빈 배열로 리턴됨
 
         const userComments = comments.map((comment) => {
-          const { id, post_id, content, user_id, created_at } = comment;
-          return { id, post_id, content, user_id, created_at };
+          const { id, postId, content, userId, createdAt } = comment;
+          return { id, postId, content, userId, createdAt };
         })
 
         return res.status(200)
@@ -134,7 +136,7 @@ module.exports = {
   },
 
   myPagePost: async (req, res) => {
-    //*GET / endpoint http://localhost:4000/mypage/context
+    //*GET / endpoint http://localhost:4000/mypage/content
     //TODO: 현재 유저가 작성한 글 가져오기
     //현재 가지고 있는 token으로 유저 확인
     //해당 유저의 ID로 post 테이블에서 검색
@@ -143,19 +145,18 @@ module.exports = {
     const [accessToken, refreshToken] = await verifyToken(req);
     if(!accessToken) return res.status(401).send("invalid token");
     else {
-      const curUser = jwt.verify(accessToken, 'accessKey');
-      const user = Users.findOne({ where: { id : curUser.id } });
+      const user = await decodeToken(accessToken);
 
       if(!user) return res.status(401).send("invalid token");
       else {
         //현재 토큰에 담긴 유저가 존재할 경우
-        const posts = Posts.findAll({ where: { user_id : user.id } });
+        const posts = await Posts.findAll({ where: { userId : user.id } });
         //posts가 없을 경우도 있음 -> 글을 안 쓴 경우
         //-> 이 경우 빈 배열로 리턴
 
         const userPosts = posts.map((post) => {
-          const { id, animal_name, title, user_id, created_at } = post;
-          return { id, animal_name, title, user_id, created_at };
+          const { id, animalId, title, userId, createdAt } = post;
+          return { id, animalId, title, userId, createdAt };
         })
 
         return res.status(200)

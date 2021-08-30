@@ -5,8 +5,8 @@ const router = exress.Router();
 router.patch('/update',update)
 router.post('/passwd',passwordCheck)
 router.get('/info',info)
-router.get('comment', myPageComment)
-router.get('context', myPagePost)
+router.get('/comment', myPageComment)
+router.get('/content', myPagePost)
 
 
 module.exports = router

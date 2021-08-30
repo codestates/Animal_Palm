@@ -32,7 +32,7 @@ module.exports = {
   },
   
   decodeToken: async (accessToken) => {
-    //accessToken을 넘겨받아서 해당 토큰 안의 유저를 return 해주는 함수
+    //accessToken을 넘겨받아서 해당 토큰 안의 유저 정보를 return 해주는 함수
 
     const curUser = jwt.verify(accessToken, process.env.ACCESS_SECRET);
     const userData = await Users.findOne({ where: { id : curUser.id } })
