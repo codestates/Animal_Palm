@@ -1,7 +1,10 @@
 import axios from 'axios';
-import React, { useState, useHistory } from 'react';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom'
 import { Modal } from './Modal';
 import { UserInfo } from './UserInfo';
+import '../../CSS/MySetting.css'
+const {test, real} = require('../../Dummy/url');
 
 export const MySetting = ({
   userInfo
@@ -16,8 +19,8 @@ export const MySetting = ({
     setIsOpen(!isOpen);
   };
   const wannaUpdateHandler = () => {
-    const userinfoURL = 'http://3.34.133.160:4000/mypage/info';
-    axios.get(userinfoURL)
+    const userinfoURL = `${test}/mypage/info`;
+    axios.get(userinfoURL, { withCredentials : true })
     .then((res) => {
       //! 유저 풀 정보 받아옴
       const message = res.data.message
@@ -41,8 +44,8 @@ export const MySetting = ({
     alert('회원정보가 변경되었습니다.')
   }
   const deleteMemberHandler = () => {
-    const deleteUserURL = 'http://3.34.133.160:4000/user';
-    axios.delete(deleteUserURL)
+    const deleteUserURL = `${test}/user`;
+    axios.delete(deleteUserURL, { withCredentials : true })
     .then((res) => {
       const message = res.data.message;
       if(message === 'ok') {
@@ -60,43 +63,48 @@ export const MySetting = ({
   }
   
   return (
-    <div>
-      {wannaUpdate?
-        <>
-        <div>
-          <div >
-            <UserInfo
-              entireInfo = {entireInfo}
-              wannaUpdateHandler={wannaUpdateHandler}
-              changeHandler={allSetHandler}
-            />
-          </div>
-          <button onClick={deleteButtonHandler}> 회원탈퇴 </button>
-          {wannaDelete?
-            <div>
-              <Modal
-                userInfo = {userInfo}
-                header='정말 탈퇴하시겠습니까?'
-                noBtnHandler={deleteButtonHandler}
-                yesBtnHandler={deleteMemberHandler}
-                yesBtn='회원탈퇴'
+    <>
+      <div className='content'>
+        {wannaUpdate?
+          <>
+          <div>
+            <div >
+              <UserInfo
+                entireInfo = {entireInfo}
+                wannaUpdateHandler={wannaUpdateHandler}
+                changeHandler={allSetHandler}
               />
             </div>
-            :null}
-        </div>
-        </>
-      : <>{isOpen?
-        <div>
-          <Modal
-            userInfo = {userInfo}
-            header='회원정보를 수정하시려면 비밀번호를 입력해주세요'
-            noBtnHandler={openModalHandler}
-            wannaUpdateHandler={wannaUpdateHandler}
-            yesBtn='확인'
-          />
-        </div>
-      : <button onClick={openModalHandler}>회원정보 확인</button>}</>}
-      
-    </div>
+            <button onClick={deleteButtonHandler}> 회원탈퇴 </button>
+            {wannaDelete?
+              <div>
+                <Modal
+                  userInfo = {userInfo}
+                  header='정말 탈퇴하시겠습니까?'
+                  noBtnHandler={deleteButtonHandler}
+                  yesBtnHandler={deleteMemberHandler}
+                  yesBtn='회원탈퇴'
+                />
+              </div>
+              :null}
+          </div>
+          </>
+        : <>{isOpen?
+          <div>
+            <Modal
+              userInfo = {userInfo}
+              header='회원정보를 수정하시려면 비밀번호를 입력해주세요'
+              noBtnHandler={openModalHandler}
+              wannaUpdateHandler={wannaUpdateHandler}
+              yesBtn='확인'
+            />
+          </div>
+        : <button
+          className='button'
+            onClick={openModalHandler}>
+              회원정보 확인
+          </button>}</>}
+      </div>
+    </>
   );
 };

@@ -1,15 +1,28 @@
 import './Navigationbar.css';
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import axios from 'axios';
+const { test, real } = require('../Dummy/url');
 
 function Navigaitionbar({
   isLogin,
   handleLogout
 }) {
+  const history = useHistory();
   const logoutHandler = () => {
-    // ajax 요청!!
-    // ! 결정)
-    // 여기서 비동기 요청을 하고 부모 컴포넌트 함수로 보내서 나머지 작업을 처리할지
-    // 아니면 바로 부모 컴포넌트로 보낼지
+    const signOutURL = `${test}/user/signout`;
+    axios.put(signOutURL, null, { withCredentials : true })
+    .then((res) => {
+      const message = res.data;
+      if(message === 'successfully signout') {
+        alert('로그아웃 되었습니다.');
+        history.push('/');
+      } else {
+        alert('잘못된 접근입니다.');
+        return;
+      }
+    })
+    .catch((err) => alert(err))
+    handleLogout();
   }
   
   return (

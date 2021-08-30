@@ -8,7 +8,7 @@ export const ContentsList = ({
   return (
     <>
           {list.map((item) => (
-            <tr key={item.id}>
+            <tr className='row' key={item.id}>
               <td>{item.id}</td>
               {'category' in item?
                 <td>{item.category}</td>

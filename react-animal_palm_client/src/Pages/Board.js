@@ -5,12 +5,13 @@ import Board_write from './components/Board_write';
 import Navigaitionbar from './components/navigationbar'
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { useState } from 'react';
+const {test, real} = require('./Dummy/url');
 
 
 
 export function Board({animalId}) {
   animalId = 'animalId'
-  const server =  'http://3.34.133.160:4000/'
+  const server =  `{tets}/`;
   return (
   <div>    
     <Navigaitionbar />

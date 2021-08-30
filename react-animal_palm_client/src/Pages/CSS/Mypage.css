@@ -1,0 +1,107 @@
+#wrap {
+  display: flex;
+  flex-direction: column;
+  max-height: 97vh;
+}
+.profile-container {
+  display: flex;
+  font-size: 30pt;
+  font-family: 'Gowun Dodum', sans-serif;
+  font-weight: bold;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10vh;
+  margin-bottom: 5vh;
+}
+.profile-container > div {
+  align-items: center;
+}
+.picture > img {
+  max-width: 50%;
+  height: auto;
+  border: 2px solid lightslategray;
+  border-radius: 3em;
+}
+.tab-menu {
+  color: rgba(46, 46, 46, 0.7);
+  font-weight: bold;
+  font-size: 20pt;
+  display: flex;
+  flex-direction: row;
+  justify-items: center;
+  justify-content: center;
+  list-style: none;
+  font-family: 'Gowun Dodum', sans-serif;
+}
+.submenu {
+  width: 17vw;
+  max-width: 100%;
+  height: auto;
+  padding: 3px 6px 3px 6px;
+  /* border-bottom: 2px solid lightslategrey; */
+  transition: all 0.2s ease;
+}
+.submenu:hover {
+  cursor: pointer;
+}
+.focused {
+  color: white;
+  background-color: lightslategrey;
+}
+
+
+.content {
+  border: 2px solid lightslategrey;
+  font-family: 'Gowun Dodum', sans-serif;
+  justify-content: center;
+  padding: 10px 10px 10px 10px;
+  margin:  0px 40px 30px 40px;
+  height: 100vh;
+  overflow: auto;
+  overflow-x: auto;
+}
+.content .no {
+  color: rgb(159, 159, 159);
+  font-size: 20pt;
+  font-weight: bold;
+  position: relative;
+  top: 30%;
+}
+
+.mine {
+  border-collapse: collapse;
+	line-height: 1.5;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	margin: 20px 10px 20px 10px;
+}
+.mine thead th {
+  min-width: 100px;
+	padding: 10px;
+	font-weight: bold;
+	vertical-align: top;
+	color: #fff;
+	background: #797979;
+	margin: 20px 10px;
+}
+.mine td {
+  border: none;
+	width: 350px;
+	padding: 10px 0 10px;
+	vertical-align: top;
+}
+.mine .row:hover {
+  cursor: pointer;
+  background-color: lightgrey;
+}
+.content .button {
+  position: relative;
+  top: 30%;
+  width: 200px;
+  height: 50px;
+  font-family: 'Gowun Dodum', sans-serif;
+  border: none;
+  color: rgb(147, 147, 147);
+  font-size: 17pt;
+  font-weight: bold;
+}

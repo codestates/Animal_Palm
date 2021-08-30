@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { ContentsList } from './ContentsList';
+const {test, real} = require('../../Dummy/url')
 
 export const MyContents = ({
   userInfo
@@ -12,8 +13,8 @@ export const MyContents = ({
   // ];
   const [list, setList] = useState([]);
   const getMyContent = () => {
-    const myContentURL = 'http://3.34.133.160:4000/mypage/context';
-    axios.get(myContentURL)
+    const myContentURL = `${test}/mypage/context`;
+    axios.get(myContentURL, { withCredentials : true })
     .then((res) => {
       const message = res.data.message;
       if(message === 'ok') {
@@ -34,20 +35,19 @@ export const MyContents = ({
   }, [])
   return (
     <>
-      <div>
-        <div>
+      <div className='content'>
+        {/* <div>
           내가 쓴 글
-        </div>
+        </div> */}
         <div>
           {list.length > 0?
-            <table>
+            <table className='mine'>
               <thead>
                 <tr>
                   <th>No.</th>
                   <th>게시판</th>
                   <th>글 목록</th>
-                  <th>작성 일자</th>
-                  <th>삭제</th>
+                  <th>작성일</th>
                 </tr>
               </thead>
               <tbody>
@@ -57,7 +57,7 @@ export const MyContents = ({
                 />
               </tbody>
             </table>
-          : <div>작성한 글이 없습니다.</div>
+          : <div className='no'>작성한 글이 없습니다.</div>
         }
         </div>
       </div>

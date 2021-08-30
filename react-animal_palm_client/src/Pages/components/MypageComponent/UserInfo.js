@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { cheackPassword, checkEmail, checkPhone } from '../function/Validatior';
+import { cheackPassword, checkEmail, checkPhone } from '../../function/Validatior';
+const { test, real } = require('../../Dummy/url');
 
 export const UserInfo = ({
   entireInfo,
@@ -19,10 +20,10 @@ export const UserInfo = ({
         data[el] = input[el]
       }
     });
-    const udpateInfoURL = 'http://3.34.133.160:4000/'
+    const udpateInfoURL = `${test}/mypage/info`
     // patch 요청!
-    axios.patch(udpateInfoURL, { data }, {
-      headers : {'Content-type' : 'application/json'},
+    axios.patch(udpateInfoURL, data, {
+      headers : { 'Content-type' : 'application/json' },
       withCredentials : true
     })
     .then((res) => {

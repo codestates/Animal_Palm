@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import './Modal.css'
+import '../../CSS/Modal.css'
+const { test, real } = require('../../Dummy/url');
 
 export const Modal = ({
   userInfo,
@@ -18,11 +19,14 @@ export const Modal = ({
       alert('비밀번호를 입력해주세요');
       return;
     }
-    const checkPwURL = 'http://3.34.133.160:4000/mypage/passwd';
-    axios.post(checkPwURL, { pwInput })
+    const checkPwURL = `${test}/mypage/passwd`;
+    axios.post(checkPwURL, { pwInput }, {
+      headers : { 'Content-type' : 'application/json' },
+      withCredentials : true
+    })
       .then((res) => {
         const message = res.data.message;
-        if(message = 'correct passwd') {
+        if(message === 'correct passwd') {
           // 제대로 받아온 경우
           wannaUpdateHandler();
         } else {
@@ -38,7 +42,7 @@ export const Modal = ({
         <div className='header'>
           {header}
         </div>
-        <div>비밀번호를 입력해주세요.</div>
+        <div className='message'>비밀번호를 입력해주세요.</div>
         <input
           type='password'
           value={pwInput}
