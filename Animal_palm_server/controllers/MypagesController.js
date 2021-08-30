@@ -37,30 +37,30 @@ module.exports = {
   },
 
   passwordCheck: async (req, res) => {
-    //*POST / endpoint http://locolhost:4000/mypage/passwd
+    //*POST / endpoint http://localhost:4000/mypage/passwd
     //TODO: 회원정보 수정 전 비밀번호 체크
     //클라에서 서버로 현재 입력된 값 전달해준 뒤 (해싱된 비밀번호가 body에 담겨 전달)
     //-> 서버에서 입력받은 값과 현재 토큰에 담긴 유저의 비밀번호를 비교
     //일치하면 응답에 일치한다고 전달 -> 이거 보고 클라에서 회원정보 페이지로 넘어감
 
     //!외않되?!?!?!!?!?!?!??!??
-    console.log(req.body)
 
     const [accessToken, refreshToken] = await verifyToken(req);
     if(!accessToken) return res.status(401).send("invalid token");
     else {
       const user = await decodeToken(accessToken);
+      console.log(user.dataValues);
 
       if(!user) return res.status(401).send("invalid token");
       else {
         //해당 유저가 존재하면 -> body로 받은 password와 비교
-        if(req.body.password === user.password) {
-          return res.status(200).send("correct password")
+        if(user.password === req.body.password) {
+          return res.status(200)
             .cookie('accessToken', accessToken, { httpOnly: true })
             .cookie('refreshToken', refreshToken, { httpOnly: true })
             .send("correct passwd");
-        }
-        else return res.status(202).send('일치하지 않는 경우 응답');
+        } 
+        else return res.status(202).send('일치하지 않는 경우 응답 내용');
       }
     }
   },
