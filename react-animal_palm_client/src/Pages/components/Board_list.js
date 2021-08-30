@@ -46,16 +46,16 @@ import { useEffect, useState } from 'react'
              {/* {alert('1')} */}
              {/* {count===0 ?
              loadContentList(animalId):null} */}
-         <table className="table">
-         <thead>
-         <tr>
-             <th className="col5">번호</th>
-             <th className="col15">태그</th>
-             <th className="col60">제목</th>
-             <th className="col12">작성자</th>
-             <th className="col8">날짜</th>
-         </tr>
-         </thead>
+            <table className="table">
+                <thead>
+                    <tr>
+                        <th className="col5">번호</th>
+                        <th className="col15">태그</th>
+                        <th className="col60">제목</th>
+                        <th className="col12">작성자</th>
+                        <th className="col8">날짜</th>
+                    </tr>
+                </thead>
          {/* {num.map(el=>{
              return <tbody>
              <tr> */}
@@ -76,23 +76,21 @@ import { useEffect, useState } from 'react'
              return (
             // <Link className="boardContent" to='board/post' >
              <tfoot>
-                 <tr className="boardContent" onClick={()=>{history.push('board/post')}}>
-                     <td className="col5" >{el.postId}</td>
+                 <tr className="boardContent" onClick={()=>{history.push({pathname:'board/post',state:{postId:el.id}})}}>
+                     <td className="col5" >{el.id}</td>
                      <td className="col15" >{el.hashtag}</td>
                      <td className="col60" >{el.title}</td>
-                     <td className="col12" >{el.userId}</td>
-                     <td className="col8" >{el.time}</td>
+                     <td className="col12" >{el.user_id}</td>
+                     <td className="col8" >{el.createdAt}</td>
                  </tr>
              </tfoot>
             // </Link>
              )
          })}
-     </table>
-     <Link to='board/write'>
-     <button>
-         글작성
-     </button>
-     </Link>
+            </table>
+            <Link to='board/write'>
+                글작성
+           </Link>
           
          </div>
        );
