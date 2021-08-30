@@ -1,7 +1,7 @@
 const Users = require('../models/').users;
 const jwt = require('jsonwebtoken');
 
-const { verifyToken } = require('./VerifyToken');
+const { verifyToken, decodeToken } = require('./VerifyToken');
 
 module.exports ={
   signIn: async (req, res) => {
@@ -12,7 +12,7 @@ module.exports ={
 
     const userData = await Users.findOne({
       where: {
-        user_id: req.body.userId,
+        userId: req.body.userId,
         password: req.body.password
       }
     });
@@ -30,18 +30,14 @@ module.exports ={
         id: userData.id
       }
 
-      const accessToken = jwt.sign(tokenPayload, 'accessKey', { expiresIn: '1h' });
-      const refreshToken = jwt.sign(tokenPayload, 'refreshKey', { expiresIn: '14d' });
+      const accessToken = jwt.sign(tokenPayload, process.env.ACCESS_SECRET, { expiresIn: '1h' });
+      const refreshToken = jwt.sign(tokenPayload, process.env.REFRESH_SECRET, { expiresIn: '14d' });
 
       return res.status(200)
-        .cookie("accessToken", accessToken, {
-          httpOnly: true
-        }) //쿠키 옵션 줘야됨 httpOnly, secure
-        .cookie("refreshToken", refreshToken, {
-          httpOnly: true
-        })
+        .cookie("accessToken", accessToken, { httpOnly: true }) //쿠키 옵션 줘야됨 httpOnly, secure
+        .cookie("refreshToken", refreshToken, { httpOnly: true })
         .send({
-          "animalName" : userData.animal_name,
+          "animalName" : userData.animalId,
           "message" : "ok"
         });
     }
@@ -52,18 +48,16 @@ module.exports ={
     //TODO: 회원가입 기능 구현
 
     const isExist = await Users.findOne({
-      where: { user_id : req.body.userId }
+      where: { userId : req.body.userId }
     }); //존재하는지 먼저 검색
-
-    console.log(isExist)
 
     if(isExist) return res.status(409).send("duplicate id or email"); //이미 존재할 경우
     else {
       Users.create({ //존재하지 않을 경우 해당 레코드 생성
-        user_id : req.body.userId,
+        userId : req.body.userId,
         password : req.body.password,
         email: req.body.email,
-        phone_number : req.body.phone_number
+        phoneNumber : req.body.phoneNumber
       });
 
       return res.status(201).send("ok");
@@ -81,8 +75,7 @@ module.exports ={
 
     if(accessToken) {
       //유효한 토큰일 경우 -> 해당 유저가 존재하는지 확인
-      const curUser = jwt.verify(accessToken, 'accessKey');
-      const user = await Users.findOne({ where: { id : curUser.id} });
+      const user = await decodeToken(accessToken);
 
       if(!user) return res.status(401).send("invalid user token");
       else return res.status(200)
@@ -90,34 +83,31 @@ module.exports ={
               .clearCookie('refreshToken')
               .send('successfully signout');
     }
-    else {
-      //토큰이 만료되어 없을 경우
-      return res.status(401).send("invalid user token");
-    }
+    else return res.status(401).send("invalid user token");
   },
 
   userDelete: async (req, res) => {
-    //*DELETE / endpoint http://localhost:4000/user/
+    //*DELETE / endpoint http://localhost:4000/user/userDelete
     //TODO: 회원 탈퇴 기능 구현
 
     //현재 로그인 되어있는 유저의 정보를 삭제
     //destroy method 사용
     //-> 현재 로그인 되어있는 유저를 DB에서 찾은 뒤 그 유저를 destory
 
-    //로그인 되어있는 유저 먼저 확인
-    //이거 토큰 검증하는 과정 템플릿으로 빼놔도 될듯
-
     const [accessToken, refreshToken] = await verifyToken(req);
 
     if(accessToken) {
       //유효한 토큰일 경우 -> 해당 유저가 존재하는지 확인
-      const curUser = jwt.verify(accessToken, 'accessKey');
-      const user = await Users.findOne({ where: { id: curUser.id } });
+      const user = await decodeToken(accessToken);
 
       if(!user) return res.status(401).send("invalid token");
       else {
-        user.destory();
-        return res.status(200).send("ok");
+        user.destroy();
+        
+        res.status(200)
+          .clearCookie('accessToken')
+          .clearCookie('refreshToken')
+          .send("ok");
       }
     }
     else return res.status(401).send("invalid token");
@@ -147,7 +137,7 @@ module.exports ={
     //req.body로 넘겨받은 아이디가 user 테이블에 있는지 findOne으로 확인
     //있으면 409, 없으면 200
 
-    const user = await Users.findOne({ where: { user_id : req.body.user_id } });
+    const user = await Users.findOne({ where: { userId : req.body.userId } });
 
     if(user) return res.status(409).send("duplicated userid");
     else return res.status(200).send("vaild user_id");
