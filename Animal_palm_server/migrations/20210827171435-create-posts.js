@@ -8,10 +8,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      animal_name: {
-        type: Sequelize.STRING
+      animal_id: {
+        type: Sequelize.INTEGER
       },
-      context: {
+      content: {
         type: Sequelize.STRING
       },
       title: {

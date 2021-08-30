@@ -2,8 +2,8 @@ const { comment, writeComment, commentDelete } = require('../controllers/Comment
 const exress = require('express');
 const router = exress.Router();
 //댓글
-router.get('/:postid/comment',comment)
-router.post('/:postid',writeComment)
-router.delete('/:postid',commentDelete)
+router.get('/:postId',comment)
+router.post('/:postId',writeComment)
+router.delete('/:commentId',commentDelete)
 
 module.exports = router
