@@ -7,7 +7,7 @@ const { verifyToken, decodeToken } = require('./VerifyToken');
 
 module.exports = {
   update: async (req, res) => {
-    //*PATCH / endpoint http://localhost:4000/mypage/update
+    //*PATCH / endpoint http://localhost:4000/mypage/info
     //TODO: 유저 정보 수정
     //req.body에 담긴 수정내용만 현재 유저 정보(DB에서 읽어옴)에 update
     //-> sequelize method중에 update method가 있음 이거 쓰면 됨!
