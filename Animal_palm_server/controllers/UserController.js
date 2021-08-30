@@ -23,7 +23,7 @@ module.exports ={
     else {
       //해당 ID의 유저가 존재하는 경우
       //-> token 생성
-      //-> access, refresh 둘 다 헤더 authorization에 저장
+      //-> access, refresh 둘 다 쿠키에 저장
 
       //token으로는 현재 접속중인 유저가 누구인지만 식별
       const tokenPayload = {
