@@ -1,16 +1,36 @@
-import React, { useState } from 'react';
+import axios from 'axios';
+import React, { useState, useHistory } from 'react';
 import { Modal } from './Modal';
 import { UserInfo } from './UserInfo';
 
-export const MySetting = () => {
+export const MySetting = ({
+  userInfo
+}) => {
+  const history = useHistory();
   const [isOpen, setIsOpen] = useState(false);
   const [wannaUpdate, setWannaUpdate] = useState(false);
   const [wannaDelete, setWannaDelete] = useState(false);
+  const [entireInfo, setEntireInfo] = useState(null);
 
   const openModalHandler = () => {
     setIsOpen(!isOpen);
   };
   const wannaUpdateHandler = () => {
+    const userinfoURL = 'http://3.34.133.160:4000/mypage/info';
+    axios.get(userinfoURL)
+    .then((res) => {
+      //! 유저 풀 정보 받아옴
+      const message = res.data.message
+      if(message === 'ok') {
+        // 작업
+        const {id, animalName, email, phone} = res.data.user_info;
+        const info = {id, animalName, email, phone};
+        setEntireInfo(info);
+      } else {
+        // 에러
+        alert('비밀번호 오류')
+      }
+    })
     setIsOpen(false)
     setWannaDelete(false)
     setWannaUpdate(!wannaUpdate);
@@ -21,7 +41,19 @@ export const MySetting = () => {
     alert('회원정보가 변경되었습니다.')
   }
   const deleteMemberHandler = () => {
-    alert('탈퇴 되었습니다. => api 연결 후 홈으로 redirect')
+    const deleteUserURL = 'http://3.34.133.160:4000/user';
+    axios.delete(deleteUserURL)
+    .then((res) => {
+      const message = res.data.message;
+      if(message === 'ok') {
+        alert('탈퇴 되었습니다.');
+        history.push('/') // 홈으로 이동
+      } else {
+        alert('잘못된 접근입니다.')
+        return;
+      }
+    })
+    .catch((err) => alert(err))
   }
   const deleteButtonHandler = () => {
     setWannaDelete(!wannaDelete);
@@ -34,6 +66,7 @@ export const MySetting = () => {
         <div>
           <div >
             <UserInfo
+              entireInfo = {entireInfo}
               wannaUpdateHandler={wannaUpdateHandler}
               changeHandler={allSetHandler}
             />
@@ -42,6 +75,7 @@ export const MySetting = () => {
           {wannaDelete?
             <div>
               <Modal
+                userInfo = {userInfo}
                 header='정말 탈퇴하시겠습니까?'
                 noBtnHandler={deleteButtonHandler}
                 yesBtnHandler={deleteMemberHandler}
@@ -54,9 +88,10 @@ export const MySetting = () => {
       : <>{isOpen?
         <div>
           <Modal
+            userInfo = {userInfo}
             header='회원정보를 수정하시려면 비밀번호를 입력해주세요'
             noBtnHandler={openModalHandler}
-            yesBtnHandler={wannaUpdateHandler}
+            wannaUpdateHandler={wannaUpdateHandler}
             yesBtn='확인'
           />
         </div>

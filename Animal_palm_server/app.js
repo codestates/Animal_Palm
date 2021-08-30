@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express');
 const https = require("http")
 const cors = require('cors');
@@ -14,13 +15,15 @@ const userRouter = require("./router/UserRouter")
 
 app.use(express.json())
 app.use(express.urlencoded({extended:false}));
-app.use('/board',boardRouter)
+app.use(cors())
+app.use('/boards',boardRouter)
 app.use('/user',userRouter)
-app.use('/comment',commentRouter)
+app.use('/comments',commentRouter)
 app.use('/mypage',mypagesRouter)
 app.get('/',(req,res,next)=>{
   res.send("main") 
 })
+
 // app.use(
 //   cors({
 //     origin:["http://localhost:3000"],

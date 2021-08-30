@@ -4,15 +4,14 @@ import { MyContents } from './components/MyContents';
 import { MyComments } from './components/MyComments';
 import { MySetting } from './components/MySetting';
 
-export const Mypage = () => {
-  // 프로필 컴포넌트
-  // 탭 구현
-  //  각 탭 누를시 컴포넌트들..!
+export const Mypage = ({
+  userInfo
+}) => {
   const [currentTab, setCurrentTab] = useState(0);
   const tabMenu = [
-    {name : '내가 쓴 글', component: <MyContents/>},
-    {name : '내가 쓴 댓글', component: <MyComments/>},
-    {name : '회원정보 수정', component: <MySetting/>}
+    {name : '내가 쓴 글', component: <MyContents userInfo={userInfo}/>},
+    {name : '내가 쓴 댓글', component: <MyComments userInfo={userInfo}/>},
+    {name : '회원정보 수정', component: <MySetting userInfo = {userInfo}/>}
   ];
   const selectMenuHandler = (index) => {
     setCurrentTab(index);
@@ -20,7 +19,9 @@ export const Mypage = () => {
   return (
     <>
     <div>
-      <Profile/>
+      <Profile
+        userInfo = {userInfo}
+      />
     </div>
     <div>
     {tabMenu.map((tab, i) => (
