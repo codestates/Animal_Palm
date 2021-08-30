@@ -3,14 +3,15 @@ const {checkAnimal} = require('./check/')
 
 module.exports ={
   getPostList:async (req, res) => {
-    //*GET / endpoint: http://localhost:4000/boards/:board_id
+    //*GET / endpoint: http://localhost:4000/boards/:animalId 
     //TODO: 현재 게시판의 글 목록 가져오기
     
     
     const animalId = req.params.animalId    
-    const allData = await models.posts.findAll({where:{animal_id:animalId},raw:true})
-    
     let data = []
+    
+    const allData = await models.posts.findAll({where:{animalId:animalId},raw:true})
+    
     for(let i =0; i<allData.length;i++){
       data.push({
         id: allData[i].id,

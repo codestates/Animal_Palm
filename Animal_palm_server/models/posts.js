@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   posts.init({
-    animal_id: DataTypes.INTEGER,
+    animalId: DataTypes.INTEGER,
     content: DataTypes.STRING,
     title: DataTypes.STRING
   }, {
