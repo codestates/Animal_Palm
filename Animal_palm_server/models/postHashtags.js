@@ -3,22 +3,22 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class post_hashtags extends Model {
+  class postHashtags extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-        models.post_hashtags.belongsTo(models.posts, {foreignKey: "post_id"})
-        models.post_hashtags.belongsTo(models.hashtags, {foreignKey: "hashtag_id"})
+        models.postHashtags.belongsTo(models.posts, {foreignKey: "postId"})
+        models.postHashtags.belongsTo(models.hashtags, {foreignKey: "hashtagId"})
     }
   };
-  post_hashtags.init({
+  postHashtags.init({
     
   }, {
     sequelize,
-    modelName: 'post_hashtags',
+    modelName: 'postHashtags',
   });
-  return post_hashtags;
+  return postHashtags;
 };

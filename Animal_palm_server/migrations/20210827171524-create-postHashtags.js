@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('post_hashtags', {
+    await queryInterface.createTable('postHashtags', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -19,6 +19,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('post_hashtags');
+    await queryInterface.dropTable('postHashtags');
   }
 };
