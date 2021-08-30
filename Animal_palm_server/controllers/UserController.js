@@ -137,7 +137,7 @@ module.exports ={
     //req.body로 넘겨받은 아이디가 user 테이블에 있는지 findOne으로 확인
     //있으면 409, 없으면 200
 
-    const user = await Users.findOne({ where: { user_id : req.body.user_id } });
+    const user = await Users.findOne({ where: { userId : req.body.userId } });
 
     if(user) return res.status(409).send("duplicated userid");
     else return res.status(200).send("vaild user_id");
