@@ -13,7 +13,7 @@ export const MyContents = ({
   // ];
   const [list, setList] = useState([]);
   const getMyContent = () => {
-    const myContentURL = `${test}/mypage/context`;
+    const myContentURL = `${test}/mypage/content`;
     axios.get(myContentURL, { withCredentials : true })
     .then((res) => {
       const message = res.data.message;
@@ -21,7 +21,6 @@ export const MyContents = ({
         // keep going
         setList(res.data.data);
         if(list.length === 0) {
-          // ! 작성한 글이 없습니다 보여주기 => state 하나 더 만들어서 이게 true면 글이 없습니다?
           return;
         }
       } else {
@@ -39,7 +38,6 @@ export const MyContents = ({
         {/* <div>
           내가 쓴 글
         </div> */}
-        <div>
           {list.length > 0?
             <table className='mine'>
               <thead>
@@ -59,7 +57,6 @@ export const MyContents = ({
             </table>
           : <div className='no'>작성한 글이 없습니다.</div>
         }
-        </div>
       </div>
     </>
   );

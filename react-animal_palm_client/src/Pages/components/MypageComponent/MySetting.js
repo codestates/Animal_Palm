@@ -13,7 +13,12 @@ export const MySetting = ({
   const [isOpen, setIsOpen] = useState(false);
   const [wannaUpdate, setWannaUpdate] = useState(false);
   const [wannaDelete, setWannaDelete] = useState(false);
-  const [entireInfo, setEntireInfo] = useState(null);
+  const [entireInfo, setEntireInfo] = useState({
+    user_id : '',
+    animal_id : '',
+    email : '',
+    phone_number : ''
+  });
 
   const openModalHandler = () => {
     setIsOpen(!isOpen);
@@ -23,11 +28,11 @@ export const MySetting = ({
     axios.get(userinfoURL, { withCredentials : true })
     .then((res) => {
       //! 유저 풀 정보 받아옴
-      const message = res.data.message
+      const message = res.data.message;
       if(message === 'ok') {
         // 작업
-        const {id, animalName, email, phone} = res.data.user_info;
-        const info = {id, animalName, email, phone};
+        const {user_id, animal_id, email, phone_number} = res.data.data;
+        const info = {user_id, animal_id, email, phone_number};
         setEntireInfo(info);
       } else {
         // 에러

@@ -20,21 +20,25 @@ export const Modal = ({
       return;
     }
     const checkPwURL = `${test}/mypage/passwd`;
-    axios.post(checkPwURL, { pwInput }, {
+    axios.post(checkPwURL, { password : pwInput }, {
       headers : { 'Content-type' : 'application/json' },
       withCredentials : true
     })
-      .then((res) => {
-        const message = res.data.message;
-        if(message === 'correct passwd') {
-          // 제대로 받아온 경우
-          wannaUpdateHandler();
-        } else {
-          // 비밀번호 틀린 경우
-          alert('비밀번호가 일치하지 않습니다.')
-          return;
-        }
-      })
+    .then((res) => {
+      // console.log('응답?')
+      const message = res.data;
+      if(message === 'correct passwd') {
+        // 제대로 받아온 경우
+        wannaUpdateHandler();
+      } else if(res.status === 202){
+        // 비밀번호 틀린 경우
+        alert('비밀번호가 일치하지 않습니다.')
+        return;
+      } else {
+        alert('잘못된 접근입니다.')
+        return;
+      }
+    })
   }
   return (
     <div className='modal'>

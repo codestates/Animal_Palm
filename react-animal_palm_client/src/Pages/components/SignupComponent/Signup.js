@@ -1,7 +1,7 @@
 import axios from "axios"
 import { useState } from "react"
 import { Link, useHistory } from "react-router-dom"
-import { cheackPassword, checkEmail, checkId, checkPhone } from "../../function/Validatior"
+import { checkPassword, checkEmail, checkId, checkPhone } from "../../function/Validatior"
 import './Signup.css'
 
 export function SignupComponent ({ setIsState,moveLogin }) {
@@ -26,7 +26,7 @@ export function SignupComponent ({ setIsState,moveLogin }) {
         else if(!checkId(signupInfo.id)){
           alert('아이디는 5~15자 영어 대소문자, 숫자, 특수기호(!@^*_-.)만 사용 가능합니다. (공백 불가)')
         }
-        else if(!cheackPassword(signupInfo.password)){
+        else if(!checkPassword(signupInfo.password)){
           alert('비밀번호는 최소 8자 이상이면서, 알파벳과 숫자 및 특수문자(@$!%*#?&)하나 이상을 포함해햐합니다.')
         }
         else if(!(signupInfo.password===signupInfo.checkPassword)){

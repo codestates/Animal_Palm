@@ -1,5 +1,5 @@
 // [비밀번호 유효성 검사]: 최소 8자 이상하면서, 알파벳과 숫자 및 특수문자(@$!%*#?&) 는 하나 이상 포함
-export const cheackPassword = (str) => {
+export const checkPassword = (str) => {
   return /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(str);
 }
 

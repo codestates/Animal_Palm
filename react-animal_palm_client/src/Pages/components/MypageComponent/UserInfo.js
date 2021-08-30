@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { cheackPassword, checkEmail, checkPhone } from '../../function/Validatior';
+import { checkPassword, checkEmail, checkPhone } from '../../function/Validatior';
 const { test, real } = require('../../Dummy/url');
 
 export const UserInfo = ({
@@ -8,7 +8,10 @@ export const UserInfo = ({
   wannaUpdateHandler,
   changeHandler
 }) => {
-  const [input, setInput] = useState(null)
+  const [input, setInput] = useState({
+    newPassword : '',
+    checkPassword : ''
+  })
   const handleInputValue = (e) => {
     setInput({...input, [e.target.name] : e.target.value })
   }
@@ -39,11 +42,11 @@ export const UserInfo = ({
     <div>
       <div>
           <span>아이디 </span>
-          <span>{entireInfo.id}</span>
+          <span>{entireInfo.user_id}</span>
         </div>
         <div>
           <span>나의 동물 </span>
-          <span>{entireInfo.animalName}</span>
+          <span>{entireInfo.animal_id}</span>
         </div>
         <div>
           <span>새 비밀번호* </span>
@@ -69,7 +72,7 @@ export const UserInfo = ({
           <input
             name='phone'
             type='text'
-            placeholder={entireInfo.phone}
+            placeholder={entireInfo.phone_number}
             value={input.phone}
             onChange={handleInputValue}
           />
