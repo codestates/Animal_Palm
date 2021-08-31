@@ -3,117 +3,117 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     const post_hashtags = await queryInterface.bulkInsert(
-      "post_hashtags",
+      "postHashtags",
       [
         {
           
-          hashtag_id: 1,
-          post_id: 2,
+          hashtagId: 1,
+          postId: 2,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           
-          hashtag_id: 2,
-          post_id: 3,
+          hashtagId: 2,
+          postId: 3,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           
-          hashtag_id: 3,
-          post_id: 4,
+          hashtagId: 3,
+          postId: 4,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           
-          hashtag_id: 4,
-          post_id: 5,
+          hashtagId: 4,
+          postId: 5,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           
-          hashtag_id: 5,
-          post_id: 6,
+          hashtagId: 5,
+          postId: 6,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           
-          hashtag_id: 6,
-          post_id: 7,
+          hashtagId: 6,
+          postId: 7,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           
-          hashtag_id: 7,
-          post_id: 8,
+          hashtagId: 7,
+          postId: 8,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           
-          hashtag_id: 8,
-          post_id: 9,
+          hashtagId: 8,
+          postId: 9,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           
-          hashtag_id: 9,
-          post_id: 10,
+          hashtagId: 9,
+          postId: 10,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           
-          hashtag_id: 10,
-          post_id: 11,
+          hashtagId: 10,
+          postId: 11,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           
-          hashtag_id: 11,
-          post_id: 12,
+          hashtagId: 11,
+          postId: 12,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           
-          hashtag_id: 12,
-          post_id: 13,
+          hashtagId: 12,
+          postId: 13,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           
-          hashtag_id: 13,
-          post_id: 14,
+          hashtagId: 13,
+          postId: 14,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           
-          hashtag_id: 14,
-          post_id: 15,
+          hashtagId: 14,
+          postId: 15,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           
-          hashtag_id: 15,
-          post_id: 16,
+          hashtagId: 15,
+          postId: 16,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           
-          hashtag_id: 16,
-          post_id: 1,
+          hashtagId: 16,
+          postId: 1,
           createdAt: new Date(),
           updatedAt: new Date(),
         },

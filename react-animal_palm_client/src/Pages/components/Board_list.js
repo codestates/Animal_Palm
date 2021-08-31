@@ -1,13 +1,14 @@
 import '../Board.css'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 
      
-     function Board_list({animalId}) {
+     function Board_list({animalId,server}) {
         const num = [1,2,3] //dummy
         let count = 0
         const [contentList, setContentList] = useState([])
+        const history = useHistory()
 
         useEffect(()=>{
             loadContentList(animalId)
@@ -16,14 +17,15 @@ import { useEffect, useState } from 'react'
         const loadContentList = (animalId) => {
             axios
              .get(
-              `http://localhost:4000/boards/${animalId}`
+              `${server}boards/${animalId}`
              ).then( data => {
-               setContentList(data)
+                 console.log(data.data.data)
+               setContentList(data.data.data)
              })
              .catch((err)=>{
                alert(err)
                 count = 1
-               console.log(count)
+               console.log(server,animalId)
                if(contentList.length===0){
                setContentList([{
                    animalId:1,
@@ -47,11 +49,11 @@ import { useEffect, useState } from 'react'
          <table className="table">
          <thead>
          <tr>
-             <th>번호</th>
-             <th>제목</th>
-             <th>작성자</th>
-             <th>날짜</th>
-             <th>태그</th>
+             <th className="col5">번호</th>
+             <th className="col15">태그</th>
+             <th className="col60">제목</th>
+             <th className="col12">작성자</th>
+             <th className="col8">날짜</th>
          </tr>
          </thead>
          {/* {num.map(el=>{
@@ -70,19 +72,19 @@ import { useEffect, useState } from 'react'
              </tr>
              </tbody>
          })} */}
-         {contentList.map(el=>{
+         {contentList.map((el,idx)=>{
              return (
-             <tbody>
-                 <Link to='board/post' >
-                 <tr>
-                     <td>{el.postId}</td>
-                     <td>{el.title}</td>
-                     <td>{el.userId}</td>
-                     <td>{el.time}</td>
-                     <td>{el.hashtag}</td>
+            // <Link className="boardContent" to='board/post' >
+             <tfoot>
+                 <tr className="boardContent" onClick={()=>{history.push('board/post')}}>
+                     <td className="col5" >{el.postId}</td>
+                     <td className="col15" >{el.hashtag}</td>
+                     <td className="col60" >{el.title}</td>
+                     <td className="col12" >{el.userId}</td>
+                     <td className="col8" >{el.time}</td>
                  </tr>
-                 </Link>
-             </tbody>
+             </tfoot>
+            // </Link>
              )
          })}
      </table>

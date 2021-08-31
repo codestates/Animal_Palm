@@ -10,13 +10,13 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      models.posts.belongsTo(models.users, {foreignKey: "user_id"})
-      models.posts.hasMany(models.comments, {foreignKey: 'post_id'})
-      models.posts.hasMany(models.post_hashtags, {foreignKey: 'post_id'})
+      models.posts.belongsTo(models.users, {foreignKey: "userId"})
+      models.posts.hasMany(models.comments, {foreignKey: 'postId'})
+      models.posts.hasMany(models.postHashtags, {foreignKey: 'postId'})
     }
   };
   posts.init({
-    animal_id: DataTypes.INTEGER,
+    animalId: DataTypes.INTEGER,
     content: DataTypes.STRING,
     title: DataTypes.STRING
   }, {

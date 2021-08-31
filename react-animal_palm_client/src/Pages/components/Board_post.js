@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import '../Board.css'
 
-function Board_post({ animalId }) {
+function Board_post({ animalId,server }) {
 
     const [context, setContext] = useState({
         id:'',
@@ -28,7 +28,7 @@ function Board_post({ animalId }) {
         // console.log('content')
         axios
          .get(
-          `http://localhost:4000/boards/${animalId}/${context.id}`
+          `${server}boards/${animalId}/${context.id}`
          ).then( data => {
            setContext(data)
          })
@@ -39,7 +39,7 @@ function Board_post({ animalId }) {
 
          axios
          .get(
-           `http://localhost:4000/boards/comments/${context.id}}`
+           `${server}boards/comments/${context.id}}`
          ).then( data => {
           setComment(data)
          })
@@ -56,7 +56,7 @@ function Board_post({ animalId }) {
         else{
         axios
          .post(
-            `http://localhost:4000/boards/${context.id}}`,
+            `${server}boards/${context.id}}`,
             {
                 comment: writeComment.comment
             }
@@ -69,7 +69,7 @@ function Board_post({ animalId }) {
           .then(()=>{
             axios
             .get(
-              `http://localhost:4000/boards/comments/${context.id}}`
+              `${server}boards/comments/${context.id}}`
             ).then( data => {
              setComment(data)
             })
@@ -86,7 +86,7 @@ function Board_post({ animalId }) {
     const deleteContext = () => {
         axios
          .delete(
-            `http://localhost:4000/board/${context.id}}/`
+            `${server}board/${context.id}}/`
          ).then(data=>{
             history.push('/board')
          })
@@ -99,11 +99,11 @@ function Board_post({ animalId }) {
     const deleteComment = () => {
         axios
          .delete(
-             `http://localhost:4000/board/${comment.id}/`//api 수정사항 comment id로 지워야함
+             `${server}board/${comment.id}/`//api 수정사항 comment id로 지워야함
          ).then(data=>{
             axios
             .get(
-              `http://localhost:4000/boards/comments/${context.id}}`
+              `${server}boards/comments/${context.id}}`
             ).then( data => {
              setComment(data)
             })
