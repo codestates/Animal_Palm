@@ -3,10 +3,8 @@ import { Link, useHistory } from "react-router-dom";
 import axios from 'axios';
 const { test, real } = require('../Dummy/url');
 
-function Navigaitionbar({
-  isLogin,
-  handleLogout
-}) {
+
+export default function Navigaitionbar({ isLogin,handleLogout }) {
   const history = useHistory();
   const logoutHandler = () => {
     const signOutURL = `${test}/user/signout`;
@@ -30,30 +28,28 @@ function Navigaitionbar({
       <ul className="nav-container">
         <Link to='/'>
           <li><a className="logo">logo</a></li>
-          </Link>
+        </Link>
         <a className='right-top'>
-          {isLogin? 
+        {isLogin? 
           <span className="right-top-children">
             <Link to="/mypage">
-            <li><a>MYPAGE</a></li>
+              <li><a>MYPAGE</a></li>
             </Link>
             <a>
-            <li><a onClick={logoutHandler}>LOGOUT</a></li>
+              <li><a onClick={logoutHandler}>LOGOUT</a></li>
             </a>
           </span>
-        : <span className="right-top-children">
-          <Link to='/login'>
-          <li><a>LOGIN</a></li>
-          </Link>
-          <Link to='/signup'>
-          <li><a>SIGNUP</a></li>
-          </Link>
-        </span>
+         :<span className="right-top-children">
+            <Link to='/login'>
+              <li><a>LOGIN</a></li>
+            </Link>
+            <Link to='/signup'>
+              <li><a>SIGNUP</a></li>
+            </Link>
+          </span>
         }
         </a>
       </ul>
     </nav>
   );
 }
-
-export default Navigaitionbar;

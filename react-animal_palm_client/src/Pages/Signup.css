@@ -1,3 +1,4 @@
+/* Signup css */
 *{
     box-sizing: border-box;
   }
@@ -36,5 +37,120 @@
     color:white;
 }
 
+/* ---------------signup component css */
+
+.signupInput {
+    border: 1px solid rgba(0,0,0,0.2);
+    width : 450px;
+    height: 50px;
+    background-color: white;
+    outline-style: none;
+    padding-left: 10px;
+    margin-bottom: 30px;
+}
+
+.signupInput:focus{
+    border: 1px solid #836354c9;
+}
+.signupLabel {
+    display : block;
+    margin-bottom : 5px;
+    font-weight: bold;
+    text-align: left;
+    margin-left: 10px;
+  }
+
+.signupButton {
+  margin :10px;
+  width : 450px;
+  height : 50px;
+  border : none;
+  background-color: #836354c9;
+  font-size : 17px;
+  color: white;
+  cursor: pointer;
+}
+
+.idCheck {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    right: 15px;
+    top: 15px;
+    background-color: #836354c9;
+    color:white;
+    width:60px;
+    height:35px;
+    cursor: pointer;
+    vertical-align: middle;
+    top:7px;
+    right:20px;
+    font-size: 13px
+}
+
+.idInput {
+    position: relative;
+}
+
+.id {
+    padding-right: 90px;
+}
+
+/* ---------------animaltest css */
 
 
+.question {
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom:20px
+}
+
+.questionContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* padding-top:50px; */
+    align-content: stretch;
+    background-color: white;
+    border-radius: 20%;
+    height: 500px;
+    position: relative;
+    border: 2px solid #836354c9 ;
+}
+
+.backToFront {
+    position: absolute;
+    left:30px;
+    top:50px;
+    cursor: pointer;
+
+}
+
+.answer {
+    background-color: white;
+    border: #836354c9 2px solid;
+    display: flex;
+    align-items: center;
+    margin: 10px;
+    justify-content: center;
+    width: 175px;
+    height: 50px;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.answer:hover {
+    background-color: #836354c9;
+    color: white;
+}
+
+.answerContainer {
+    display: flex;
+}
+
+.hide {
+    display: none;
+    transition: 1s;
+}
