@@ -39,6 +39,10 @@ export const MyComments = ({
     .then((res) => {
       const message = res.data.message;
       if(message === 'ok') {
+        const idx = list.findIndex((el) => el.id === commentId);
+        const temp = list.slice();
+        temp.splice(idx, 1);
+        setList(temp);
         alert('댓글이 삭제되었습니다.')
         return;
       } else {
@@ -50,7 +54,7 @@ export const MyComments = ({
   }
   useEffect(() => {
     getMyComment();
-  }, [list.id]);
+  }, []);
   return (
     <>
       <div className='content'>

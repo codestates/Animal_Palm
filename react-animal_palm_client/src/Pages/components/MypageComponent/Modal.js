@@ -39,6 +39,7 @@ export const Modal = ({
         return;
       }
     })
+    .catch((err) => alert(err))
   }
   return (
     <div className='modal'>

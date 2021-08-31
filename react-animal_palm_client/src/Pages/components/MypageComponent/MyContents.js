@@ -51,6 +51,7 @@ export const MyContents = ({
               <tbody>
                 <ContentsList
                   list={list}
+                  userInfo={userInfo}
                   show='post'
                 />
               </tbody>
