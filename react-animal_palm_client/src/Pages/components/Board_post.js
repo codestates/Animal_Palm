@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import '../Board.css'
 
-function Board_post({ server }) {
+function Board_post() {
 
     const [context, setContext] = useState({})
     const [comment, setComment] = useState([[]])

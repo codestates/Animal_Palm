@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import '../Board.css'
 
      
-     function Board_write({ server }) {
+     function Board_write() {
 
       const [context,setContext] = useState({
         title:'',
@@ -33,7 +33,7 @@ import '../Board.css'
         else{
         axios
           .post(
-            `${process.env.REACT_APP_API_URL}/boards/${location.state.location}`,
+            `${process.env.REACT_APP_API_URL}/boards/${location.state.animalId}`,
             {
               title: context.title,
               content: context.content,
