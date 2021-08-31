@@ -15,9 +15,9 @@ export const MyComments = ({
   //   {id : 6, context : '테스트 댓글내용6', post_id: 6, created_At : '2021-08-25'}
   // ];
   const [list, setList] = useState([]);
-  const getMyComment = () => {
+  const getMyComment = async () => {
     const myCommentURL = `${test}/mypage/comment`;
-    axios.get(myCommentURL, { withCredentials : true })
+    await axios.get(myCommentURL, { withCredentials : true })
     .then((res) => {
       const message = res.data.message;
       if(message === 'ok') {
@@ -50,7 +50,7 @@ export const MyComments = ({
   }
   useEffect(() => {
     getMyComment();
-  }, [list]);
+  }, [list.id]);
   return (
     <>
       <div className='content'>
