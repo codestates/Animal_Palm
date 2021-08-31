@@ -1,25 +1,31 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import '../Board.css'
 
-function Board_post({ animalId,server }) {
+function Board_post() {
 
-    const [context, setContext] = useState({
-        id:'',
-    })
-    const [comment, setComment] = useState()
+    const [context, setContext] = useState({})
+    const [comment, setComment] = useState([[]])
 
     const [writeComment, setWriteComment] = useState({
-        comment:''
+        content:''
     })
 
     const history = useHistory()
 
+    const location = useLocation()
+
     useEffect(()=>{
-        loadContentComment(animalId)
+        loadContentComment(location.state.location)
     },[])
     
+    const isHaveEnter = (context) => {
+        if(typeof context === 'string'){
+        console.log(context.split('\n').join('<br></br>'),1111)
+        return !!(context.indexOf('\n'))}
+    }
+
     const handleInputValue = (key) => (e) => {
         setWriteComment({...writeComment, [key]: e.target.value })
     }
@@ -28,20 +34,25 @@ function Board_post({ animalId,server }) {
         // console.log('content')
         axios
          .get(
-          `${server}boards/${animalId}/${context.id}`
+          `${process.env.REACT_APP_API_URL}/boards/${animalId}/${location.state.postId}`
+          ,{ withCredentials: true }
          ).then( data => {
-           setContext(data)
-         })
+           setContext(data.data.data)
+           console.log(context)
+           })
          .catch((err)=>{
-            setContext('data')
              alert(err)
          })
 
          axios
          .get(
-           `${server}boards/comments/${context.id}}`
+           `${process.env.REACT_APP_API_URL}/comments/${location.state.postId}`,
+           { withCredentials: true }
          ).then( data => {
-          setComment(data)
+            //  console.log(data.data.data)
+          setComment([...data.data.data])
+          
+          console.log(comment, data.data.data)
          })
          .catch((err)=>{
             alert(err)
@@ -50,28 +61,30 @@ function Board_post({ animalId,server }) {
       }
 
     const postComment = () => {
-        if(writeComment.comment === ''){
+        if(writeComment.content === ''){
             alert('내용을 입력해주세요')
         }
         else{
         axios
          .post(
-            `${server}boards/${context.id}}`,
+            `${process.env.REACT_APP_API_URL}/comments/${location.state.postId}`,
             {
-                comment: writeComment.comment
-            }
+                content: writeComment.content
+            },
+            { withCredentials: true }
          ).then(()=>{
             alert('댓글을 게시했습니다')
             setWriteComment({
-                comment:''
+                content:''
             })
           })
           .then(()=>{
             axios
             .get(
-              `${server}boards/comments/${context.id}}`
+              `${process.env.REACT_APP_API_URL}/comments/${location.state.postId}`
+              ,{ withCredentials: true }
             ).then( data => {
-             setComment(data)
+             setComment(data.data.data)
             })
             .catch((err)=>{
                alert(err)
@@ -86,7 +99,8 @@ function Board_post({ animalId,server }) {
     const deleteContext = () => {
         axios
          .delete(
-            `${server}board/${context.id}}/`
+            `${process.env.REACT_APP_API_URL}/boards/${location.state.postId}}/`,
+            { withCredentials: true }
          ).then(data=>{
             history.push('/board')
          })
@@ -96,20 +110,22 @@ function Board_post({ animalId,server }) {
          })
     }
 
-    const deleteComment = () => {
+    const deleteComment = (commentId) => {
         axios
          .delete(
-             `${server}board/${comment.id}/`//api 수정사항 comment id로 지워야함
-         ).then(data=>{
+             `${process.env.REACT_APP_API_URL}/comments/${commentId}/`//api 수정사항 comment id로 지워야함
+             ,{ withCredentials: true }
+         ).then(()=>{
             axios
             .get(
-              `${server}boards/comments/${context.id}}`
+              `${process.env.REACT_APP_API_URL}/comments/${location.state.postId}`
+              ,{ withCredentials: true }
             ).then( data => {
-             setComment(data)
+             setComment(data.data.data)
             })
             .catch((err)=>{
                alert(err)
-           }) //comment가 삭제된후 새로 로딩
+           }) //comment가 추가된후 새로 로딩
          })
     }
 
@@ -117,50 +133,44 @@ function Board_post({ animalId,server }) {
     <div className="Board_post">
         {/* {loadContentComment(animalId)} */}
         <div className="Header">
-            <h1>제목입니다</h1>
-            {/* <h1>{context.title}</h1> */}
+            {/* <h1>제목입니다</h1> */}
+            <h1>{context.title}</h1>
         </div>
-        <button onClick={deleteContext}>글삭제</button>
+        <button className="deleteContext" onClick={deleteContext}>글삭제</button>
         <div className="Container">
-            <div className="Content">
-                게시글 <br></br>
-                게시글 <br></br>
-                게시글 <br></br>
-                게시글 <br></br>
-                게시글 <br></br>
-                {/* {context.content} */}
-            
-            </div>
+            <pre className="Content">
+                {context.content}
+            </pre>
             <div className="Replybox"></div>
             <div className="Commentbox">
                 <ul className="Commentlist">
                     {/* {여기는 map으로 구현해야함} */}
-                    <li>
+                    {/* <li>
                         <div>
-                            <div>댓글작성자</div>
+                            <span>댓글작성자</span>
+                            <button className="deleteComment" onClick={deleteComment}>삭제</button>
                             <div>댓글입니다.댓글입니다.댓글입니다.댓글입니다</div>
                             <div>
                                 2021.12.34 22:00
-                                <button onClick={deleteComment}>삭제</button>
                             </div>
                         </div>
-                    </li>
-                    {/* {comment.map(el=>{
+                    </li> */}
+                    {comment.map(el=>{
+                        return(
                     <li>
                         <div>
-                            <div>{comment.user}</div>
-                            <div>{comment.comment}</div>
+                            <span>{el.userId}</span>
+                            <button className="deleteComment" onClick={()=>deleteComment(el.id)}>삭제</button>
+                            <div>{el.content}</div>
                             <div>
-                            {comment.time}
-                            <button onClick={deleteComment}>삭제</button>
+                            {el.createdAt}
                             </div>
                         </div>
-                    </li>
-                    })} */}
+                    </li>)
+                    })}
                 </ul>
-                <div>
-                <h3>댓글</h3>
-                <textarea placeholder="댓글을 입력해주세요" onChange={handleInputValue('comment')} value={writeComment.comment} />
+                <div className="enterCommentContainer">
+                <textarea placeholder="댓글을 입력해주세요" onChange={handleInputValue('content')} value={writeComment.content} />
                 <button onClick={postComment} >등록</button>
                 </div>
             </div>

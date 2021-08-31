@@ -20,13 +20,13 @@ export function Board({animalId}) {
       
       <Switch>
         <Route exact path="/board">
-          <Board_list animalId={animalId} server={server} />
+          <Board_list animalId={animalId} />
         </Route>
         <Route path="/board/post">
-          <Board_post animalId={animalId} server={server} />
+          <Board_post />
         </Route>
         <Route path="/board/write">
-          <Board_write animalId={animalId} server={server} />
+          <Board_write />
         </Route>
       </Switch>
     </div>

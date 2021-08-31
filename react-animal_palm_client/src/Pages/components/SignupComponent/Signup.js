@@ -1,3 +1,4 @@
+
 import axios from "axios"
 import { useState } from "react"
 import { Link, useHistory } from "react-router-dom"
@@ -5,6 +6,7 @@ import { checkPassword, checkEmail, checkId, checkPhone } from "../../function/V
 import './Signup.css'
 
 export function SignupComponent ({ setIsState,moveLogin }) {
+  require('dotenv').config()
     const [signupInfo,setSignupInfo] = useState({
         id:'',
         password:'',
@@ -39,24 +41,23 @@ export function SignupComponent ({ setIsState,moveLogin }) {
           alert('000-000-0000 혹은 000-0000-0000형식으로 작성해주십시오.')
         }
         else{
-          console.log(checkId(signupInfo.id))
         axios
           .post(
-            `http://3.34.133.160:4000/user/signup`,
+            `${process.env.REACT_APP_API_URL}/user/signup`,
             {
               id: signupInfo.id,
               password: signupInfo.password,
               email: signupInfo.email,
               phonenumber: signupInfo.mobile
             }
+            ,{ withCredentials: true }
           )
           .then(data =>{
             history.push('/signup/animalTest')
-            setIsState('two')
           })
           .catch(err => {
+           
             history.push('/signup/animalTest')
-            setIsState('two')
             alert(err)
           })
         }
@@ -65,11 +66,13 @@ export function SignupComponent ({ setIsState,moveLogin }) {
       const validExistId = () => {
         axios
          .post(
-           `http://localhost:4000/user/userid`,
+           `${process.env.REACT_APP_API_URL}/user/userid`,
            {
              id: signupInfo.id
-           }
+           },
+           { withCredentials: true }
          ).then(data=>{
+           alert(data.data.message)
            
          })
          .catch(err=>{
@@ -80,6 +83,7 @@ export function SignupComponent ({ setIsState,moveLogin }) {
       return (
         
 <center>
+  {setIsState('one')}
   <h1>회원가입</h1>
   <form>
   <div>
