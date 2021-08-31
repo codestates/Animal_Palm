@@ -39,60 +39,84 @@ export const UserInfo = ({
     return password1 === password2;
   }
   return (
-    <div>
-      <div>
-          <span>아이디 </span>
-          <span>{entireInfo.user_id}</span>
-        </div>
-        <div>
-          <span>나의 동물 </span>
-          <span>{entireInfo.animal_id}</span>
-        </div>
-        <div>
-          <span>새 비밀번호* </span>
-          <input
+    <div className='setting-userinfo'>
+      <table>
+        <tr>
+          <th><span>아이디</span></th>
+          <td><span>{entireInfo.user_id}</span></td>
+        </tr>
+        <tr>
+          <th><span>나의 동물</span></th>
+          <td><span>{entireInfo.animal_id}</span></td>
+        </tr>
+        <tr>
+          <th><span>비밀번호</span></th>
+          <td><input
             name='newPassword'
             type={input.newPassword}
             onChange={handleInputValue}
-          />
-          <div>8자 이상, 알파벳과 숫자 및 특수문자(@$!%*#?&) 하나 이상 포함</div>
-        </div>
-        <div>
-          <span>비밀번호 확인* </span>
-          <input 
+            placeholder='새 비밀번호'
+          /></td>
+        </tr>
+          <tr><th></th><td>
+            <div
+              className={checkPassword(input.newPassword)? 'invalid-message hide' : 'invalid-message'}>
+            8자 이상, 알파벳과 숫자 및 특수문자(@$!%*#?&) 하나 이상 포함
+            </div>
+          </td></tr>
+        <tr>
+          <th><span>비밀번호 확인</span></th>
+          <td><input 
             name='checkPassword'
             type='password'
             value={input.checkPassword}
             onChange={handleInputValue}
-          />
-          <div>비밀번호가 일치하지 않습니다.</div>
-        </div>
-        <div>
-          <span>휴대전화 </span>
-          <input
+            placeholder='새 비밀번호 확인'
+          /></td>
+        </tr>
+          <tr><th></th><td>
+            <div
+              className={isMatch(input.newPassword, input.checkPassword)? 'invalid-message hide' : 'invalid-message'}>
+                비밀번호가 일치하지 않습니다.
+            </div>
+          </td></tr>
+        <tr>
+          <th><span>휴대전화 </span></th>
+          <td><input
             name='phone'
             type='text'
             placeholder={entireInfo.phone_number}
             value={input.phone}
             onChange={handleInputValue}
-          />
-          <div>숫자와 - 만 가능합니다.</div>
-        </div>
-        <div>
-          <span>이메일 </span>
-          <input
+          /></td>
+        </tr>
+        <tr><th></th><td>
+          <div 
+            className={checkPhone(input.phone)? 'invalid-message hide' : 'invalid-message'}>
+              숫자만 입력해주세요.
+          </div>
+        </td></tr>
+        <tr>
+          <th><span>이메일 </span></th>
+          <td><input
             name='email'
             type='email'
             placeholder={entireInfo.email}
             value={input.email}
             onChange={handleInputValue}
-          />
-          <div>올바른 이메일을 적어주세요.</div>
-        </div>
-        <div>
-          <button onClick={wannaUpdateHandler}> 취소 </button>
-          <button onClick={changeBtnHandler}> 확인 </button>
-          </div>
+          /></td>
+        </tr>
+          <tr><th></th><td>
+            <div
+              className={checkEmail(input.email)? 'invalid-message hide' : 'invalid-message'}>
+                올바른 이메일 유형을 입력해주세요.
+            </div>
+          </td></tr>
+      </table>
+      <div className='setting-button'>
+        <button onClick={wannaUpdateHandler}> 취소 </button>
+        <button onClick={changeBtnHandler}> 확인 </button>
+      </div>
     </div>
   );
 };

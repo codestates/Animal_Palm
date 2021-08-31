@@ -72,15 +72,17 @@ export const MySetting = ({
       <div className='content'>
         {wannaUpdate?
           <>
-          <div>
-            <div >
+          <div id='info-wrap'>
+            <div className='setting-container'>
               <UserInfo
                 entireInfo = {entireInfo}
                 wannaUpdateHandler={wannaUpdateHandler}
                 changeHandler={allSetHandler}
               />
             </div>
-            <button onClick={deleteButtonHandler}> 회원탈퇴 </button>
+            <button
+              classNam='delete-member-button'
+              onClick={deleteButtonHandler}> 회원탈퇴 </button>
             {wannaDelete?
               <div>
                 <Modal
@@ -88,7 +90,7 @@ export const MySetting = ({
                   header='정말 탈퇴하시겠습니까?'
                   noBtnHandler={deleteButtonHandler}
                   yesBtnHandler={deleteMemberHandler}
-                  yesBtn='회원탈퇴'
+                  yesBtn='탈퇴'
                 />
               </div>
               :null}
