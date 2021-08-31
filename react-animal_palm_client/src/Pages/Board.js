@@ -9,8 +9,10 @@ const {test, real} = require('./Dummy/url');
 
 
 
-export function Board({animalId}) {
-  animalId = 'animalId'
+export function Board({animalName}) {
+  // const animalId = userInfo.animalName;
+  console.log(animalName)
+  // animalId = 'animalId'
   const server =  `{tets}/`;
   return (
   <div>    
@@ -20,7 +22,7 @@ export function Board({animalId}) {
       
       <Switch>
         <Route exact path="/board">
-          <Board_list animalId={animalId} />
+          <Board_list animalId={animalName} />
         </Route>
         <Route path="/board/post">
           <Board_post />

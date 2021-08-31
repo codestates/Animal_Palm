@@ -5,7 +5,7 @@ div, section, header, footer, p, h1, h2 {
 	box-sizing: border-box;
 }
 a {
-	color: royalblue;
+	color: rgb(205, 144, 98);
 }
 img {
 	max-width: 79%;

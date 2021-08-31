@@ -83,10 +83,10 @@ export const UserInfo = ({
         <tr>
           <th><span>휴대전화 </span></th>
           <td><input
-            name='phone'
+            name='phoneNumber'
             type='text'
             placeholder={entireInfo.phone_number}
-            value={input.phone}
+            value={input.phoneNumber}
             onChange={handleInputValue}
           /></td>
         </tr>
