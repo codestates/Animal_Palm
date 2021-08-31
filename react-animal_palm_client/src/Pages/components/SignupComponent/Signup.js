@@ -1,10 +1,12 @@
+
 import axios from "axios"
 import { useState } from "react"
 import { Link, useHistory } from "react-router-dom"
-import { cheackPassword, checkEmail, checkId, checkPhone } from "../../function/Validatior"
+import { checkPassword, checkEmail, checkId, checkPhone } from "../../function/Validatior"
 import './Signup.css'
 
 export function SignupComponent ({ setIsState,moveLogin }) {
+  require('dotenv').config()
     const [signupInfo,setSignupInfo] = useState({
         id:'',
         password:'',
@@ -26,7 +28,7 @@ export function SignupComponent ({ setIsState,moveLogin }) {
         else if(!checkId(signupInfo.id)){
           alert('아이디는 5~15자 영어 대소문자, 숫자, 특수기호(!@^*_-.)만 사용 가능합니다. (공백 불가)')
         }
-        else if(!cheackPassword(signupInfo.password)){
+        else if(!checkPassword(signupInfo.password)){
           alert('비밀번호는 최소 8자 이상이면서, 알파벳과 숫자 및 특수문자(@$!%*#?&)하나 이상을 포함해햐합니다.')
         }
         else if(!(signupInfo.password===signupInfo.checkPassword)){
@@ -39,24 +41,23 @@ export function SignupComponent ({ setIsState,moveLogin }) {
           alert('000-000-0000 혹은 000-0000-0000형식으로 작성해주십시오.')
         }
         else{
-          console.log(checkId(signupInfo.id))
         axios
           .post(
-            `http://3.34.133.160:4000/user/signup`,
+            `${process.env.REACT_APP_API_URL}/user/signup`,
             {
               id: signupInfo.id,
               password: signupInfo.password,
               email: signupInfo.email,
               phonenumber: signupInfo.mobile
             }
+            ,{ withCredentials: true }
           )
           .then(data =>{
             history.push('/signup/animalTest')
-            setIsState('two')
           })
           .catch(err => {
+           
             history.push('/signup/animalTest')
-            setIsState('two')
             alert(err)
           })
         }
@@ -65,11 +66,13 @@ export function SignupComponent ({ setIsState,moveLogin }) {
       const validExistId = () => {
         axios
          .post(
-           `http://localhost:4000/user/userid`,
+           `${process.env.REACT_APP_API_URL}/user/userid`,
            {
              id: signupInfo.id
-           }
+           },
+           { withCredentials: true }
          ).then(data=>{
+           alert(data.data.message)
            
          })
          .catch(err=>{
@@ -80,6 +83,7 @@ export function SignupComponent ({ setIsState,moveLogin }) {
       return (
         
 <center>
+  {setIsState('one')}
   <h1>회원가입</h1>
   <form>
   <div>

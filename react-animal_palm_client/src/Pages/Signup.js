@@ -33,7 +33,7 @@ export const Signup = () => {
           <AnimalTest setIsState={setIsState} />
         </Route>
         <Route path="/signup/success">
-          <Success moveLogin={moveLogin} />
+          <Success setIsState={setIsState} moveLogin={moveLogin} />
         </Route>
         </Switch>
         </BrowserRouter>

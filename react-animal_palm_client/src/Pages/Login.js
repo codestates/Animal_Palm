@@ -1,12 +1,15 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { Link, useHistory } from "react-router-dom";
+import './CSS/Login.css';
+const { test,real } = require('./Dummy/url');
+
 export function Login({
   handleUserInfo
 }) {
   const history = useHistory();
   const [loginInfo, setLoginInfo] = useState({
-    id:'',
+    userId:'',
     password:''
   })
   const handleInputValue = (e) => {
@@ -14,22 +17,22 @@ export function Login({
     // console.log(loginInfo)
   }
   const LoginHandler = () => {
-    if(loginInfo.id === '' || loginInfo.password === '') {
+    if(loginInfo.userId === '' || loginInfo.password === '') {
       alert('아이디와 비밀번호를 제대로 입력해주세요')
       return;
     }
-    const signInURl = 'http://3.34.133.160:4000/user/signin';
-    axios.post(signInURl,
-      { loginInfo }
-      )
+    const signInURl = `${test}/user/signin`;
+    axios.post(signInURl, loginInfo, {
+      headers : { 'Content-type' : 'application/json' },
+      withCredentials : true
+    })
     .then((res) => {
-      console.log(1)
+      // console.log(1)
       const message = res.data.message;
 
       if(message === 'ok') {
         const userInfo = {
-          animalName : res.data.animalName,
-          accessToken : res.data.token
+          animalName : res.data.animalName
         }
         handleUserInfo(userInfo);
         history.push('/')
@@ -41,23 +44,26 @@ export function Login({
     })
     .catch((err) => alert(err))
   }
+  const goToSignUpHandler = () => {
+    history.push('/signup')
+  }
 
   return (
-    <>
+    <div className='wrapper'>
       <div>
-        <h1>Sign In</h1>
+        <div id='title'>Animal Palm</div>
         <div>
-          <div>
-            <span>아이디</span>
+          <div className='input-box'>
+            <label>ID</label>
             <input
-              name='id'
+              name='userId'
               type='text'
-              value={loginInfo.id}
+              value={loginInfo.userId}
               onChange={handleInputValue}
             />
           </div>
-          <div>
-            <span>비밀번호</span>
+          <div className='input-box'>
+            <label>Password</label>
             <input
               name = 'password'
               type='password'
@@ -65,18 +71,16 @@ export function Login({
               onChange={handleInputValue}
             />
           </div>
-          <Link to="signup">
-          <button>
-            회원가입
-          </button>
-          </Link>
-          {/* <Link to="/"> */}
-          <button onClick={LoginHandler}>
-            로그인
-          </button>
-          {/* </Link> */}
         </div>
-      </div>
-    </>
+          <div className='container'>
+            <a herf='#' className='button' onClick={LoginHandler}>
+              로그인
+            </a>
+            <a className='button' onClick={goToSignUpHandler}>
+              회원가입
+            </a>
+          </div>
+        </div>
+    </div>
   );
 };

@@ -1,24 +1,44 @@
-td {
+.Board_list td {
     width: 150px;
     padding:10px;
     font-weight: bold;
     border-bottom: 1px solid #ccc;
 }
 
-th {
+.Board_list th {
     padding: 10px;
     font-weight: bold;
-    color: orange;
-    border-bottom: 3px solid orange;
+    color: rgb(255, 255, 255);
+    /* border-bottom: 3px solid orange; */
+    background-color: #836354c9;
 }
 
-.Board_post,  .Board_write{
-    margin-top: 100px;
-}
 
 .Board_list {
+    display: flex;
+    flex-direction: column;
     margin-top: 100px;
     width: 70%;
+}
+
+.Board_list > a {
+    border: 1px solid #ccc;
+    text-decoration: none;
+    width: 5em;
+    height: 2em;
+    align-self: flex-end;
+    margin : 1em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12%;
+}
+
+
+
+.Board_list > a:visited{
+    color: black
 }
 
 .table {
@@ -31,11 +51,6 @@ th {
     border: 1px solid gray;
 }
 
-.Content {
-    height: 10em;
-}
-
-
 
 .boardContent:hover {
     background-color: #ccc;
@@ -47,6 +62,7 @@ th {
     align-items: center;
     justify-content: center;
 }
+
 
 .col10 {
     width: 10%;
@@ -70,4 +86,255 @@ th {
 
 .col8 {
     width: 8%;
+}
+
+.selectBoard > button {
+    background-color: white;
+    border: #836354a1 2px solid;
+    display: flex;
+    align-items: center;
+    margin: 7px;
+    margin-bottom: 5px;
+    justify-content: center;
+    width: 100px;
+    height: 30px;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.selectBoard > button:hover {
+    background-color: #836354c9;
+    border: none;
+    color: white;
+}
+
+.selectBoard {
+    display: flex;
+}
+/*-------------------------------------------------------*/
+
+.Board_post{
+    margin-top: 100px;
+    width: 70%;
+    text-align: start;
+    display: flex;
+    flex-direction: column;
+}
+
+.Header {
+    margin-bottom: 10px;
+    border-bottom: 3px solid #ccc;
+}
+
+.Header > h1 {
+    margin-block-end: 0.3em;
+}
+
+.deleteContext {
+    align-self: flex-end;
+    margin-right: 15px;
+    width: 6em;
+    height: 1.8em;
+    border:none;
+    background-color: white;
+    border: 2px solid rgba(196, 224, 250, 0.979);
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.deleteContext:hover {
+    background-color: rgba(196, 224, 250, 0.979);
+}
+
+.Content {
+    font-size: 16px;
+    padding-bottom: 10em;
+    border-bottom: 3px solid #ccc;
+}
+
+.deleteComment {
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.Commentlist {
+    list-style-type: none;
+}
+
+.Commentlist > li > div > span{
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.Commentlist > li > div > div {
+    margin : 0.3em;
+}
+
+.enterCommentContainer {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+}
+
+.enterCommentContainer > textarea {
+    width: 95%;
+    height: 70px;
+    margin-top: 1em;
+    font-size: 16px;
+    align-self: center;
+    resize: none;
+    padding: 10px;
+}
+
+
+
+.enterCommentContainer > button {
+    position:absolute;
+    justify-self: end;
+    align-self: flex-end;
+    bottom: 5px;
+    right: 30px;
+    border:none;
+    color:rgb(122, 122, 122);
+    background-color:unset;
+    cursor: pointer;
+    font-size: 16px;
+    border:1px solid rgb(190, 190, 190);
+    border-bottom: 3px solid rgb(190, 190, 190);
+    border-right: 3px solid rgb(190, 190, 190) ;
+    border-radius: 10%;
+}
+
+.enterCommentContainer > button:hover{
+    background-color: rgb(224, 224, 224);
+}
+
+.enterCommentContainer > button:active {
+    border-bottom: 1px solid rgb(190, 190, 190);
+    border-right: 1px solid rgb(190, 190, 190) ;
+}
+
+.deleteComment {
+    background-color: white;
+    border:none
+}
+
+/*----------------------------------------------------------*/
+
+.Board_write{
+    margin-top: 100px;
+    width: 70%;
+    text-align: start;
+    display: flex;
+    flex-direction: column;
+}
+
+.Board_write > h2, .Board_write > h3 {
+    margin-left: 0.6em;
+    margin-bottom: .3em;
+}
+
+.Board_write > input {
+    font-size: 16px;
+    border : none;
+    resize: none;
+    padding:0.7em;
+    height: 2.2em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.Board_write > div {
+    display: flex;
+    flex-direction: column;
+    height: 25em;
+    align-items: stretch;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 1em;
+    padding: 0.7em
+}
+
+.Board_write > div > input , .Board_write > div > textarea {
+    font-size: 16px;
+    border : none;
+    resize: none;
+}
+
+.Board_write > div > textarea {
+    height: 100%;
+    width: 100%;
+    border-bottom: 2px solid #ccc;
+}
+.Board_write > div > input {
+    height: 2.2em;
+    width: 95%;
+}
+
+.Board_write > div > input , .Board_write > div > textarea, .Board_write > input{
+    outline:none
+}
+
+.Board_write > button {
+    z-index: 1;
+    position: relative;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer; 
+    height: 2em;
+    background-color: white;
+    border: 2px solid orange;
+    transition: all 2s;
+    
+}
+
+.Board_write > button:hover {
+    color:white;
+}
+
+.Board_write > button::after {
+    content:"";
+    color:white;
+    position: absolute;
+    z-index: -1;
+    top:0;
+    left:0;
+    width: 0;
+    height: 100%;
+    background-color: orange;
+    transition: all 3s ;
+   
+}
+
+.Board_write > button:hover::after{
+    width: 100%;
+}
+
+.hashTag{
+    width: 100%;
+    height: 3em;
+    overflow-x: auto;
+}
+
+.hashTag > span {
+    font-size: 1.1em;
+    padding-left:1.3em;
+    padding-right: .2em;
+    border-radius: 5px;
+    height: 1.4em;
+    background-color: rgb(192, 192, 192);
+    position: relative;
+    margin-right:1em;
+}
+
+.hashTag > span > a {
+    position: absolute;
+    background-color: unset;
+    border:none;
+    left : 5px;
+    cursor: pointer;
 }

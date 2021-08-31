@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { Profile } from './components/Profile';
-import { MyContents } from './components/MyContents';
-import { MyComments } from './components/MyComments';
-import { MySetting } from './components/MySetting';
+import { Profile } from './components/MypageComponent/Profile';
+import { MyContents } from './components/MypageComponent/MyContents';
+import { MyComments } from './components/MypageComponent/MyComments';
+import { MySetting } from './components/MypageComponent/MySetting';
+import './CSS/Mypage.css';
+import Navigaitionbar from './components/navigationbar';
 
 export const Mypage = ({
   userInfo
@@ -18,23 +20,26 @@ export const Mypage = ({
   };
   return (
     <>
-    <div>
-      <Profile
-        userInfo = {userInfo}
-      />
+    <Navigaitionbar/>
+    <div id='wrap'>
+      <div className='profile'>
+        <Profile
+          userInfo = {userInfo}
+        />
+      </div>
+      <div className='tab-menu'>
+      {tabMenu.map((tab, i) => (
+          <li
+          key={i}
+          className={currentTab === i? "submenu focused": "submenu"}
+          onClick={()=>selectMenuHandler(i)}
+          >
+            {tab.name}
+          </li>
+        ))}
+      </div>
+      {tabMenu[currentTab].component}
     </div>
-    <div>
-    {tabMenu.map((tab, i) => (
-        <li
-        key={i}
-        className={currentTab === i? "submenu focused": "submenu"}
-        onClick={()=>selectMenuHandler(i)}
-        >
-          {tab.name}
-        </li>
-      ))}
-    </div>
-    {tabMenu[currentTab].component}
     </>
   );
 };

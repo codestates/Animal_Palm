@@ -2,13 +2,13 @@
 .nav-container {
     position: fixed;
     top:0;
-    background-color: darkslategrey;
+    background-color: white;
     width: 100%;
     display: flex;
     justify-content: space-between;
     margin:0;
     padding: 0;
-    z-index: 999;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 8px 0px;
     
     font-size: 2em;
     padding: 10px;
@@ -23,8 +23,41 @@
     cursor: pointer;
 }
 
-a {
-    border:1px solid black;
-    background-color: white;
-
+.right-top-children {
+    display: flex;
+    margin-right: 2em;
 }
+
+.right-top-children > a {
+    font-size: 20px;
+    position: relative;
+    margin-left : 1em;
+    text-decoration: none;
+    color:black
+}
+
+.right-top-children > a::after {
+    content:'';
+    position:absolute;
+    left:0;
+    bottom:-7px;
+    width: 0;
+    height: 2px;
+    margin: 5px 0 0;
+    /* z-index: 1; */
+    border-bottom:solid 0px black;
+    transition: all 1s ease-in-out;
+    background-color: black;
+}
+
+.right-top-children > a:hover::after {
+    width: 100%;
+}
+
+.nav-container > a {
+    text-decoration: none;
+    border: none;
+    background-color: unset;
+    color:black
+}
+
