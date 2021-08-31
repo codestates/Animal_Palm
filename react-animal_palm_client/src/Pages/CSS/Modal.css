@@ -1,0 +1,59 @@
+.modal {
+  position: fixed;
+  z-index: 999;
+  right: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(145, 144, 144, 0.6);
+  display: grid;
+  place-items: center;
+  text-align: center;
+  font-size: 15pt;
+}
+.modal button {
+  outline: none;
+  cursor: pointer;
+  border: none;
+}
+.modal > section {
+  width: 500px;
+  height: 300px;
+  margin:0 auto;
+  border-radius: .5rem;
+  background-color: #fff;
+}
+.header {
+  height: 5rem;
+  background-color: #f1f1f1;
+  font-weight: 700;
+  display: table-cell;
+  width: 500px;
+  padding: 10px 10px 10px 10px;
+  vertical-align: middle;
+}
+.modal input {
+  border:none;
+  outline: none;
+  border-bottom: solid 1px #ccc;
+  width: 19vw;
+  text-align: center;
+  font-size: 16pt;
+  margin: 20px 10px 20px 10px;
+  vertical-align: middle;
+}
+.modal .message {
+  padding: 20px 10px 10px 10px;
+}
+.modal button {
+  width: 75px;
+  height: 35px;
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+  font-size: 14pt;
+}
+.modal button:hover {
+  color: white;
+  background: rgb(63, 135, 95);
+}

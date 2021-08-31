@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { ContentsList } from './ContentsList';
+const {test, real} = require('../../Dummy/url');
 
 export const MyComments = ({
   userInfo
@@ -14,9 +15,9 @@ export const MyComments = ({
   //   {id : 6, context : '테스트 댓글내용6', post_id: 6, created_At : '2021-08-25'}
   // ];
   const [list, setList] = useState([]);
-  const getMyComment = () => {
-    const myCommentURL = 'http://3.34.133.160:4000/mypage/comment';
-    axios.get(myCommentURL)
+  const getMyComment = async () => {
+    const myCommentURL = `${test}/mypage/comment`;
+    await axios.get(myCommentURL, { withCredentials : true })
     .then((res) => {
       const message = res.data.message;
       if(message === 'ok') {
@@ -33,11 +34,15 @@ export const MyComments = ({
     })
   }
   const deleteCommentHandler = (commentId) => {
-    const deleteCommentURL = `http://3.34.133.160:4000/comments/${commentId}/`
-    axios.delete(deleteCommentURL)
+    const deleteCommentURL = `${test}/comments/${commentId}/`
+    axios.delete(deleteCommentURL, { withCredentials : true })
     .then((res) => {
       const message = res.data.message;
       if(message === 'ok') {
+        const idx = list.findIndex((el) => el.id === commentId);
+        const temp = list.slice();
+        temp.splice(idx, 1);
+        setList(temp);
         alert('댓글이 삭제되었습니다.')
         return;
       } else {
@@ -49,32 +54,34 @@ export const MyComments = ({
   }
   useEffect(() => {
     getMyComment();
-  }, [list]);
+  }, []);
   return (
     <>
-      <div>
-        내가 쓴 댓글
+      <div className='content'>
+        {/* <div>
+          내가 쓴 댓글
+        </div> */}
+        {list.length > 0?
+          <table className='mine'>
+            <thead>
+            <tr>
+              <th>No.</th>
+              <th>댓글 내용</th>
+              <th>작성 일자</th>
+              <th>삭제</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ContentsList
+              list={list}
+              show='comment'
+              handleDelete = {deleteCommentHandler}
+            />
+          </tbody>
+          </table>
+          : <div className='no'>작성한 댓글이 없습니다.</div>  
+        }
       </div>
-      {list.length > 0?
-        <table>
-          <thead>
-          <tr>
-            <th>No.</th>
-            <th>댓글 내용</th>
-            <th>작성 일자</th>
-            <th>삭제</th>
-          </tr>
-        </thead>
-        <tbody>
-          <ContentsList
-            list={list}
-            show='comment'
-            handleDelete = {deleteCommentHandler}
-          />
-        </tbody>
-        </table>
-        : <div>작성한 댓글이 없습니다.</div>  
-      }
     </>
   );
 };

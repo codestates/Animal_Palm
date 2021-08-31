@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { ContentsList } from './ContentsList';
+const {test, real} = require('../../Dummy/url')
 
 export const MyContents = ({
   userInfo
@@ -12,15 +13,14 @@ export const MyContents = ({
   // ];
   const [list, setList] = useState([]);
   const getMyContent = () => {
-    const myContentURL = 'http://3.34.133.160:4000/mypage/context';
-    axios.get(myContentURL)
+    const myContentURL = `${test}/mypage/content`;
+    axios.get(myContentURL, { withCredentials : true })
     .then((res) => {
       const message = res.data.message;
       if(message === 'ok') {
         // keep going
         setList(res.data.data);
         if(list.length === 0) {
-          // ! 작성한 글이 없습니다 보여주기 => state 하나 더 만들어서 이게 true면 글이 없습니다?
           return;
         }
       } else {
@@ -34,32 +34,30 @@ export const MyContents = ({
   }, [])
   return (
     <>
-      <div>
-        <div>
+      <div className='content'>
+        {/* <div>
           내가 쓴 글
-        </div>
-        <div>
+        </div> */}
           {list.length > 0?
-            <table>
+            <table className='mine'>
               <thead>
                 <tr>
-                  <th>No.</th>
+                  <th>글 번호</th>
                   <th>게시판</th>
                   <th>글 목록</th>
-                  <th>작성 일자</th>
-                  <th>삭제</th>
+                  <th>작성일</th>
                 </tr>
               </thead>
               <tbody>
                 <ContentsList
                   list={list}
+                  userInfo={userInfo}
                   show='post'
                 />
               </tbody>
             </table>
-          : <div>작성한 글이 없습니다.</div>
+          : <div className='no'>작성한 글이 없습니다.</div>
         }
-        </div>
       </div>
     </>
   );

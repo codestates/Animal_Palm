@@ -1,0 +1,35 @@
+#info-wrap{
+  font-size: 14pt;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+}
+.delete-member-button{
+
+}
+.setting-container{
+  padding: 2% 1% 2% 1%;
+}
+.setting-userinfo{
+
+}
+.setting-userinfo table th {
+  text-align: left;
+  padding-right: 80px;
+}
+.setting-userinfo table td input {
+  border: 1px solid #ececec;
+  font-size: 14px;
+  color: #4c4c4c;
+  height: 40px;
+  padding: 10px;
+  width: 100%;
+}
+.setting-button {
+
+}
+.invalid-message{
+  font-size: 8pt;
+}
