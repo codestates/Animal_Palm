@@ -21,6 +21,7 @@ export const Mypage = ({
   return (
     <>
     <Navigaitionbar/>
+    {console.log(userInfo)}
     <div id='wrap'>
       <div className='profile'>
         <Profile

@@ -5,10 +5,9 @@ import { useEffect, useState } from 'react'
 
      
      function Board_list({animalId}) {
-        animalId = 1;
         const num = [1,2,3] //dummy
         const [contentList, setContentList] = useState([])
-        const [location, setLocation] = useState(1)
+        const [location, setLocation] = useState(animalId)
         const history = useHistory()
 
         useEffect(()=>{
@@ -55,7 +54,7 @@ import { useEffect, useState } from 'react'
                 <thead>
                     <tr>
                         <th className="col5">번호</th>
-                        {/* <th className="col15">태그</th> */}
+                        <th className="col15">태그</th>
                         <th className="col60">제목</th>
                         <th className="col12">작성자</th>
                         <th className="col8">날짜</th>
@@ -83,9 +82,9 @@ import { useEffect, useState } from 'react'
              <tfoot key={idx}>
                  <tr className="boardContent" onClick={()=>{history.push({pathname:'board/post',state:{postId:el.id, animalId: location}})}}>
                      <td className="col5" >{el.id}</td>
-                     {/* <td className="col15" >{el.hashtag.map(el=>''+el).join(',')}</td> */}
+                     <td className="col15" >{el.hashtag.map(el=>''+el).join(',')}</td>
                      <td className="col60" >{el.title}</td>
-                     <td className="col12" >{el.userId}</td>
+                     <td className="col12" >{el.user_id}</td>
                      <td className="col8" >{el.createdAt}</td>
                  </tr>
              </tfoot>

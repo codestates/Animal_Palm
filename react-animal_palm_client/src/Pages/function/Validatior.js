@@ -17,5 +17,5 @@ export const checkId = (str) => {
 // [전화번호 검승 함수 수정] : 숫자 10자리 혹은 11자리 가능
 export const checkPhone = (str) => {
   // return /^[0-9]{3}-[0-9]{3,4}-[0-9]{4}/.test(str)
-  return /^[0-9]{10, 11}/.test(str)
+  return /^\d{10,11}$/.test(str)
 }

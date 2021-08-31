@@ -18,4 +18,3 @@ export const Profile = ({
     </div>
   );
 };
-// ! 완료

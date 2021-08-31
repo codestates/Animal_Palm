@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import '../../CSS/Modal.css'
-const { test, real } = require('../../Dummy/url');
+import { hash } from '../../function/Hasing';
 
 export const Modal = ({
   userInfo,
@@ -19,7 +19,8 @@ export const Modal = ({
       alert('비밀번호를 입력해주세요');
       return;
     }
-    const checkPwURL = `${test}/mypage/passwd`;
+    const checkPwURL = `${process.env.REACT_APP_API_URL}/mypage/passwd`;
+    //! const password = hash(pwInput);
     axios.post(checkPwURL, { password : pwInput }, {
       headers : { 'Content-type' : 'application/json' },
       withCredentials : true

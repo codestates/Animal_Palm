@@ -37,6 +37,7 @@ export const ContentsList = ({
               {show === 'comment'?
                 <td>
                   <button
+                    className='delete-btn'
                     onClick={() => handleDelete(item.id)}>삭제</button>
                 </td>
               : null}

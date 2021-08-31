@@ -14,7 +14,7 @@ module.exports ={
       const post = await models.posts.findOne({where:{
         id: postId
       }})
-      if(!post) return res.status(401).send("invalid access");
+      if(!post||post.id !== postId) return res.status(401).send("invalid access");
       else {
         const data = await models.comments.findAll({where:{
           postId:postId
@@ -43,7 +43,6 @@ module.exports ={
     //postId: req.params, content: req.body, user_id: req.cookie(token에 담겨있음)
 
     const content = req.body.content
-    
     const postId = req.params.postId
 
     const [accessToken, refreshToken] = await verifyToken(req);
@@ -53,7 +52,7 @@ module.exports ={
       const post = await models.posts.findOne({where:{
         id: postId
       }})
-      if(!post) return res.status(401).send("invalid access");
+      if(!post||post.id !== postId) return res.status(401).send("invalid access");
       else {
         await models.comments.create({
           content:content,
@@ -70,6 +69,7 @@ module.exports ={
  
     //token에 담긴 유저가 유효한 유저인지 항상 유효성부터 체크
     //postId가 존재하는 게시글인지 확인 -> postDB에서 확인
+
     //유효한 유저가 존재하는 게시글에 작성한 댓글일 경우에만 commentsDB에 추가
   },
 
@@ -94,7 +94,7 @@ module.exports ={
         id:commentId,
         userId:user.id
       }})
-      if(!userData) return res.status(401).json({message:"invalid access"});
+      if(!userData || userData.id !== user.id) return res.status(401).json({message:"invalid access"});
       else {
         await models.comments.destroy({where:{id:commentId}})
         return res.status(200).json({message:"ok"});

@@ -5,15 +5,13 @@ import Board_write from './components/Board_write';
 import Navigaitionbar from './components/navigationbar'
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { useState } from 'react';
-const {test, real} = require('./Dummy/url');
 
 
 
-export function Board({animalName}) {
+export function Board({userInfo}) {
   // const animalId = userInfo.animalName;
-  console.log(animalName)
+  console.log(userInfo)
   // animalId = 'animalId'
-  const server =  `{tets}/`;
   return (
   <div>    
     <Navigaitionbar />
@@ -22,7 +20,7 @@ export function Board({animalName}) {
       
       <Switch>
         <Route exact path="/board">
-          <Board_list animalId={animalName} />
+          <Board_list animalId={userInfo.animalId} />
         </Route>
         <Route path="/board/post">
           <Board_post />

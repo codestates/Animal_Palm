@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { Link, useHistory } from "react-router-dom";
 import './CSS/Login.css';
-const { test,real } = require('./Dummy/url');
+import { hash } from './function/Hasing';
 
 export function Login({
   handleUserInfo
@@ -21,7 +21,8 @@ export function Login({
       alert('아이디와 비밀번호를 제대로 입력해주세요')
       return;
     }
-    const signInURl = `${test}/user/signin`;
+    const sendInfo = { userId : loginInfo.userId, password : hash(loginInfo.password)}; //! 26번째 줄 이거로 수정
+    const signInURl = `${process.env.REACT_APP_API_URL}/user/signin`;
     axios.post(signInURl, loginInfo, {
       headers : { 'Content-type' : 'application/json' },
       withCredentials : true
@@ -32,7 +33,8 @@ export function Login({
 
       if(message === 'ok') {
         const userInfo = {
-          animalName : res.data.animalName
+          animalName : res.data.animalName,
+          animalId : res.data.animalId
         }
         handleUserInfo(userInfo);
         history.push('/')
@@ -51,7 +53,7 @@ export function Login({
   return (
     <div className='wrapper'>
       <div>
-        <div id='title'>Animal Palm</div>
+        <div id='title' onClick={() => history.push('/')}>Animal Palm</div>
         <div>
           <div className='input-box'>
             <label>ID</label>
