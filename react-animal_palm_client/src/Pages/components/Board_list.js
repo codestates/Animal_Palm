@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
      
      function Board_list({animalId,server}) {
         const num = [1,2,3] //dummy
-        let count = 0
+        let location = animalId
         const [contentList, setContentList] = useState([])
         const history = useHistory()
 
@@ -17,14 +17,14 @@ import { useEffect, useState } from 'react'
         const loadContentList = (animalId) => {
             axios
              .get(
-              `${server}boards/${animalId}`
+              `${process.env.REACT_APP_API_URL}/boards/${animalId}`,
+              { withCredentials: true }
              ).then( data => {
-                 console.log(data.data.data)
+                 console.log(data.data.data,animalId)
                setContentList(data.data.data)
              })
              .catch((err)=>{
                alert(err)
-                count = 1
                console.log(server,animalId)
                if(contentList.length===0){
                setContentList([{
@@ -43,9 +43,14 @@ import { useEffect, useState } from 'react'
        return (
          
          <div className="Board_list">
+             {console.log(process.env.REACT_APP_API_URL)}
              {/* {alert('1')} */}
              {/* {count===0 ?
              loadContentList(animalId):null} */}
+            <div className="selectBoard">
+                <button onClick={()=>{loadContentList('전체게시판'); location='전체게시판'}}>전체게시판</button>
+                <button onClick={()=>{loadContentList(animalId); location=animalId}}>당신의게시판</button>
+            </div>
             <table className="table">
                 <thead>
                     <tr>
@@ -75,8 +80,8 @@ import { useEffect, useState } from 'react'
          {contentList.map((el,idx)=>{
              return (
             // <Link className="boardContent" to='board/post' >
-             <tfoot>
-                 <tr className="boardContent" onClick={()=>{history.push({pathname:'board/post',state:{postId:el.id}})}}>
+             <tfoot key={idx}>
+                 <tr className="boardContent" onClick={()=>{history.push({pathname:'board/post',state:{postId:el.id, animalId: location}})}}>
                      <td className="col5" >{el.id}</td>
                      <td className="col15" >{el.hashtag}</td>
                      <td className="col60" >{el.title}</td>
@@ -88,7 +93,7 @@ import { useEffect, useState } from 'react'
              )
          })}
             </table>
-            <Link to='board/write'>
+            <Link to={{pathname:'board/write', state:{animalId: location}}}>
                 글작성
            </Link>
           

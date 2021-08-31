@@ -1,9 +1,10 @@
 import axios from 'axios';
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import '../Board.css'
 
      
-     function Board_write({ animalId,server }) {
+     function Board_write({ server }) {
 
       const [context,setContext] = useState({
         title:'',
@@ -11,6 +12,8 @@ import '../Board.css'
         hash:'',
         hashTag:[]
       })
+
+      const location = useLocation()
 
       const handleInputValue = (key) => (e) => {
         
@@ -25,18 +28,18 @@ import '../Board.css'
 
       const postContext = () => {
         if(context.title===''|| context.content===''){
-          console.log(animalId)
           alert('빈칸을 입력해주세요')
         }
         else{
         axios
           .post(
-            `${server}boards/${animalId}`,
+            `${process.env.REACT_APP_API_URL}/boards/${location.state.location}`,
             {
               title: context.title,
               content: context.content,
               hash: context.hashTag
             }
+            ,{ withCredentials: true }
           ).then(()=>{
             alert('글을 게시했습니다')
             setContext({

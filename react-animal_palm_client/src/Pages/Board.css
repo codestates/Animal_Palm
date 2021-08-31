@@ -87,6 +87,29 @@ th {
     width: 8%;
 }
 
+.selectBoard > button {
+    background-color: white;
+    border: orange 2px solid;
+    display: flex;
+    align-items: center;
+    margin: 7px;
+    margin-bottom: 5px;
+    justify-content: center;
+    width: 100px;
+    height: 30px;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.selectBoard > button:hover {
+    background-color: orange;
+    color: white;
+}
+
+.selectBoard {
+    display: flex;
+}
 /*-------------------------------------------------------*/
 
 .Board_post{
@@ -131,6 +154,7 @@ th {
 
 .deleteComment {
     margin-left: 10px;
+    cursor: pointer;
 }
 
 .Commentlist {

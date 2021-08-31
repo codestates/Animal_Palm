@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import '../Board.css'
 
-function Board_post({ animalId,server }) {
+function Board_post({ server }) {
 
     const [context, setContext] = useState({})
     const [comment, setComment] = useState([[]])
@@ -17,7 +17,7 @@ function Board_post({ animalId,server }) {
     const location = useLocation()
 
     useEffect(()=>{
-        loadContentComment(animalId)
+        loadContentComment(location.state.location)
     },[])
     
     const isHaveEnter = (context) => {
@@ -34,7 +34,8 @@ function Board_post({ animalId,server }) {
         // console.log('content')
         axios
          .get(
-          `${server}boards/${animalId}/${location.state.postId}`
+          `${process.env.REACT_APP_API_URL}/boards/${animalId}/${location.state.postId}`
+          ,{ withCredentials: true }
          ).then( data => {
            setContext(data.data.data)
            console.log(context)
@@ -45,7 +46,8 @@ function Board_post({ animalId,server }) {
 
          axios
          .get(
-           `${server}comments/${location.state.postId}`
+           `${process.env.REACT_APP_API_URL}/comments/${location.state.postId}`,
+           { withCredentials: true }
          ).then( data => {
             //  console.log(data.data.data)
           setComment([...data.data.data])
@@ -65,10 +67,11 @@ function Board_post({ animalId,server }) {
         else{
         axios
          .post(
-            `${server}comments/${location.state.postId}`,
+            `${process.env.REACT_APP_API_URL}/comments/${location.state.postId}`,
             {
                 content: writeComment.content
-            }
+            },
+            { withCredentials: true }
          ).then(()=>{
             alert('댓글을 게시했습니다')
             setWriteComment({
@@ -78,7 +81,8 @@ function Board_post({ animalId,server }) {
           .then(()=>{
             axios
             .get(
-              `${server}comments/${location.state.postId}`
+              `${process.env.REACT_APP_API_URL}/comments/${location.state.postId}`
+              ,{ withCredentials: true }
             ).then( data => {
              setComment(data.data.data)
             })
@@ -95,7 +99,8 @@ function Board_post({ animalId,server }) {
     const deleteContext = () => {
         axios
          .delete(
-            `${server}boards/${location.state.postId}}/`
+            `${process.env.REACT_APP_API_URL}/boards/${location.state.postId}}/`,
+            { withCredentials: true }
          ).then(data=>{
             history.push('/board')
          })
@@ -108,11 +113,13 @@ function Board_post({ animalId,server }) {
     const deleteComment = (commentId) => {
         axios
          .delete(
-             `${server}comments/${commentId}/`//api 수정사항 comment id로 지워야함
+             `${process.env.REACT_APP_API_URL}/comments/${commentId}/`//api 수정사항 comment id로 지워야함
+             ,{ withCredentials: true }
          ).then(()=>{
             axios
             .get(
-              `${server}comments/${location.state.postId}`
+              `${process.env.REACT_APP_API_URL}/comments/${location.state.postId}`
+              ,{ withCredentials: true }
             ).then( data => {
              setComment(data.data.data)
             })
