@@ -66,22 +66,22 @@ export function AnimalTest({ setIsState }) {
     const sendAnimalId = () => {
         axios
          .post(
-             `http://localhost:4000/user/animal`,
+             `${process.env.REACT_APP_API_URL}/user/animal`,
              {
                 animal_name : parseInt(yourPersonality[0],16),
                 user_id : ''
-            }
+            },
+            { withCredentials: true }
          ).then(()=>{
-             history.push('/signup/success')
-             setIsState('three')
+            history.push('/signup/success')
          })
          .catch(err => {
-            history.push('/signup/success')
-            setIsState('three')
+            alert(err)
          })
     }
     return (
     <container>
+        {setIsState('two')}
         <article className={`questionContainer ${personalityType[1] !==''  ? 'hide' : ''}`}>
             <header>
                 <div></div> <br></br>

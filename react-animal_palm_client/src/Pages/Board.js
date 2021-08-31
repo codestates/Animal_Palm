@@ -10,7 +10,6 @@ import { useState } from 'react';
 
 export function Board({animalId}) {
   animalId = 'animalId'
-  const server =  'http://3.34.133.160:4000/'
   return (
   <div>    
     <Navigaitionbar />
@@ -19,13 +18,13 @@ export function Board({animalId}) {
       
       <Switch>
         <Route exact path="/board">
-          <Board_list animalId={animalId} server={server} />
+          <Board_list animalId={animalId} />
         </Route>
         <Route path="/board/post">
-          <Board_post animalId={animalId} server={server} />
+          <Board_post />
         </Route>
         <Route path="/board/write">
-          <Board_write animalId={animalId} server={server} />
+          <Board_write />
         </Route>
       </Switch>
     </div>

@@ -1,6 +1,7 @@
-export function Success({moveLogin}) {
+export function Success({ setIsState,moveLogin }) {
     return(
     <center>
+        {setIsState('three')}
         <h1>
         환영합니다!
         </h1>
