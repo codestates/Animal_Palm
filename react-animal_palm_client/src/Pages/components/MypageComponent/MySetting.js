@@ -17,7 +17,7 @@ export const MySetting = ({
     user_id : '',
     animal_id : '',
     email : '',
-    phone_number : ''
+    phoneNumber : ''
   });
 
   const openModalHandler = () => {

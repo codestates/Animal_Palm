@@ -51,7 +51,7 @@ export function Login({
   return (
     <div className='wrapper'>
       <div>
-        <div id='title'>LOGIN</div>
+        <div id='title'>Animal Palm</div>
         <div>
           <div className='input-box'>
             <label>ID</label>

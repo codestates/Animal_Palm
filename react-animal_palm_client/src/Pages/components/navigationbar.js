@@ -37,7 +37,9 @@ function Navigaitionbar({
             <Link to="/mypage">
             <li><a>MYPAGE</a></li>
             </Link>
+            <a>
             <li><a onClick={logoutHandler}>LOGOUT</a></li>
+            </a>
           </span>
         : <span className="right-top-children">
           <Link to='/login'>

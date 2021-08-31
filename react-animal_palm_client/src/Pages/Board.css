@@ -8,8 +8,9 @@
 .Board_list th {
     padding: 10px;
     font-weight: bold;
-    color: orange;
-    border-bottom: 3px solid orange;
+    color: rgb(255, 255, 255);
+    /* border-bottom: 3px solid orange; */
+    background-color: #836354c9;
 }
 
 
@@ -89,7 +90,7 @@
 
 .selectBoard > button {
     background-color: white;
-    border: orange 2px solid;
+    border: #836354a1 2px solid;
     display: flex;
     align-items: center;
     margin: 7px;
@@ -103,7 +104,8 @@
 }
 
 .selectBoard > button:hover {
-    background-color: orange;
+    background-color: #836354c9;
+    border: none;
     color: white;
 }
 

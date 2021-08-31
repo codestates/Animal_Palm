@@ -30,16 +30,17 @@ import '../Board.css'
         if(context.title===''|| context.content===''){
           alert('빈칸을 입력해주세요')
         }
-        else{
+        else{ //${location.state.animalId}
         axios
           .post(
-            `${process.env.REACT_APP_API_URL}/boards/${location.state.animalId}`,
+            `${process.env.REACT_APP_API_URL}/boards/1`,
             {
               title: context.title,
               content: context.content,
               hash: context.hashTag
             }
-            ,{ withCredentials: true }
+            ,{headers : {'Content-type' : 'application/json'},
+              withCredentials: true }
           ).then(()=>{
             alert('글을 게시했습니다')
             setContext({

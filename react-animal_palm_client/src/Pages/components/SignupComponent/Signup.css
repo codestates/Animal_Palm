@@ -9,7 +9,7 @@
 }
 
 .signupInput:focus{
-    border: 1px solid orange
+    border: 1px solid #836354c9;
 }
 label {
     display : block;
@@ -24,7 +24,7 @@ label {
   width : 450px;
   height : 50px;
   border : none;
-  background-color: orange;
+  background-color: #836354c9;
   font-size : 17px;
   color: white;
   cursor: pointer;
@@ -37,7 +37,7 @@ label {
     justify-content: center;
     right: 15px;
     top: 15px;
-    background-color: orange;
+    background-color: #836354c9;
     color:white;
     width:60px;
     height:35px;

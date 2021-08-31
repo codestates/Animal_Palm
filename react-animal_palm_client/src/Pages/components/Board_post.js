@@ -17,7 +17,7 @@ function Board_post() {
     const location = useLocation()
 
     useEffect(()=>{
-        loadContentComment(location.state.location)
+        loadContentComment(location.state.animalId)
     },[])
     
     const isHaveEnter = (context) => {

@@ -4,9 +4,13 @@
   min-height: 100vh;
 }
 #title {
-  padding: 15vh 0px 2em;
-  font-size: 25pt;
+  padding: 11vh 0px 2em;
+  color : #DE844F;
+  font-size: 35pt;
   font-weight: bold;
+}
+#title:hover {
+  cursor: pointer;
 }
 .input-box{
   position:relative;
@@ -49,11 +53,12 @@ input:focus {
   transition: all 0.3s cubic-bezier(0.390, 0.500, 0.150, 1.000);
 }
 a.button {
-	color: rgba(30, 22, 54, 0.6);
-	box-shadow: rgba(22, 54, 32, 0.4) 0 0px 0px 0px inset;
+  font-weight: bold;
+	color: rgba(0, 0, 0, 0.6);
+	box-shadow: #b16a41d2 0 0px 0px 0px inset;
 }
 
 a.button:hover {
 	color: rgba(255, 255, 255, 0.85);
-	box-shadow: rgba(34, 67, 42, 0.7) 0 80px 0px 0px inset;
+	box-shadow: #de844fd2 0 80px 0px 0px inset;
 }
