@@ -10,12 +10,12 @@ export const ContentsList = ({
           {list.map((item) => (
             <tr className='row' key={item.id}>
               <td>{item.id}</td>
-              {'category' in item?
-                <td>{item.category}</td>
+              {show === 'post'?
+                <td>{item.animalId}</td>
                 : null
               }
-              <td>{item.context}</td>
-              <td>{item.created_At}</td>
+              <td>{show === 'post'? item.title:item.content}</td>
+              <td>{item.createdAt}</td>
               {show === 'comment'?
                 <td>
                   <button

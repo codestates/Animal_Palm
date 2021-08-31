@@ -1,11 +1,11 @@
-td {
+.Board_list td {
     width: 150px;
     padding:10px;
     font-weight: bold;
     border-bottom: 1px solid #ccc;
 }
 
-th {
+.Board_list th {
     padding: 10px;
     font-weight: bold;
     color: orange;

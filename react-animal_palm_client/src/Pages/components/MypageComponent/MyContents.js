@@ -42,7 +42,7 @@ export const MyContents = ({
             <table className='mine'>
               <thead>
                 <tr>
-                  <th>No.</th>
+                  <th>글 번호</th>
                   <th>게시판</th>
                   <th>글 목록</th>
                   <th>작성일</th>
