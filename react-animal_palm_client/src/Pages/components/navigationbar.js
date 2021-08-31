@@ -20,20 +20,20 @@ function Navigaitionbar({
           </Link>
         <a className='right-top'>
           {isLogin? 
-          <>
+          <span className="right-top-children">
             <Link to="/mypage">
             <li><a>MYPAGE</a></li>
             </Link>
             <li><a onClick={logoutHandler}>LOGOUT</a></li>
-          </>
-        : <>
+          </span>
+        : <span className="right-top-children">
           <Link to='/login'>
           <li><a>LOGIN</a></li>
           </Link>
           <Link to='/signup'>
           <li><a>SIGNUP</a></li>
           </Link>
-        </>
+        </span>
         }
         </a>
       </ul>
