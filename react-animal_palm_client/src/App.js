@@ -49,6 +49,8 @@ function App() {
         <Route path="/mypage">
           <Mypage
             userInfo = {userInfo}
+            isLogin={isLogin}
+            handleLogout={handleLogout}
           />
         </Route>
         <Route path="/login">
