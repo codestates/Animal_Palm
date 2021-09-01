@@ -23,6 +23,8 @@ app.use('/boards',boardRouter)
 app.use('/user',userRouter)
 app.use('/comments',commentRouter)
 app.use('/mypage',mypagesRouter)
+app.use('/main', mypagesRouter)
+
 app.get('/',(req,res,next)=>{
   res.send("main") 
 })
