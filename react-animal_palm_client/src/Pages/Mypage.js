@@ -7,7 +7,9 @@ import './CSS/Mypage.css';
 import Navigaitionbar from './components/navigationbar';
 
 export const Mypage = ({
-  userInfo
+  userInfo,
+  isLogin,
+  handleLogout
 }) => {
   const [currentTab, setCurrentTab] = useState(0);
   const tabMenu = [
@@ -20,7 +22,11 @@ export const Mypage = ({
   };
   return (
     <>
-    <Navigaitionbar/>
+    <Navigaitionbar
+      isLogin={isLogin}
+      handleLogout={handleLogout}
+    />
+    {console.log(userInfo)}
     <div id='wrap'>
       <div className='profile'>
         <Profile

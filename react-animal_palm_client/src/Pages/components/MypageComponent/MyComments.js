@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { ContentsList } from './ContentsList';
-const {test, real} = require('../../Dummy/url');
 
 export const MyComments = ({
   userInfo
@@ -16,7 +15,7 @@ export const MyComments = ({
   // ];
   const [list, setList] = useState([]);
   const getMyComment = async () => {
-    const myCommentURL = `${test}/mypage/comment`;
+    const myCommentURL = `${process.env.REACT_APP_API_URL}/mypage/comment`;
     await axios.get(myCommentURL, { withCredentials : true })
     .then((res) => {
       const message = res.data.message;
@@ -34,7 +33,7 @@ export const MyComments = ({
     })
   }
   const deleteCommentHandler = (commentId) => {
-    const deleteCommentURL = `${test}/comments/${commentId}/`
+    const deleteCommentURL = `${process.env.REACT_APP_API_URL}/comments/${commentId}/`
     axios.delete(deleteCommentURL, { withCredentials : true })
     .then((res) => {
       const message = res.data.message;

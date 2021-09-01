@@ -4,7 +4,6 @@ import { useHistory } from 'react-router-dom'
 import { Modal } from './Modal';
 import { UserInfo } from './UserInfo';
 import '../../CSS/MySetting.css'
-const {test, real} = require('../../Dummy/url');
 
 export const MySetting = ({
   userInfo
@@ -17,14 +16,14 @@ export const MySetting = ({
     user_id : '',
     animal_id : '',
     email : '',
-    phoneNumber : ''
+    phoneNumber : 0
   });
 
   const openModalHandler = () => {
     setIsOpen(!isOpen);
   };
   const wannaUpdateHandler = () => {
-    const userinfoURL = `${test}/mypage/info`;
+    const userinfoURL = `${process.env.REACT_APP_API_URL}/mypage/info`;
     axios.get(userinfoURL, { withCredentials : true })
     .then((res) => {
       //! 유저 풀 정보 받아옴
@@ -32,7 +31,7 @@ export const MySetting = ({
       if(message === 'ok') {
         // 작업
         const {user_id, animal_id, email, phone_number} = res.data.data;
-        const info = {user_id, animal_id, email, phone_number};
+        const info = {user_id, animal_id, email, phoneNumber : phone_number, animalName : userInfo.animalName};
         setEntireInfo(info);
       } else {
         // 에러
@@ -49,7 +48,7 @@ export const MySetting = ({
     alert('회원정보가 변경되었습니다.')
   }
   const deleteMemberHandler = () => {
-    const deleteUserURL = `${test}/user`;
+    const deleteUserURL = `${process.env.REACT_APP_API_URL}/user`;
     axios.delete(deleteUserURL, { withCredentials : true })
     .then((res) => {
       const message = res.data.message;
@@ -81,7 +80,7 @@ export const MySetting = ({
               />
             </div>
             <button
-              classNam='delete-member-button'
+              className='delete-member'
               onClick={deleteButtonHandler}> 회원탈퇴 </button>
             {wannaDelete?
               <div>

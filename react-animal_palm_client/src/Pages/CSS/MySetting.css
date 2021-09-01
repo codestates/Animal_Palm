@@ -4,32 +4,53 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  max-width: 600px;
 }
-.delete-member-button{
-
+#info-wrap button {
+  border: none;
+  width: 80px;
+  height: 30px;
+  color: white;
+  background-color: #836354c9;
+  margin: 6vh 3em 0 3em;
+}
+#info-wrap button:hover {
+  cursor: pointer;
+}
+#info-wrap .delete-member{
+  color : black;
+  background-color: rgb(255, 255, 255);
+  border: 3px solid tomato;
+  margin-top: 1vh;
+}
+#info-wrap .delete-member:hover {
+  background-color: tomato;
+  color: white;
 }
 .setting-container{
   padding: 2% 1% 2% 1%;
 }
-.setting-userinfo{
-
+.setting-userinfo .fixed{
+  text-align: left;
 }
 .setting-userinfo table th {
   text-align: left;
   padding-right: 80px;
 }
+.setting-userinfo table td {
+  padding: 6px 0;
+}
 .setting-userinfo table td input {
   border: 1px solid #ececec;
-  font-size: 14px;
+  font-size: 12pt;
   color: #4c4c4c;
-  height: 40px;
+  height: 47px;
   padding: 10px;
   width: 100%;
 }
-.setting-button {
-
+.setting-userinfo table td input::placeholder {
+  color: #b1b0b0;
 }
 .invalid-message{
-  font-size: 8pt;
+  font-size: 11pt;
+  padding-top: 0px;
 }

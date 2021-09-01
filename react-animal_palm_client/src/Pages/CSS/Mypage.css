@@ -56,16 +56,14 @@
   justify-content: center;
   padding: 10px 10px 10px 10px;
   margin:  0px 40px 30px 40px;
-  height: 100vh;
-  overflow: auto;
-  overflow-x: auto;
+  height: auto;
 }
 .content .no {
   color: rgb(159, 159, 159);
   font-size: 20pt;
   font-weight: bold;
   position: relative;
-  top: 30%;
+  padding: 3vh 0 16vh 0;
 }
 
 .mine {
@@ -73,7 +71,7 @@
 	line-height: 1.5;
 	border-top: 1px solid #ccc;
 	border-bottom: 1px solid #ccc;
-	margin: 20px 10px 20px 10px;
+	margin: 0 auto;
 }
 .mine thead th {
   min-width: 100px;
@@ -96,7 +94,6 @@
 }
 .content .button {
   position: relative;
-  top: 30%;
   width: 200px;
   height: 50px;
   font-family: 'Gowun Dodum', sans-serif;
@@ -104,4 +101,14 @@
   color: rgb(147, 147, 147);
   font-size: 17pt;
   font-weight: bold;
+  margin: 3vh 0 14vh 0;
+}
+.delete-btn{
+  border: none;
+  height: 2em;
+  width: 4em;
+  background-color: saddlebrown;
+  color: white;
+  font-weight: bold;
+  font-size: 12pt;
 }
