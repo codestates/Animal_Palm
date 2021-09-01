@@ -85,7 +85,8 @@ export const UserInfo = ({
           <th><span>비밀번호</span></th>
           <td><input
             name='newPassword'
-            type={input.newPassword}
+            type='password'
+            value={input.newPassword}
             onChange={handleInputValue}
             placeholder='새 비밀번호'
           /></td>

@@ -28,7 +28,7 @@ export function Login({
       withCredentials : true
     })
     .then((res) => {
-      // console.log(1)
+      console.log(res)
       const message = res.data.message;
 
       if(message === 'ok') {
@@ -38,13 +38,14 @@ export function Login({
         }
         handleUserInfo(userInfo);
         history.push('/')
-      } else {
-        alert('아이디 혹은 비밀번호를 잘못 입력하셨습니다.')
-        return;
-        // history.push('/')
       }
     })
-    .catch((err) => alert(err))
+    .catch((err) => {
+      if(err.response.status === 401) {
+        alert('아이디 혹은 비밀번호를 잘못 입력하셨습니다.')
+        return;
+      }
+    })
   }
   const goToSignUpHandler = () => {
     history.push('/signup')

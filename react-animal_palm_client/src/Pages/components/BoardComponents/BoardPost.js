@@ -121,6 +121,7 @@ export default function BoardPost() {
     return (
         <div className="Board_post">
             <div className="Header">
+                {console.log(context)}
                 <h1>{context.title}</h1>
             </div>
             <button className="deleteContext" onClick={deleteContext}>글삭제</button>

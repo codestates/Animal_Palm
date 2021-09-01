@@ -1,6 +1,5 @@
 import React from 'react';
 import { useHistory } from 'react-router';
-import { test } from '../../Dummy/url';
 import BoardPost from '../BoardComponents/BoardPost';
 
 
@@ -19,22 +18,23 @@ export const ContentsList = ({
         animalId: animalId
       }
     })
-  }
+  } //onClick={show==='comment'?() => clickPostHandler(item.postId, userInfo.animalId): null}
   return (
     <>
           {list.map((item) => (
             <tr
               className='row'
               key={item.id}
-              onClick={show === 'post'? ()=>clickPostHandler(item.id, item.animalId):''}
+              onClick={show === 'post'? ()=>clickPostHandler(item.id, item.animalId)
+              : null}
             >
-              <td>{item.id}</td>
+              <td onClick={show==='comment'?() => clickPostHandler(item.postId, userInfo.animalId): null}>{item.id}</td>
               {show === 'post'?
                 <td>{item.animalId}</td>
                 : null
               }
-              <td>{show === 'post'? item.title:item.content}</td>
-              <td>{item.createdAt}</td>
+              <td onClick={show==='comment'?() => clickPostHandler(item.postId, userInfo.animalId): null}>{show === 'post'? item.title:item.content}</td>
+              <td onClick={show==='comment'?() => clickPostHandler(item.postId, userInfo.animalId): null}>{item.createdAt}</td>
               {show === 'comment'?
                 <td>
                   <button

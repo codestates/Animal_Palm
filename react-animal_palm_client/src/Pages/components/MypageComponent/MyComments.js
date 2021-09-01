@@ -5,14 +5,6 @@ import { ContentsList } from './ContentsList';
 export const MyComments = ({
   userInfo
 }) => {
-  // const testComments = [
-  //   {id : 1, context : '테스트 댓글내용1', post_id: 1, created_At : '2021-08-25'},
-  //   {id : 2, context : '테스트 댓글내용2', post_id: 2, created_At : '2021-08-25'},
-  //   {id : 3, context : '테스트 댓글내용3', post_id: 3, created_At : '2021-08-25'},
-  //   {id : 4, context : '테스트 댓글내용4', post_id: 4, created_At : '2021-08-25'},
-  //   {id : 5, context : '테스트 댓글내용5', post_id: 5, created_At : '2021-08-25'},
-  //   {id : 6, context : '테스트 댓글내용6', post_id: 6, created_At : '2021-08-25'}
-  // ];
   const [list, setList] = useState([]);
   const getMyComment = async () => {
     const myCommentURL = `${process.env.REACT_APP_API_URL}/mypage/comment`;
@@ -38,7 +30,6 @@ export const MyComments = ({
     .then((res) => {
       const message = res.data.message;
       if(message === 'ok') {
-        console.log('test')
         const idx = list.findIndex((el) => el.id === commentId);
         const temp = list.slice();
         temp.splice(idx, 1);
@@ -74,6 +65,7 @@ export const MyComments = ({
           <tbody>
             <ContentsList
               list={list}
+              userInfo={userInfo}
               show='comment'
               handleDelete = {deleteCommentHandler}
             />

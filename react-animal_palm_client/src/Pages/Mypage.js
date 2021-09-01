@@ -15,7 +15,7 @@ export const Mypage = ({
   const tabMenu = [
     {name : '내가 쓴 글', component: <MyContents userInfo={userInfo}/>},
     {name : '내가 쓴 댓글', component: <MyComments userInfo={userInfo}/>},
-    {name : '회원정보 수정', component: <MySetting userInfo = {userInfo}/>}
+    {name : '회원정보 수정', component: <MySetting userInfo = {userInfo} handleLogout={handleLogout}/>}
   ];
   const selectMenuHandler = (index) => {
     setCurrentTab(index);
@@ -26,7 +26,6 @@ export const Mypage = ({
       isLogin={isLogin}
       handleLogout={handleLogout}
     />
-    {console.log(userInfo)}
     <div id='wrap'>
       <div className='profile'>
         <Profile
