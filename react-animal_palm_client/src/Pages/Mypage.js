@@ -22,6 +22,7 @@ export const Mypage = ({
   };
   return (
     <>
+    {console.log(userInfo)}
     <Navigaitionbar
       isLogin={isLogin}
       handleLogout={handleLogout}

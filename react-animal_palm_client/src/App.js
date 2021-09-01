@@ -24,7 +24,7 @@ function App() {
 
   return (
     <BrowserRouter>
-    <div className="App">
+    <div className="App">{console.log(userInfo)}
       <Route exact path="/">
           <Mainpage
             isLogin={isLogin}
@@ -48,7 +48,7 @@ function App() {
           <Signup />
         </Route>
         <Route path="/board">
-          <Board animalName={userInfo.animalId}/>
+          <Board animalName={userInfo.animalId} />
         </Route>
         
       </Switch>

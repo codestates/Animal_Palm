@@ -1,8 +1,10 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
 import image1 from '../../../images/01.jpg'
 import image2 from '../../../images/02.jpg'
 import image3 from '../../../images/03.jpg'
+import { MainContent } from './MainContent';
 
 export const MainFrame = () => {
   const [index,setIndex] = useState(0);
@@ -11,7 +13,19 @@ export const MainFrame = () => {
   )
   const [scrollY,setScrollY] = useState(bodyOffset.top)
   
-  
+  const [mainContent, setMainContent] = useState([]);
+  const getContent = async () => {
+    const URL = `${process.env.REACT_APP_API_URL}/main`;
+    await axios.get(URL, {
+      withCredentials : true
+    })
+    .then((res) => {
+      setMainContent(res.data.data)
+    })
+  }
+  useEffect(() => {
+    getContent();
+  },[])
 
   const check = (scrollY)=>{
     if(scrollY < 970) setIndex(0)
@@ -54,11 +68,7 @@ export const MainFrame = () => {
 					간단한 설명
         </p>
 			</div>
-			<div className="bubble">
-				<p>
-          글 미리보기(제목)
-				</p>
-			</div>
+			<MainContent mainContent={mainContent}/>
 			<div className="bubble">
 				<p>
           글 미리보기(제목)3
