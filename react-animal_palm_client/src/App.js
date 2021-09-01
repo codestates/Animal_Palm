@@ -63,7 +63,7 @@ function App() {
         </Route>
         <Route path="/board">
           {console.log(userInfo)}
-          <Board userInfo={userInfo}/>
+          <Board animalName={userInfo.animalId}/>
         </Route>
         
       </Switch>

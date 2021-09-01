@@ -13,6 +13,7 @@ export function Board({animalName}) {
         <div className="Board">
           <Switch>
             <Route exact path="/board">
+              {console.log(animalName)}
               <BoardList animalId={animalName} />
             </Route>
             <Route path="/board/post">

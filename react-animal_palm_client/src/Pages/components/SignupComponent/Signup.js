@@ -16,60 +16,8 @@ export function SignupComponent ({ setIsState,moveLogin }) {
         checkPassword:'',
         email:'',
         mobile:''
-<<<<<<< HEAD
-      })
-
-      const history = useHistory()
-    
-      const handleInputValue = (key) => (e) => {
-        setSignupInfo({...signupInfo, [key]: e.target.value })
-      }
-    
-      const signupHandler = () => {
-        if(signupInfo.id===''|| signupInfo.password===''){
-          alert('아이디와 패스워드는 필수 입니다.')
-        }
-        else if(!checkId(signupInfo.id)){
-          alert('아이디는 5~15자 영어 대소문자, 숫자, 특수기호(!@^*_-.)만 사용 가능합니다. (공백 불가)')
-        }
-        else if(!checkPassword(signupInfo.password)){
-          alert('비밀번호는 최소 8자 이상이면서, 알파벳과 숫자 및 특수문자(@$!%*#?&)하나 이상을 포함해햐합니다.')
-        }
-        else if(!(signupInfo.password===signupInfo.checkPassword)){
-          alert('비밀번호와 비밀번호 재확인이 서로 다릅니다.')
-        }
-        else if(!checkEmail(signupInfo.email)){
-          alert('이메일 형식이 아닙니다.')
-        }
-        else if(!checkPhone(signupInfo.mobile)){
-          alert('000-000-0000 혹은 000-0000-0000형식으로 작성해주십시오.')
-        }
-        else{
-        axios
-          .post(
-            `${process.env.REACT_APP_API_URL}/user/signup`,
-            {
-              id: signupInfo.id,
-              password: signupInfo.password, // ! hash(signupInfo.password)
-              email: signupInfo.email,
-              phonenumber: signupInfo.mobile
-            }
-            ,{ withCredentials: true }
-          )
-          .then(data =>{
-            history.push('/signup/animalTest')
-          })
-          .catch(err => {
-           
-            history.push('/signup/animalTest')
-            alert(err)
-          })
-        }
-      }
-=======
     }
   )
->>>>>>> b51615720f6d8de1fdb7aecb5cc496ce97498b30
 
   const handleInputValue = (key) => (e) => {
     setSignupInfo({...signupInfo, [key]: e.target.value })
