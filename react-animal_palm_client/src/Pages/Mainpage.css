@@ -57,3 +57,9 @@ a {
     border-radius: 10px;
     box-shadow: rgba(0,0, 0, 0.3) 0 0 3px;
 }
+.fas {
+    font-size: 5rem;
+    color: var(--default-text-color);
+    padding: 1.3rem;
+    cursor: pointer;
+}

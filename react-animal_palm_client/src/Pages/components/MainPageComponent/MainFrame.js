@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import image1 from '../../../images/01.jpg'
 import image2 from '../../../images/02.jpg'
 import image3 from '../../../images/03.jpg'
-import { MainContent } from './MainContent';
 
 export const MainFrame = () => {
   const [index,setIndex] = useState(0);
@@ -12,7 +11,7 @@ export const MainFrame = () => {
     document.body.getBoundingClientRect()
   )
   const [scrollY,setScrollY] = useState(bodyOffset.top)
-  
+  const [contentOpen, setContentOpen] = useState([false, false, false, false, false]);
   const [mainContent, setMainContent] = useState([]);
   const getContent = async () => {
     const URL = `${process.env.REACT_APP_API_URL}/main`;
@@ -20,6 +19,7 @@ export const MainFrame = () => {
       withCredentials : true
     })
     .then((res) => {
+      console.log(res.data.data)
       setMainContent(res.data.data)
     })
   }
@@ -45,6 +45,11 @@ export const MainFrame = () => {
       window.removeEventListener("scroll", listener);
     };
   });
+  const openContentHandler = (i) => {
+    const temp = contentOpen.slice();
+    temp[i] = !temp[i];
+    setContentOpen(temp);
+  }
   return (
     <div className='main-page'>
       <header className="header">
@@ -53,6 +58,7 @@ export const MainFrame = () => {
           <p>
             홈페이지 설명<br/>밑으로 스크롤 해봅시다.<br/>
           </p>
+          <i class="fas fa-angle-double-down"></i>
         </div>
       </header>  
 	<section className="scroll-content">
@@ -68,27 +74,14 @@ export const MainFrame = () => {
 					간단한 설명
         </p>
 			</div>
-			<MainContent mainContent={mainContent}/>
-			<div className="bubble">
-				<p>
-          글 미리보기(제목)3
-				</p>
-			</div>
-			<div className="bubble">
-				<p>
-          글 미리보기(제목)4
-				</p>
-			</div>
-			<div className="bubble">
-				<p>
-          글 미리보기(제목)5
-				</p>
-			</div>
-			<div className="bubble">
-				<p>
-          글 미리보기(제목)6
-				</p>
-			</div>
+      {mainContent.map((content, i) => (
+        <div key={i} className="bubble">
+          <h3 onClick={()=>openContentHandler(i)}>{content.title} - {content.userId}</h3>
+          <p className={contentOpen[i] === true? 'content' : ' content hide'}>
+            {content.content}
+          </p>
+        </div>
+      ))}
 		</div>
 	</section>
 	<section className="normal-content global-width">
