@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { ContentsList } from './ContentsList';
-const {test, real} = require('../../Dummy/url')
 
 export const MyContents = ({
   userInfo
@@ -13,7 +12,7 @@ export const MyContents = ({
   // ];
   const [list, setList] = useState([]);
   const getMyContent = () => {
-    const myContentURL = `${test}/mypage/content`;
+    const myContentURL = `${process.env.REACT_APP_API_URL}/mypage/content`;
     axios.get(myContentURL, { withCredentials : true })
     .then((res) => {
       const message = res.data.message;
@@ -44,7 +43,7 @@ export const MyContents = ({
                 <tr>
                   <th>글 번호</th>
                   <th>게시판</th>
-                  <th>글 목록</th>
+                  <th>글 제목</th>
                   <th>작성일</th>
                 </tr>
               </thead>

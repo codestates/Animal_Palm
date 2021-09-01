@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { hash } from '../../function/Hasing';
 import { checkPassword, checkEmail, checkPhone } from '../../function/Validatior';
-const { test, real } = require('../../Dummy/url');
 
 export const UserInfo = ({
   entireInfo,
@@ -10,20 +10,45 @@ export const UserInfo = ({
 }) => {
   const [input, setInput] = useState({
     newPassword : '',
-    checkPassword : ''
+    checkPassword : '',
+    email :'',
+    phoneNumber : '',
   })
+  const isMatch = (password1, password2) => {
+    return password1 === password2;
+  }
   const handleInputValue = (e) => {
     setInput({...input, [e.target.name] : e.target.value })
   }
   const changeBtnHandler= () => {
     // input 값이 ''가 아닌애들만 보내야함.
     const data = {};
-    Object.keys(input).forEach((el) => {
-      if(input[el] !== '') {
-        data[el] = input[el]
+    if(input.newPassword !== '') {
+      if(!checkPassword(input.newPassword)) {
+        alert('비밀번호가 유효하지 않습니다.');
+        return;
       }
-    });
-    const udpateInfoURL = `${test}/mypage/info`
+      if(!isMatch(input.newPassword, input.checkPassword)){
+        alert('비밀번호가 일치하지 않습니다.');
+        return;
+      }
+      data['password'] = input.newPassword; //! hash(input.newPassword);
+    }
+    if(input.email !== '') {
+      if(!checkEmail(input.email)) {
+        alert('이메일이 유효하지 않습니다.');
+        return;
+      }
+      data['email'] = input.email;
+    }
+    if(input.phoneNumber !== '') {
+      if(!checkPhone(input.phoneNumber)) {
+        alert('전화번호가 유효하지 않습니다.');
+        return;
+      }
+      data['phoneNumber'] = input.phoneNumber;
+    }
+    const udpateInfoURL = `${process.env.REACT_APP_API_URL}/mypage/info`
     // patch 요청!
     axios.patch(udpateInfoURL, data, {
       headers : { 'Content-type' : 'application/json' },
@@ -35,20 +60,27 @@ export const UserInfo = ({
     })
     .catch((err) => alert(err))
   }
-  const isMatch = (password1, password2) => {
-    return password1 === password2;
-  }
   return (
     <div className='setting-userinfo'>
       <table>
         <tr>
           <th><span>아이디</span></th>
-          <td><span>{entireInfo.user_id}</span></td>
+          <td className='fixed'><span>{entireInfo.user_id}</span></td>
         </tr>
+        <tr><th></th><td>
+            <div className='hide'>
+            아이디는 고정입니다.
+            </div>
+          </td></tr>
         <tr>
           <th><span>나의 동물</span></th>
-          <td><span>{entireInfo.animal_id}</span></td>
+          <td className='fixed'><span>{entireInfo.animalName}</span></td>
         </tr>
+        <tr><th></th><td>
+            <div className='hide'>
+            동물은 고정입니다.
+            </div>
+          </td></tr>
         <tr>
           <th><span>비밀번호</span></th>
           <td><input
@@ -85,15 +117,15 @@ export const UserInfo = ({
           <td><input
             name='phoneNumber'
             type='text'
-            placeholder={entireInfo.phone_number}
+            placeholder={entireInfo.phoneNumber}
             value={input.phoneNumber}
             onChange={handleInputValue}
           /></td>
         </tr>
         <tr><th></th><td>
           <div 
-            className={checkPhone(input.phone)? 'invalid-message hide' : 'invalid-message'}>
-              숫자만 입력해주세요.
+            className={checkPhone(input.phoneNumber) || input.phoneNumber === ''? 'invalid-message hide' : 'invalid-message'}>
+              연락처를 정확히 입력해주세요.
           </div>
         </td></tr>
         <tr>
@@ -108,8 +140,8 @@ export const UserInfo = ({
         </tr>
           <tr><th></th><td>
             <div
-              className={checkEmail(input.email)? 'invalid-message hide' : 'invalid-message'}>
-                올바른 이메일 유형을 입력해주세요.
+              className={checkEmail(input.email) || input.email === ''? 'invalid-message hide' : 'invalid-message'}>
+                올바른 이메일을 입력해주세요.
             </div>
           </td></tr>
       </table>

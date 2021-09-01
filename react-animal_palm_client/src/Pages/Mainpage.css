@@ -1,29 +1,29 @@
-body {
+.main-page {
 	margin: 0;
 }
-div, section, header, footer, p, h1, h2 {
+.main-page  div, section, header, footer, p, h1, h2 {
 	box-sizing: border-box;
 }
 a {
 	color: rgb(205, 144, 98);
 }
-img {
+.main-page  img {
 	max-width: 79%;
 	height: auto;
 }
 .Navigaitionbar{
     z-index: 999;
 }
-.global-width{
+.main-page  .global-width{
     max-width: 620px;
     margin: 0 auto;
     padding: 0 15px;
 }
 
-.page-title{
+.main-page  .page-title{
     margin-top: 100px;
 }
-.graphic-item{
+.main-page  .graphic-item{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -35,21 +35,21 @@ img {
     opacity: 0;
     transition: 1s;
 }
-.visivle{
+.main-page  .visivle{
     opacity: 1;
 }
-.scroll-graphic{
+.main-page  .scroll-graphic{
     position: sticky;
     top:0;
     height:100vh;
 }
-.scroll-img{
+.main-page  .scroll-img{
     max-height: 60vh;
 }
-.scroll-text{
+.main-page .scroll-text{
     position: relative;
 }
-.bubble{
+.main-page .bubble{
     z-index: 998;
     padding: 0 auto;
     margin-bottom: 40vh;
@@ -57,6 +57,3 @@ img {
     border-radius: 10px;
     box-shadow: rgba(0,0, 0, 0.3) 0 0 3px;
 }
-
-
-

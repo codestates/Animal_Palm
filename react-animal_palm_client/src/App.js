@@ -12,7 +12,8 @@ const {test, real} = require('./Pages/Dummy/url');
 function App() {
   const [isLogin, setIsLogin] = useState(false);
   const [userInfo, setUserInfo] = useState({
-    animalName: ''
+    animalName: '',
+    animalId : ''
   })
   const handleUserInfo = (data) => {
     setIsLogin(true)
@@ -48,6 +49,8 @@ function App() {
         <Route path="/mypage">
           <Mypage
             userInfo = {userInfo}
+            isLogin={isLogin}
+            handleLogout={handleLogout}
           />
         </Route>
         <Route path="/login">
@@ -60,7 +63,7 @@ function App() {
         </Route>
         <Route path="/board">
           {console.log(userInfo)}
-          <Board animalName={userInfo.animalName}/>
+          <Board animalName={userInfo.animalId}/>
         </Route>
         
       </Switch>
