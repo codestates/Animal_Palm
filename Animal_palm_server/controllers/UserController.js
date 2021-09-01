@@ -125,8 +125,6 @@ module.exports ={
     //req.body에 넘겨받은 아이디의 유저 탐색
     //해당 유저의 MBTI 정보 추가
 
-    console.log(req.body);
-
     const user = await Users.findOne({ where: { userId : req.body.userId } });
 
     if(!user) return res.status(401).send("invalid user ID");
