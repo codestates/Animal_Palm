@@ -1,4 +1,5 @@
 import './Navigationbar.css';
+import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from "react-router-dom";
 import axios from 'axios';
 const { test, real } = require('../Dummy/url');
@@ -8,6 +9,13 @@ function Navigaitionbar({
   handleLogout
 }) {
   const history = useHistory();
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const updateScroll = () => {
+    setScrollPosition(window.scrollY || document.documentElement.scrollTop);
+  };
+  useEffect(()=>{
+      window.addEventListener('scroll', updateScroll);
+  });
   const logoutHandler = () => {
     const signOutURL = `${test}/user/signout`;
     axios.put(signOutURL, null, { withCredentials : true })
@@ -26,7 +34,7 @@ function Navigaitionbar({
   }
   
   return (
-    <nav className="Navigationbar">
+    <nav className={scrollPosition < 100? "Navigationbar" : "Navigationbar hide"}>
       <ul className="nav-container">
         <Link to='/'>
           <li><a className="logo">logo</a></li>

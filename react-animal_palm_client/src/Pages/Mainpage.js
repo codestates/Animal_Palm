@@ -10,10 +10,6 @@ export default function Mainpage({
   isLogin,
   handleLogout
 }) {
-
-  const [index,setIndex] = useState(0)
-  
-  
   return (
 		<>
       <div className="Navigaitionbar">
@@ -22,7 +18,7 @@ export default function Mainpage({
         handleLogout={handleLogout}
       />
       </div>
-			<div className="Mainpage global-width">   
+			<div className="mainpage global-width">   
         {isLogin?
 					<Link to='/board'>
 						<div className='welcome'>환영합니다</div>

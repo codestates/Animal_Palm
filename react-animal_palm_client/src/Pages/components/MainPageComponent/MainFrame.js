@@ -33,16 +33,14 @@ export const MainFrame = () => {
   });
   return (
     <div className='main-page'>
-      <header class="header">
-		<div class="global-width">
-			<h1 class="page-title">제목</h1>
-			<p>
-				홈페이지 설명<br/>밑으로 스크롤 해봅시다.<br/>
-			</p>
-		</div>
-	</header>
- 
-  
+      <header className="header">
+        <div className="global-width">
+          <h1 class="page-title">제목</h1>
+          <p>
+            홈페이지 설명<br/>밑으로 스크롤 해봅시다.<br/>
+          </p>
+        </div>
+      </header>  
 	<section className="scroll-content">
 		<div className="scroll-graphic">
 			<div  className={index === 0 ? "graphic-item visivle" : "graphic-item"}><img className="scene-img" src={image1} alt="" /></div>
