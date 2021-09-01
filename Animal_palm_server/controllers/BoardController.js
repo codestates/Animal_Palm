@@ -65,9 +65,9 @@ module.exports ={
         id:postId,
         animalId:animalId
         }})
-
-    if(data === null ) return res.status(404).json({message:"invalid post"})
-    if(user.id !== data.userId) return res.status(404).json({message:"invalid post"})     
+        
+    if(data === null ) return res.status(404).json({message:"invalid post"})    
+    if(user.id !== data.userId) return res.status(404).json({message:"invalid post"})    
     else {
       return res.status(200)
         .cookie('accessToken', accessToken, { httpOnly: true })

@@ -1,3 +1,5 @@
+/* BoardList css */
+
 .Board_list td {
     width: 150px;
     padding:10px;
@@ -9,7 +11,7 @@
     padding: 10px;
     font-weight: bold;
     color: rgb(255, 255, 255);
-    /* border-bottom: 3px solid orange; */
+    /* border-bottom: 3px solid #836354c9; */
     background-color: #836354c9;
 }
 
@@ -109,10 +111,14 @@
     color: white;
 }
 
+.clickedButton {
+    color:#836354c9;
+}
+
 .selectBoard {
     display: flex;
 }
-/*-------------------------------------------------------*/
+/*-------------------BoardPost CSS------------------------------------*/
 
 .Board_post{
     margin-top: 100px;
@@ -221,7 +227,7 @@
     border:none
 }
 
-/*----------------------------------------------------------*/
+/*---------------------- BoardWrite CSS------------------------------------*/
 
 .Board_write{
     margin-top: 100px;
@@ -287,7 +293,7 @@
     cursor: pointer; 
     height: 2em;
     background-color: white;
-    border: 2px solid orange;
+    border: 2px solid #836354c9;
     transition: all 2s;
     
 }
@@ -305,7 +311,7 @@
     left:0;
     width: 0;
     height: 100%;
-    background-color: orange;
+    background-color: #836354c9;
     transition: all 3s ;
    
 }
