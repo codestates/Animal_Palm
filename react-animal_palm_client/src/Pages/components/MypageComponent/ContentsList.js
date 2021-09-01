@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router';
 import { test } from '../../Dummy/url';
 import Board_post from '../Board_post';
 
@@ -8,11 +9,15 @@ export const ContentsList = ({
   show, // 내가 쓴 글인지 댓글인지 구분
   handleDelete
 }) => {
-  const clickPostHandler = () => {
-    <Board_post
-      animalId={userInfo.animalName}
-      server={test}
-    />
+  const history = useHistory();
+  const clickPostHandler = (postId, animalId) => {
+    history.push({
+      pathname:'board/post',
+      state:{
+        postId: postId,
+        animalId: animalId
+      }
+    })
   }
   return (
     <>
@@ -20,7 +25,7 @@ export const ContentsList = ({
             <tr
               className='row'
               key={item.id}
-              onClick={show === 'post'? clickPostHandler:''}
+              onClick={show === 'post'? ()=>clickPostHandler(item.id, item.animalId):''}
             >
               <td>{item.id}</td>
               {show === 'post'?

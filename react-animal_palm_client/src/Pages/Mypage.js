@@ -4,6 +4,7 @@ import { MyContents } from './components/MypageComponent/MyContents';
 import { MyComments } from './components/MypageComponent/MyComments';
 import { MySetting } from './components/MypageComponent/MySetting';
 import './CSS/Mypage.css';
+import Navigaitionbar from './components/navigationbar';
 
 export const Mypage = ({
   userInfo
@@ -18,6 +19,8 @@ export const Mypage = ({
     setCurrentTab(index);
   };
   return (
+    <>
+    <Navigaitionbar/>
     <div id='wrap'>
       <div className='profile'>
         <Profile
@@ -37,5 +40,6 @@ export const Mypage = ({
       </div>
       {tabMenu[currentTab].component}
     </div>
+    </>
   );
 };

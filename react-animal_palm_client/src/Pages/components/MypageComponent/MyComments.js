@@ -39,6 +39,7 @@ export const MyComments = ({
     .then((res) => {
       const message = res.data.message;
       if(message === 'ok') {
+        console.log('test')
         const idx = list.findIndex((el) => el.id === commentId);
         const temp = list.slice();
         temp.splice(idx, 1);

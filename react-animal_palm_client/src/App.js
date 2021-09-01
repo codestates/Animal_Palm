@@ -59,7 +59,8 @@ function App() {
           <Signup />
         </Route>
         <Route path="/board">
-          <Board />
+          {console.log(userInfo)}
+          <Board animalName={userInfo.animalName}/>
         </Route>
         
       </Switch>

@@ -46,12 +46,12 @@
 }
 .focused {
   color: white;
-  background-color: lightslategrey;
+  background-color: #613722;
 }
 
 
 .content {
-  border: 2px solid lightslategrey;
+  border: 2px solid rgba(69, 105, 82, 0.884);
   font-family: 'Gowun Dodum', sans-serif;
   justify-content: center;
   padding: 10px 10px 10px 10px;
@@ -81,7 +81,7 @@
 	font-weight: bold;
 	vertical-align: top;
 	color: #fff;
-	background: #969696;
+  background-color: #836354c9;
 	margin: 20px 10px;
 }
 .mine td {

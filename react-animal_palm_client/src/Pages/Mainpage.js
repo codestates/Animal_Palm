@@ -79,60 +79,40 @@ export default function Mainpage({
 		<div className="scroll-text global-width">
 			<div data-data="1" className="bubble">
 				<p>
-					말풍선1
+					간단한 설명
         </p>
 			</div>
 			<div className="bubble">
 				<p>
-          말풍선2
+          글 미리보기(제목)
 				</p>
 			</div>
 			<div className="bubble">
 				<p>
-          말풍선3
+          글 미리보기(제목)3
 				</p>
 			</div>
 			<div className="bubble">
 				<p>
-          말풍선4
+          글 미리보기(제목)4
 				</p>
 			</div>
 			<div className="bubble">
 				<p>
-          말풍선5
+          글 미리보기(제목)5
 				</p>
 			</div>
 			<div className="bubble">
 				<p>
-          말풍선6
-				</p>
-			</div>
-			<div className="bubble">
-				<p>
-        말풍선7
-				</p>
-			</div>
-			<div className="bubble">
-				<p>
-        말풍선8
-				</p>
-			</div>
-			<div className="bubble">
-				<p>
-        말풍선9
-				</p>
-			</div>
-			<div className="bubble">
-				<p>
-        말풍선10
+          글 미리보기(제목)6
 				</p>
 			</div>
 		</div>
 	</section>
 	<section className="normal-content global-width">
-		<h2>도시를 떠나는 사람들</h2>
+		<h2>자세한 설명</h2>
 		<p>원격근무 하시는 개발자 디자이너분들, 제주로 오세요. 진짜 좋아요. Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis ullam culpa ab, laborum repellat ut quae deleniti nostrum sapiente illum!</p>
-		<h2>언택트 시대가 온다</h2>
+		<h2>자세한 설명2</h2>
 		<p>언택트(Untact)'란 '콘택트(contact: 접촉하다)'에서 부정의 의미인 '언(un-)을 합성한 말로, 기술의 발전을 통해 비대면으로 이루어지는 활동 경향을 의미한다. Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam provident voluptatum numquam dolorum, quod odio.</p>
 		<h2>내일은 어떤 모습일까</h2>
 		<p>똑같겠지 다를게 있나 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Qui impedit numquam atque quidem quos facere obcaecati deleniti labore culpa esse nostrum dicta earum rem ducimus, voluptates eligendi voluptate exercitationem dolorem!</p>

@@ -24,7 +24,7 @@
     display: flex;
     font-size: 23px;
     background-color: white;
-    border:orange 3px solid;
+    border:#836354c9 3px solid;
     border-radius: 100%;
     justify-content: center;
     align-items: center;
@@ -32,7 +32,7 @@
 }
 
 .stepComplete {
-    background-color: orange;
+    background-color: #836354c9;
     color:white;
 }
 
