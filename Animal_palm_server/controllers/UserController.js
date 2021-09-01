@@ -125,13 +125,15 @@ module.exports ={
     //req.body에 넘겨받은 아이디의 유저 탐색
     //해당 유저의 MBTI 정보 추가
 
-    const user = await Users.findOne({ where: { user_id : req.body.uesr_id } });
+    console.log(req.body);
 
-    if(!user) return res.status(401).send("invalid user id");
+    const user = await Users.findOne({ where: { userId : req.body.userId } });
+
+    if(!user) return res.status(401).send("invalid user ID");
     else {
-      user.update({ animal_name : req.body.animal });
+      user.update({ animalId : req.body.animalId });
 
-      return res.status(201).send("ok");
+      return res.status(200).send("ok");
     }
   },
 
