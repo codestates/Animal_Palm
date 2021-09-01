@@ -4,7 +4,7 @@ const router = exress.Router();
 //게시판
 router.get('/:animalId', getPostList)
 router.get('/:animalId/:postId', getPost)
-router.post('/:postId/', writeContent)
+router.post('/:animalId/', writeContent)
 router.delete('/:postId', contentDelete)
 
 

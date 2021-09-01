@@ -14,8 +14,8 @@ module.exports ={
       const post = await models.posts.findOne({where:{
         id: postId
       }})
-      if(!post||post.id !== postId) return res.status(401).send("invalid access");
-      else {
+      // if(!post||post.id !== postId) return res.status(401).send("invalid access");
+      
         const data = await models.comments.findAll({where:{
           postId:postId
         },raw:true})
@@ -24,7 +24,7 @@ module.exports ={
           .cookie('accessToken', accessToken, { httpOnly: true })
           .cookie('refreshToken', refreshToken, { httpOnly: true })
           .json({data:data});
-      }
+      
     }
     //req.params에 담긴 현재 게시글의 id를 통해 탐색 가능
     //comments.findAll({where: {post_Id = req.params.postId}})
@@ -52,8 +52,8 @@ module.exports ={
       const post = await models.posts.findOne({where:{
         id: postId
       }})
-      if(!post||post.id !== postId) return res.status(401).send("invalid access");
-      else {
+      // if(!post||post.id !== postId) return res.status(401).send("invalid access");
+    
         await models.comments.create({
           content:content,
           userId:user.id,
@@ -64,7 +64,7 @@ module.exports ={
           .cookie('accessToken', accessToken, { httpOnly: true })
           .cookie('refreshToken', refreshToken, { httpOnly: true })
           .json({message:"ok"});
-      }
+      
     }
  
     //token에 담긴 유저가 유효한 유저인지 항상 유효성부터 체크
@@ -94,11 +94,11 @@ module.exports ={
         id:commentId,
         userId:user.id
       }})
-      if(!userData || userData.id !== user.id) return res.status(401).json({message:"invalid access"});
-      else {
+      // if(!userData || userData.id !== user.id) return res.status(401).json({message:"invalid access"});
+      
         await models.comments.destroy({where:{id:commentId}})
         return res.status(200).json({message:"ok"});
-      }
+      
     }
   }
 }

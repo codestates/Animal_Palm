@@ -13,14 +13,19 @@ module.exports ={
     //findAll -> 배열로 받은 값을 client에서 필요한 형태로 map해서 응답
     const animalId = req.params.animalId
     if(animalId>16) return res.status(401).json({message:"invalid page"})    
-    const [accessToken, refreshToken] = await verifyToken(req);
+    const [accessToken, refreshToken] = await verifyToken(req);console.log(req.headers.cookie)
+    const user = await decodeToken(accessToken);
     if(!accessToken) return res.status(401).send("invalid token");
-    if(animalId>0){
-      if(animalId !== user.animalId) return res.status(401).send("invalid access");
-    }
+    
+    // if(animalId>0){
+    //   console.log(animalId,String(user.animalId))
+    //   if(animalId !== String(user.animalId)) return res.status(401).send("invalid access");
+    // }
     else {
       //유효한 토큰일 경우 -> 해당 유저가 존재하는지 확인
-    const user = await decodeToken(accessToken);
+      
+    
+    
     if(!user) return res.status(401).send("invalid token");
 
     else {
@@ -30,10 +35,10 @@ module.exports ={
         data.push({
           id: allData[i].id,
           title: allData[i].title,
-          userId : checkAnimal(allData[i].userId),
+          userId : allData[i].userId,
           hashtag :allData[i].hashtag,
           createdAt: allData[i].createdAt,
-          updatedAt: allData[i].updatedAt,  
+          updatedAt: allData[i].updatedAt,
         })
       }
       return res.status(200)
@@ -66,14 +71,14 @@ module.exports ={
         animalId:animalId
         }})
         
-    if(data === null ) return res.status(404).json({message:"invalid post"})    
-    if(user.id !== data.userId) return res.status(404).json({message:"invalid post"})    
-    else {
+    // if(data === null ) return res.status(404).json({message:"invalid post"})    
+    // if(user.id !== data.userId) return res.status(404).json({message:"invalid post"})    
+    
       return res.status(200)
         .cookie('accessToken', accessToken, { httpOnly: true })
         .cookie('refreshToken', refreshToken, { httpOnly: true })
         .json({data:data});
-      }
+      
     }    
   },
 
@@ -88,7 +93,6 @@ module.exports ={
     const [accessToken, refreshToken] = await verifyToken(req);
     if(accessToken) {
       const user = await decodeToken(accessToken);
-
       if(!user) return res.status(401).json({message:"invalid user token"});
       else {
         

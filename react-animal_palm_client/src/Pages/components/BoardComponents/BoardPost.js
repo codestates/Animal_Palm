@@ -89,7 +89,7 @@ export default function BoardPost() {
     const deleteContext = () => {
         axios
         .delete(
-            `${process.env.REACT_APP_API_URL}/boards/${location.state.postId}}/`,
+            `${process.env.REACT_APP_API_URL}/boards/${location.state.postId}`,
             { withCredentials: true }
         )
         .then(()=>{
