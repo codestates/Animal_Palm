@@ -8,7 +8,8 @@ export const Modal = ({
   header,
   yesBtn,
   noBtnHandler,
-  wannaUpdateHandler
+  wannaUpdateHandler,
+  deleteMemberHandler
 }) => {
   const [pwInput, setPwInput] = useState('');
   const passwordInputHandler = (e) => {
@@ -30,7 +31,12 @@ export const Modal = ({
       const message = res.data;
       if(message === 'correct passwd') {
         // 제대로 받아온 경우
-        wannaUpdateHandler();
+        if(yesBtn === '확인') {
+          wannaUpdateHandler();
+        }
+        else if(yesBtn === '탈퇴') {
+          deleteMemberHandler();
+        }
       } else if(res.status === 202){
         // 비밀번호 틀린 경우
         alert('비밀번호가 일치하지 않습니다.')

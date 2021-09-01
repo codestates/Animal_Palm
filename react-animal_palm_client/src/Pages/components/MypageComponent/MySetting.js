@@ -6,7 +6,8 @@ import { UserInfo } from './UserInfo';
 import '../../CSS/MySetting.css'
 
 export const MySetting = ({
-  userInfo
+  userInfo,
+  handleLogout
 }) => {
   const history = useHistory();
   const [isOpen, setIsOpen] = useState(false);
@@ -48,12 +49,14 @@ export const MySetting = ({
     alert('회원정보가 변경되었습니다.')
   }
   const deleteMemberHandler = () => {
-    const deleteUserURL = `${process.env.REACT_APP_API_URL}/user`;
+    const deleteUserURL = `${process.env.REACT_APP_API_URL}/user/userDelete`;
     axios.delete(deleteUserURL, { withCredentials : true })
     .then((res) => {
-      const message = res.data.message;
+      console.log(res)
+      const message = res.data;
       if(message === 'ok') {
         alert('탈퇴 되었습니다.');
+        handleLogout();
         history.push('/') // 홈으로 이동
       } else {
         alert('잘못된 접근입니다.')
@@ -88,7 +91,7 @@ export const MySetting = ({
                   userInfo = {userInfo}
                   header='정말 탈퇴하시겠습니까?'
                   noBtnHandler={deleteButtonHandler}
-                  yesBtnHandler={deleteMemberHandler}
+                  deleteMemberHandler={deleteMemberHandler}
                   yesBtn='탈퇴'
                 />
               </div>

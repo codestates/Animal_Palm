@@ -7,7 +7,6 @@ import { Signup } from './Pages/Signup';
 import { Board } from './Pages/Board';
 import { useState } from 'react';
 import axios from 'axios';
-const {test, real} = require('./Pages/Dummy/url');
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
@@ -20,19 +19,6 @@ function App() {
     setUserInfo(data);
   }
   const handleLogout = () => {
-    // const signOutURL = `${test}/user/signout`;
-    // axios.put(signOutURL, null, { withCredentials : true })
-    // .then((res) => {
-    //   const message = res.data;
-    //   if(message === 'successfully signout') {
-    //     alert('로그아웃 되었습니다.');
-    //     history.push('/');
-    //   } else {
-    //     alert('잘못된 접근입니다.');
-    //     return;
-    //   }
-    // })
-    // .catch((err) => alert(err))
     setIsLogin(false)
   }
 
@@ -62,7 +48,6 @@ function App() {
           <Signup />
         </Route>
         <Route path="/board">
-          {console.log(userInfo)}
           <Board animalName={userInfo.animalId}/>
         </Route>
         
