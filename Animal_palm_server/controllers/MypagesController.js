@@ -1,7 +1,6 @@
-const Users = require('../models/').users;
 const Comments = require('../models/').comments;
 const Posts = require('../models/').posts;
-const jwt = require('jsonwebtoken');
+const Sequelize = require('sequelize');
 
 const { verifyToken, decodeToken } = require('./VerifyToken');
 
@@ -168,5 +167,31 @@ module.exports = {
         })
       }
     }
+  },
+
+  getRandomPost: async (req, res) => {
+    //*GET / endpoint: http://localhost:4000/main
+    //TODO: 랜덤으로 게시글 5개 가져오기
+
+    const randomPosts = await Posts.findAll({
+      order: Sequelize.literal('rand()'),
+      limit: 5
+    });
+
+    const posts = randomPosts.map((post) => {
+      return {
+        id: post.id,
+        animalId: post.animalId,
+        title: post.title,
+        content: post.content,
+        userId: post.userId,
+        createdAt: post.createdAt
+      };
+    });
+
+    return res.status(200).send({
+      "data" : posts,
+      "message" : "ok"
+    })
   }
 }
