@@ -1,7 +1,8 @@
 import React from 'react';
 import { useHistory } from 'react-router';
 import { test } from '../../Dummy/url';
-import Board_post from '../Board_post';
+import BoardPost from '../BoardComponents/BoardPost';
+
 
 export const ContentsList = ({
   userInfo,
