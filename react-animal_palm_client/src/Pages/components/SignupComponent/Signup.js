@@ -37,23 +37,23 @@ export function SignupComponent ({ setIsState,moveLogin }) {
     else if(!checkEmail(signupInfo.email)){
       alert('이메일 형식이 아닙니다.')
     }
-    else if(!checkPhone(signupInfo.mobile)){
-      alert('000-000-0000 혹은 000-0000-0000형식으로 작성해주십시오.')
-    }
+    // else if(!checkPhone(signupInfo.mobile)){
+    //   alert('000-000-0000 혹은 000-0000-0000형식으로 작성해주십시오.')
+    // }
     else{
       axios
       .post(
         `${process.env.REACT_APP_API_URL}/user/signup`,
         {
-          id: signupInfo.id,
+          userId: signupInfo.id,
           password: signupInfo.password,
           email: signupInfo.email,
-          phonenumber: signupInfo.mobile
+          phoneNumber: signupInfo.mobile
         },
         { withCredentials: true }
       )
       .then(() =>{
-        history.push('/signup/animalTest')
+        history.push({pathname:'/signup/animalTest',state:{userId:signupInfo.id}})
       })
       .catch(err => {
         alert(err)
