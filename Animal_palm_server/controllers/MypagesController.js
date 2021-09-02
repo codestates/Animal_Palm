@@ -5,6 +5,7 @@ const Sequelize = require('sequelize');
 const { checkAnimal } = require('./check/');
 const { verifyToken, decodeToken } = require('./VerifyToken');
 const COOKIEOPTION = {
+  domain: 'http://ec2-3-34-133-160.ap-northeast-2.compute.amazonaws.com',
   httpOnly: true,
   sameSite: 'None'
 }
