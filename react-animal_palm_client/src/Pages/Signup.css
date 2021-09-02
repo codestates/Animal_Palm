@@ -3,6 +3,17 @@
     box-sizing: border-box;
   }
 
+.red {
+    margin-top: -18px;
+    color:red;
+    font-size: 14px;
+}
+
+.green {
+    margin-top: -18px;
+    color:green;
+    font-size: 14px;
+}
 
 .container {
     display:flex;

@@ -18,29 +18,43 @@ export function SignupComponent ({ setIsState,moveLogin }) {
         mobile:''
     }
   )
+  const [isValid,setIsValid] = useState(
+    {
+      id:false,
+      signupButtonId:false,
+      validButton:false,
+      signupButtonPwd:false,
+      signupButtonCheckPwd:false,
+      signupButtonEmail:false,
+      signupButtonPhoneNumber:false
+    }
+  )
 
   const handleInputValue = (key) => (e) => {
     setSignupInfo({...signupInfo, [key]: e.target.value })
   }
   const signupHandler = () => {
     if(signupInfo.id===''|| signupInfo.password===''){
-      alert('아이디와 패스워드는 필수 입니다.')
+      setIsValid({...isValid,signupButtonId:true, signupButtonPwd:true})
     }
     else if(!checkId(signupInfo.id)){
-      alert('아이디는 5~15자 영어 대소문자, 숫자, 특수기호(!@^*_-.)만 사용 가능합니다. (공백 불가)')
+      setIsValid({...isValid,signupButtonId:true})
+    }
+    else if(!isValid.validButton){
+      alert('중복검사를 해주세요')
     }
     else if(!checkPassword(signupInfo.password)){
-      alert('비밀번호는 최소 8자 이상이면서, 알파벳과 숫자 및 특수문자(@$!%*#?&)하나 이상을 포함해햐합니다.')
+      setIsValid({...isValid,signupButtonPwd:true})
     }
     else if(!(signupInfo.password===signupInfo.checkPassword)){
-      alert('비밀번호와 비밀번호 재확인이 서로 다릅니다.')
+      setIsValid({...isValid,signupButtonCheckPwd:true})
     }
     else if(!checkEmail(signupInfo.email)){
-      alert('이메일 형식이 아닙니다.')
+      setIsValid({...isValid,signupButtonEmail:true})
     }
-    // else if(!checkPhone(signupInfo.mobile)){
-    //   alert('000-000-0000 혹은 000-0000-0000형식으로 작성해주십시오.')
-    // }
+    else if(!checkPhone(signupInfo.mobile)){
+      setIsValid({...isValid,signupButtonPhoneNumber:true})
+    }
     else{
       axios
       .post(
@@ -70,11 +84,11 @@ export function SignupComponent ({ setIsState,moveLogin }) {
       },
       { withCredentials: true }
     )
-    .then(data=>{
-      alert(data.data.message)
+    .then(()=>{
+      setIsValid({...isValid,id:true,validButton:true})
     })
-    .catch(err=>{
-      alert(err)
+    .catch(()=>{
+      setIsValid({...isValid,id:false,validButton:true})
     })
   }
   return (
@@ -89,11 +103,10 @@ export function SignupComponent ({ setIsState,moveLogin }) {
             <span className="idCheck" onClick={validExistId}>
               중복검사
             </span>
-            <div className="hide">
-              5~15자 영어 대소문자, 숫자, 특수기호(!@^*_-.)만 가능 (공백 불가)
-            </div>
-            <div className="hide">
-              사용할 수 있는 아이디입니다.
+            <div className={`red ${!isValid.id && isValid.validButton ? '' : "hide"}`}>이미 존재하는 아이디입니다.</div>
+            <div className={`green ${checkId(signupInfo.id) && isValid.id ? '' : "hide"}`}>사용할 수 있는 아이디입니다.</div>
+            <div className={`red ${!checkId(signupInfo.id) && (signupInfo.id!==''||isValid.signupButtonId)? '' : "hide"}`}>
+              아이디는 5자이상 영문혹은 숫자이고 공백이 없어야합니다.
             </div>
           </div>
         </div>
@@ -102,11 +115,21 @@ export function SignupComponent ({ setIsState,moveLogin }) {
           <div>
             <input className="signupInput" type='password' onChange={handleInputValue('password')} value={signupInfo.password}/>
           </div>
-        </div>
+          <div className={`red ${!checkPassword(signupInfo.password) && (signupInfo.password!==''||isValid.signupButtonPwd) ? '' : "hide"}`}>
+            비밀번호는 8자 이상이고 특수문자,숫자,영어가 포함되어야합니다.</div>
+          </div>
         <div>
           <label className="signupLabel">비밀번호 재확인</label>
           <div>
             <input className="signupInput" type='password' onChange={handleInputValue('checkPassword')} value={signupInfo.checkPassword}/>
+          </div>
+          <div className={`red ${signupInfo.password!==signupInfo.checkPassword &&
+            (signupInfo.checkPassword !== '' || isValid.signupButtonCheckPwd) ? '' : "hide"}`}>
+            비밀번호가 일치하지 않습니다.
+          </div>
+          <div className={`green ${signupInfo.password===signupInfo.checkPassword &&
+            signupInfo.checkPassword !== '' ? '' : "hide"}`}>
+            비밀번호가 일치합니다.
           </div>
         </div>
         <div>
@@ -114,11 +137,17 @@ export function SignupComponent ({ setIsState,moveLogin }) {
           <div>
             <input className="signupInput" type='email' onChange={handleInputValue('email')} value={signupInfo.email}/>
           </div>
+          <div className={`red ${!isValid.signupButtonEmail || checkEmail(signupInfo.email)? "hide" : ''}`}>
+            이메일의 형식(***@***)이어야 합니다.
+          </div>
         </div>
         <div>
           <label className="signupLabel">전화번호</label>
           <div>
             <input className="signupInput" type='tel' onChange={handleInputValue('mobile')} value={signupInfo.mobile}/>
+          </div>
+          <div className={`red ${!isValid.signupButtonPhoneNumber || checkPhone(signupInfo.mobile)? "hide" : ''}`}>
+            휴대전화번호를 입력해주세요.
           </div>
         </div>           
         <div>

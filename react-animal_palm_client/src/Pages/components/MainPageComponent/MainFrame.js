@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
 import image1 from '../../../images/01.jpg'
@@ -10,7 +11,26 @@ export const MainFrame = () => {
     document.body.getBoundingClientRect()
   )
   const [scrollY,setScrollY] = useState(bodyOffset.top)
-  
+  const [randomPosts,setRandomPosts] = useState([])
+  const loadRandomPosts = () => {
+    axios
+    .get(
+      `${process.env.REACT_APP_API_URL}/main`,
+      { withCredentials: true }
+    )
+    .then(data => {
+      setRandomPosts(data.data.data.map(el=>{return (
+        <div>
+          <h4>{el.title}</h4>
+          <div>{el.content}</div>
+        </div>
+        )} ))
+    })
+  }
+  useEffect(()=>{
+    loadRandomPosts()
+  },[])
+
   
 
   const check = (scrollY)=>{
@@ -58,27 +78,27 @@ export const MainFrame = () => {
 			</div>
 			<div className="bubble">
 				<p>
-          글 미리보기(제목)
+          {randomPosts[0]}
 				</p>
 			</div>
 			<div className="bubble">
 				<p>
-          글 미리보기(제목)3
+          {randomPosts[1]}
 				</p>
 			</div>
 			<div className="bubble">
 				<p>
-          글 미리보기(제목)4
+          {randomPosts[2]}
 				</p>
 			</div>
 			<div className="bubble">
 				<p>
-          글 미리보기(제목)5
+          {randomPosts[3]}
 				</p>
 			</div>
 			<div className="bubble">
 				<p>
-          글 미리보기(제목)6
+          {randomPosts[4]}
 				</p>
 			</div>
 		</div>

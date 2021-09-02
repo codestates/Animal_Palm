@@ -1,10 +1,12 @@
 import axios from 'axios';
 import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import '../../Board.css'
 
 export default function BoardWrite() {
   const location = useLocation()
+  const history = useHistory()
+  
   const [context,setContext] = useState(
     {
       title:'',
@@ -50,6 +52,7 @@ export default function BoardWrite() {
               hashTag:[]
             }
           )
+          history.push('/board')
         })
         .catch((err)=>{
           alert(err)
