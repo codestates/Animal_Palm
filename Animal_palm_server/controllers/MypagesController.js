@@ -113,13 +113,22 @@ module.exports = {
       if(!user) return res.status(401).send("invalid token");
       else {
         //현재 토큰에 담긴 유저가 존재할 경우
-        const comments = await Comments.findAll({ where: { userId : user.id } });
+        //const comments = await Comments.findAll({ where: { userId : user.id } });
+        const comments = await Comments.findAll({
+          include: [
+            {
+              model: Posts,
+              attributes: ['animalId']
+            }
+          ],
+          where: { userId : user.id }
+        })
         //comments가 없을 수도 있음 -> 댓글을 안 단 경우
         //-> 이 경우 빈 배열로 리턴됨
 
         const userComments = comments.map((comment) => {
           const { id, postId, content, userId, createdAt } = comment;
-          return { id, postId, content, userId, createdAt };
+          return { id, postId, content, userId, createdAt, animalId: comment.post.animalId };
         })
 
         return res.status(200)
