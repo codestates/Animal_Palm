@@ -1,4 +1,6 @@
+
 const models = require('../models/')
+const { post } = require('../router/BoardRouter')
 const {checkAnimal} = require('./check/')
 const {verifyToken,decodeToken} = require('./VerifyToken')
 
@@ -6,6 +8,8 @@ module.exports ={
   getPostList:async (req, res) => {
     if(!req.headers.cookie) return res.status(401).json({message:"invalid authority"})
     //*GET / endpoint: http://localhost:4000/boards/:animalId 
+
+    
 
     //const data = await posts.findAll()
     //req.params에 담긴 id로 postDB 조회
@@ -23,20 +27,37 @@ module.exports ={
     // }
     else {
       //유효한 토큰일 경우 -> 해당 유저가 존재하는지 확인
-      
-    
-    
     if(!user) return res.status(401).send("invalid token");
 
     else {
       let data = []
       const allData = await models.posts.findAll({where:{animalId:animalId},raw:true})
+      
+      
+      //console.log(hashtagStr,'testsetest')
+      // 해쉬태그 전달하기
       for(let i =0; i<allData.length;i++){
+        const postId = await models.posts.findOne({where:{id:allData[i].id}})
+        const userId = await models.users.findOne({where:{id:postId.userId}})
+        
+        const postHashtagsPostId = await models.postHashtags.findAll({where:{postId:postId.id},raw:true})
+        const hashtagArr = []
+        const arr =[]
+        for(let j=0; j<postHashtagsPostId.length;j++) {
+          const hashtagStr = await models.hashtags.findOne({where:{id:postHashtagsPostId[j].id}})
+          
+          arr.push(hashtagStr.hashtag)
+        }
+        
+        for(let k=0;k<arr.length;k++){
+          hashtagArr.push([arr[k]])
+        }
+        
         data.push({
           id: allData[i].id,
           title: allData[i].title,
-          userId : allData[i].userId,
-          hashtag :allData[i].hashtag,
+          userId : checkAnimal(userId.animalId),
+          hashtag :hashtagArr,
           createdAt: allData[i].createdAt,
           updatedAt: allData[i].updatedAt,
         })
@@ -95,26 +116,28 @@ module.exports ={
       const user = await decodeToken(accessToken);
       if(!user) return res.status(401).json({message:"invalid user token"});
       else {
-        
-
         const title = req.body.title
         const content = req.body.content
-        const hashtag = req.body.hashtag
+        const hashtag =req.body.hash
         
         const postData = await models.posts.create({
           userId :user.id,
           animalId : animalId,
           content : content,
-          title : title,
-          
+          title : title,   
         })
-        const hashtagData = await models.hashtags.create({
-          hashtag:hashtag
-        })
-        await models.postHashtags.create({
-          postId:postData.id,
-          hashtagId:hashtagData.id
-        })
+
+        const data = []
+        for(let i=0; i<hashtag.length;i++){
+          const hashtagData = await models.hashtags.create({
+            hashtag:hashtag[i][0]
+          })
+         await models.postHashtags.create({
+            postId:postData.id,
+            hashtagId:hashtagData.id
+          })
+        }
+        
         return res.status(200)
               .cookie('accessToken', accessToken, { httpOnly: true })
               .cookie('refreshToken', refreshToken, { httpOnly: true })

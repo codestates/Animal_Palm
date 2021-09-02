@@ -3,6 +3,7 @@
 module.exports = {
     checkAnimal: (animal_name) =>{
         const animal ={
+            0:"전체",
             1:"여우",
             2:"곰",
             3:"코뿔소",

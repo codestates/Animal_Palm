@@ -1,6 +1,7 @@
 const Comments = require('../models/').comments;
 const Posts = require('../models/').posts;
 const Sequelize = require('sequelize');
+const {checkAnimal} = require('./check/')
 
 const { verifyToken, decodeToken } = require('./VerifyToken');
 
@@ -175,13 +176,13 @@ module.exports = {
 
     const randomPosts = await Posts.findAll({
       order: Sequelize.literal('rand()'),
-      limit: 5
+      limit: 4
     });
 
     const posts = randomPosts.map((post) => {
       return {
         id: post.id,
-        animalId: post.animalId,
+        animalId: checkAnimal(post.animalId),
         title: post.title,
         content: post.content,
         userId: post.userId,
