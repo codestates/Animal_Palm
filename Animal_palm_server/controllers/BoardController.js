@@ -92,7 +92,7 @@ module.exports ={
       const user = await models.users.findOne({where:{
         id:data.userId
       }})
-      const arr = [{
+      const arr = {
         id:data.id,
         animalId:data.animalId,
         content: data.content,
@@ -100,7 +100,7 @@ module.exports ={
         createdAt:data.createdAt,
         updatedAt:data.updatedAt,
         userId:checkAnimal(user.animalId)
-      }]
+      }
 
       
     // if(data === null ) return res.status(404).json({message:"invalid post"})    
