@@ -1,8 +1,8 @@
 const Comments = require('../models/').comments;
 const Posts = require('../models/').posts;
 const Sequelize = require('sequelize');
-const {checkAnimal} = require('./check/')
 
+const { checkAnimal } = require('./check/');
 const { verifyToken, decodeToken } = require('./VerifyToken');
 
 module.exports = {
@@ -42,8 +42,6 @@ module.exports = {
     //클라에서 서버로 현재 입력된 값 전달해준 뒤 (해싱된 비밀번호가 body에 담겨 전달)
     //-> 서버에서 입력받은 값과 현재 토큰에 담긴 유저의 비밀번호를 비교
     //일치하면 응답에 일치한다고 전달 -> 이거 보고 클라에서 회원정보 페이지로 넘어감
-
-    //!외않되?!?!?!!?!?!?!??!??
 
     const [accessToken, refreshToken] = await verifyToken(req);
     if(!accessToken) return res.status(401).send("invalid token");
@@ -193,6 +191,6 @@ module.exports = {
     return res.status(200).send({
       "data" : posts,
       "message" : "ok"
-    })
+    });
   }
 }
