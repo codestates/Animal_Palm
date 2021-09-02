@@ -22,7 +22,6 @@ export default function Mainpage  ({
   
 
   const check = (scrollY)=>{
-    console.log(scrollY)
     if(scrollY < 850) setIndex(0)
     else if(scrollY < 1500) setIndex(1)
     else if(scrollY < 2000) setIndex(2)
@@ -49,7 +48,6 @@ export default function Mainpage  ({
             { withCredentials: true }
         )
         .then(data => {
-            console.log(data.data)
             setConents(data.data.data)
         })
         .catch((err)=>{

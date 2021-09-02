@@ -52,7 +52,6 @@ export const MySetting = ({
     const deleteUserURL = `${process.env.REACT_APP_API_URL}/user/userDelete`;
     axios.delete(deleteUserURL, { withCredentials : true })
     .then((res) => {
-      console.log(res)
       const message = res.data;
       if(message === 'ok') {
         alert('탈퇴 되었습니다.');

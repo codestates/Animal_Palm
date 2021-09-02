@@ -27,7 +27,6 @@ export const Modal = ({
       withCredentials : true
     })
     .then((res) => {
-      // console.log('응답?')
       const message = res.data;
       if(message === 'correct passwd') {
         // 제대로 받아온 경우

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
+import { profileImages } from '../../../assets/ProfileImage';
 import '../../Board.css'
 import { getParsedDate } from '../../function/DateFormat';
 
@@ -137,7 +138,7 @@ export default function BoardPost() {
                             return (
                                 <li>
                                     <div>
-                                        <span>{el.userId}</span>
+                                        <span>{el.animalid}</span>
                                         <button className="deleteComment" onClick={()=>deleteComment(el.id)}>삭제</button>
                                         <div>{el.content}</div>
                                         <div>{getParsedDate(el.createdAt)}</div>
