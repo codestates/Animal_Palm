@@ -4,6 +4,10 @@ const Comments = require('../models/').comments;
 const jwt = require('jsonwebtoken');
 
 const { verifyToken, decodeToken } = require('./VerifyToken');
+const COOKIEOPTION = {
+  httpOnly: true,
+  sameSite: 'None'
+}
 
 module.exports ={
   signIn: async (req, res) => {
@@ -40,8 +44,8 @@ module.exports ={
       const refreshToken = jwt.sign(tokenPayload, process.env.REFRESH_SECRET, { expiresIn: '14d' });
 
       return res.status(200)
-        .cookie("accessToken", accessToken, { httpOnly: true }) //쿠키 옵션 줘야됨 httpOnly, secure
-        .cookie("refreshToken", refreshToken, { httpOnly: true })
+        .cookie("accessToken", accessToken, COOKIEOPTION)
+        .cookie("refreshToken", refreshToken, COOKIEOPTION)
         .send({
           "animalId" : userData.animalId,
           "animalName" : ANIMAL[userData.animalId],
