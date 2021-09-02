@@ -21,9 +21,9 @@ export function Login({
       alert('아이디와 비밀번호를 제대로 입력해주세요')
       return;
     }
-    const sendInfo = { userId : loginInfo.userId, password : hash(loginInfo.password)}; //! 26번째 줄 이거로 수정
+    const sendInfo = { userId : loginInfo.userId, password : hash(loginInfo.password)};
     const signInURl = `${process.env.REACT_APP_API_URL}/user/signin`;
-    axios.post(signInURl, loginInfo, {
+    axios.post(signInURl, sendInfo, {
       headers : { 'Content-type' : 'application/json' },
       withCredentials : true
     })

@@ -21,8 +21,8 @@ export const Modal = ({
       return;
     }
     const checkPwURL = `${process.env.REACT_APP_API_URL}/mypage/passwd`;
-    //! const password = hash(pwInput);
-    axios.post(checkPwURL, { password : pwInput }, {
+    const password = hash(pwInput);
+    axios.post(checkPwURL, { password : password }, {
       headers : { 'Content-type' : 'application/json' },
       withCredentials : true
     })

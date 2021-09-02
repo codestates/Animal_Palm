@@ -82,7 +82,7 @@ export function AnimalTest({ setIsState }) {
                 </header>
                 <section>
                     <h3>당심의 성향이 궁금합니다.</h3> <br></br>
-                    <h3>당신은 내향적인편 입니까? 외향적인편 입니까?</h3> <br></br>
+                    <h3>당신은 내향적인편 입니까? <br/>외향적인편 입니까?</h3> <br></br>
                     <div className="answerContainer">
                         <div onClick= {()=>selectType('E',1)} className ={`answer`}>외향적</div>
                         <div onClick= {()=>selectType('I',1)} className ={`answer`}>내향적</div>
@@ -96,7 +96,7 @@ export function AnimalTest({ setIsState }) {
                     <div className="question">2번째 질문</div>
                 </header>
                 <section>
-                    <h3>당신은 감각적입니까? 직관적입니까?</h3> <br></br>
+                    <h3>당신은 감각적입니까? <br/>직관적입니까?</h3> <br></br>
                     <div className="answerContainer">
                         <div onClick= {()=>selectType('N',2)} className ={`answer`} >직관적</div>
                         <div onClick= {()=>selectType('S',2)} className ={`answer`} >감각적</div>
@@ -110,7 +110,7 @@ export function AnimalTest({ setIsState }) {
                     <div className="question">3번째 질문</div>
                 </header>
                 <section>
-                    <h3>당신은 감정적인가요? 아니면 이성적인가요</h3> <br></br>
+                    <h3>당신은 감정적인가요? <br/> 이성적인가요</h3> <br></br>
                     <div className="answerContainer">
                         <div onClick= {()=>selectType('F',3)} className ={`answer`}>감정적</div>
                         <div onClick= {()=>selectType('T',3)} className ={`answer`}>이성적</div>
@@ -124,7 +124,7 @@ export function AnimalTest({ setIsState }) {
                     <div className="question">4번째 질문</div>
                 </header>
                 <section>
-                    <h3>당신은 계획적으로 행동하나요 유동적으로 행동하나요?</h3> <br></br>
+                    <h3>당신은 계획적으로 행동하나요? <br/>유동적으로 행동하나요?</h3> <br></br>
                     <div className="answerContainer">
                         <div onClick= {()=>selectType('P',4)} className ={`answer`}>유동적</div>
                         <div onClick= {()=>selectType('J',4)} className ={`answer`}>계획적</div>

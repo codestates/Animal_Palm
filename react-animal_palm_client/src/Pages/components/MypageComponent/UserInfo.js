@@ -32,7 +32,7 @@ export const UserInfo = ({
         alert('비밀번호가 일치하지 않습니다.');
         return;
       }
-      data['password'] = input.newPassword; //! hash(input.newPassword);
+      data['password'] = hash(input.newPassword);
     }
     if(input.email !== '') {
       if(!checkEmail(input.email)) {
@@ -93,7 +93,7 @@ export const UserInfo = ({
         </tr>
           <tr><th></th><td>
             <div
-              className={checkPassword(input.newPassword)? 'invalid-message hide' : 'invalid-message'}>
+              className={checkPassword(input.newPassword)? 'invalid-message warning' : 'invalid-message'}>
             8자 이상, 알파벳과 숫자 및 특수문자(@$!%*#?&) 하나 이상 포함
             </div>
           </td></tr>
@@ -109,7 +109,7 @@ export const UserInfo = ({
         </tr>
           <tr><th></th><td>
             <div
-              className={isMatch(input.newPassword, input.checkPassword)? 'invalid-message hide' : 'invalid-message'}>
+              className={isMatch(input.newPassword, input.checkPassword)? 'invalid-message warning' : 'invalid-message'}>
                 비밀번호가 일치하지 않습니다.
             </div>
           </td></tr>
@@ -125,7 +125,7 @@ export const UserInfo = ({
         </tr>
         <tr><th></th><td>
           <div 
-            className={checkPhone(input.phoneNumber) || input.phoneNumber === ''? 'invalid-message hide' : 'invalid-message'}>
+            className={checkPhone(input.phoneNumber) || input.phoneNumber === ''? 'invalid-message warning' : 'invalid-message'}>
               연락처를 정확히 입력해주세요.
           </div>
         </td></tr>
@@ -141,7 +141,7 @@ export const UserInfo = ({
         </tr>
           <tr><th></th><td>
             <div
-              className={checkEmail(input.email) || input.email === ''? 'invalid-message hide' : 'invalid-message'}>
+              className={checkEmail(input.email) || input.email === ''? 'invalid-message warning' : 'invalid-message'}>
                 올바른 이메일을 입력해주세요.
             </div>
           </td></tr>

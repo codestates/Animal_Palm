@@ -24,6 +24,7 @@ export default function Navigaitionbar({ isLogin,handleLogout }) {
       const message = res.data;
       if(message === 'successfully signout') {
         alert('로그아웃 되었습니다.');
+        handleLogout();
         history.push('/');
       } else {
         alert('잘못된 접근입니다.');
@@ -31,7 +32,6 @@ export default function Navigaitionbar({ isLogin,handleLogout }) {
       }
     })
     .catch((err) => alert(err))
-    handleLogout();
   }
   
   return (

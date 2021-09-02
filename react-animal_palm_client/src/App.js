@@ -49,7 +49,7 @@ function App() {
         </Route>
         <Route path="/board">
           {console.log(userInfo)}
-          <Board animalName={userInfo.animalId} isLogin={isLogin}/>
+          <Board animalName={userInfo.animalId} isLogin={isLogin} handleLogout={handleLogout}/>
         </Route>
         
       </Switch>

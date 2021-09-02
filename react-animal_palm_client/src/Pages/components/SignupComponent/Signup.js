@@ -61,7 +61,7 @@ export function SignupComponent ({ setIsState,moveLogin }) {
         `${process.env.REACT_APP_API_URL}/user/signup`,
         {
           userId: signupInfo.id,
-          password: signupInfo.password,
+          password: hash(signupInfo.password),
           email: signupInfo.email,
           phoneNumber: signupInfo.mobile
         },

@@ -2,6 +2,7 @@ import '../../Board.css'
 import { Link, useHistory } from 'react-router-dom'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
+import { getParsedDate } from '../../function/DateFormat'
 
 export default function BoardList({animalId}) {
     const history = useHistory()
@@ -52,7 +53,7 @@ export default function BoardList({animalId}) {
                                 <td className="col15" >{el.hashtag.map(el=>''+el).join(',')}</td>
                                 <td className="col60" >{el.title}</td>
                                 <td className="col12" >{el.userId}</td>
-                                <td className="col8" >{el.createdAt}</td>
+                                <td className="col8" >{getParsedDate(el.createdAt)}</td>
                             </tr>
                         </tfoot>
                     )

@@ -4,7 +4,6 @@ import { Link,useHistory } from 'react-router-dom'
 import image1 from '../../../images/04.jpg'
 import image2 from '../../../images/05.jpg'
 import image3 from '../../../images/06.jpg'
-import axios from 'axios'
 
 export const MainFrame = ({
   isLogin,
@@ -76,7 +75,7 @@ export const MainFrame = ({
     }
 
   return (
-
+    <>
     <div className='main-page'>
       <header className="header">
         <div className="global-width">
