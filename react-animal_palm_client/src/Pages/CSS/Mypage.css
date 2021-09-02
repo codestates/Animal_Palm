@@ -6,8 +6,7 @@
 .profile-container {
   display: flex;
   font-size: 30pt;
-  font-family: 'Gowun Dodum', sans-serif;
-  font-weight: bold;
+  font-family: 'Jua', sans-serif;
   align-items: center;
   justify-content: center;
   margin-top: 100px;
@@ -26,14 +25,13 @@
 }
 .tab-menu {
   color: rgba(46, 46, 46, 0.7);
-  font-weight: bold;
   font-size: 20pt;
   display: flex;
   flex-direction: row;
   justify-items: center;
   justify-content: center;
   list-style: none;
-  font-family: 'Gowun Dodum', sans-serif;
+  font-family: 'Jua', sans-serif;
 }
 .submenu {
   width: 17vw;
@@ -54,7 +52,7 @@
 
 .content {
   border: 2px solid rgba(69, 105, 82, 0.884);
-  font-family: 'Gowun Dodum', sans-serif;
+  /* font-family: 'Gowun Dodum', sans-serif; */
   justify-content: center;
   padding: 10px 10px 10px 10px;
   margin:  0px 40px 30px 40px;
@@ -98,7 +96,7 @@
   position: relative;
   width: 200px;
   height: 50px;
-  font-family: 'Gowun Dodum', sans-serif;
+  /* font-family: 'Gowun Dodum', sans-serif; */
   border: none;
   color: rgb(147, 147, 147);
   font-size: 17pt;
@@ -113,4 +111,10 @@
   color: white;
   font-weight: bold;
   font-size: 12pt;
+}
+.invalid-message {
+  color:tomato
+}
+.warning {
+  color : transparent;
 }

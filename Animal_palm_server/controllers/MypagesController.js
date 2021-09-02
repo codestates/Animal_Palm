@@ -110,7 +110,6 @@ module.exports = {
       if(!user) return res.status(401).send("invalid token");
       else {
         //현재 토큰에 담긴 유저가 존재할 경우
-        //const comments = await Comments.findAll({ where: { userId : user.id } });
         const comments = await Comments.findAll({
           include: [
             {

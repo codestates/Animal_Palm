@@ -79,7 +79,7 @@
 }
 
 .col60 {
-    width: 60%;
+    width: 40%;
 }
 
 .col12 {
@@ -87,7 +87,7 @@
 }
 
 .col8 {
-    width: 8%;
+    width: 20%;
 }
 
 .selectBoard > button {
@@ -131,6 +131,15 @@
 .Header {
     margin-bottom: 10px;
     border-bottom: 3px solid #ccc;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding-right: 6%;
+}
+
+.Header > span {
+    font-size: 14px;
+    font-weight: bold;
 }
 
 .Header > h1 {
@@ -201,7 +210,7 @@
     justify-self: end;
     align-self: flex-end;
     bottom: 5px;
-    right: 30px;
+    right: 2vw;
     border:none;
     color:rgb(122, 122, 122);
     background-color:unset;

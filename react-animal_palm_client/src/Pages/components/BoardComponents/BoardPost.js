@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import '../../Board.css'
+import { getParsedDate } from '../../function/DateFormat';
 
 export default function BoardPost() {
     const history = useHistory()
@@ -122,6 +123,7 @@ export default function BoardPost() {
         <div className="Board_post">
             <div className="Header">
                 <h1>{context.title}</h1>
+                <span>{context.userId}</span>
             </div>
             <button className="deleteContext" onClick={deleteContext}>글삭제</button>
             <div className="Container">
@@ -138,7 +140,7 @@ export default function BoardPost() {
                                         <span>{el.userId}</span>
                                         <button className="deleteComment" onClick={()=>deleteComment(el.id)}>삭제</button>
                                         <div>{el.content}</div>
-                                        <div>{el.createdAt}</div>
+                                        <div>{getParsedDate(el.createdAt)}</div>
                                     </div>
                                 </li>
                             )
