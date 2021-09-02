@@ -19,11 +19,26 @@ module.exports ={
         const data = await models.comments.findAll({where:{
           postId:postId
         },raw:true})
+        let arr =[]
+        for(let i=0;i<data.length;i++){
+          const user = await models.users.findOne({where:{
+          id:data[i].userId}})
+          arr.push({
+            content:data[i].content,
+            animalid:checkAnimal(user.animalId),
+            postId:data[i].postId,
+            userId:data[i].userId,
+            createdAt:data[i].createdAt,
+            updatedAt:data[i].updatedAt,
+            id:data[i].id
+          })
+        }
+        
         
         return res.status(201)
           .cookie('accessToken', accessToken, { httpOnly: true })
           .cookie('refreshToken', refreshToken, { httpOnly: true })
-          .json({data:data});
+          .json({data:arr});
       
     }
     //req.params에 담긴 현재 게시글의 id를 통해 탐색 가능
