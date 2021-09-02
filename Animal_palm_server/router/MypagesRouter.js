@@ -7,6 +7,8 @@ router.post('/passwd',passwordCheck)
 router.get('/info',info)
 router.get('/comment', myPageComment)
 router.get('/content', myPagePost)
+
+//메인페이지 랜덤게시글
 router.get('/', getRandomPost)
 
 

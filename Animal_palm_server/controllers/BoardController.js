@@ -15,14 +15,10 @@ module.exports ={
     //findAll -> 배열로 받은 값을 client에서 필요한 형태로 map해서 응답
     const animalId = req.params.animalId
     if(animalId>16) return res.status(401).json({message:"invalid page"})    
-    const [accessToken, refreshToken] = await verifyToken(req);console.log(req.headers.cookie)
+    const [accessToken, refreshToken] = await verifyToken(req);
     const user = await decodeToken(accessToken);
     if(!accessToken) return res.status(401).send("invalid token");
     
-    // if(animalId>0){
-    //   console.log(animalId,String(user.animalId))
-    //   if(animalId !== String(user.animalId)) return res.status(401).send("invalid access");
-    // }
     else {
       //유효한 토큰일 경우 -> 해당 유저가 존재하는지 확인
     if(!user) return res.status(401).send("invalid token");
@@ -32,7 +28,6 @@ module.exports ={
       const allData = await models.posts.findAll({where:{animalId:animalId},raw:true})
       
       
-      //console.log(hashtagStr,'testsetest')
       // 해쉬태그 전달하기
       for(let i =0; i<allData.length;i++){
         const postId = await models.posts.findOne({where:{id:allData[i].id}})
@@ -100,11 +95,7 @@ module.exports ={
         createdAt:data.createdAt,
         updatedAt:data.updatedAt,
         userId:checkAnimal(user.animalId)
-      }
-
-      
-    // if(data === null ) return res.status(404).json({message:"invalid post"})    
-    // if(user.id !== data.userId) return res.status(404).json({message:"invalid post"})    
+      }   
     
       return res.status(200)
         .cookie('accessToken', accessToken, { httpOnly: true })

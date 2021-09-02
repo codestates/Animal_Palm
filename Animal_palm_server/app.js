@@ -28,19 +28,12 @@ app.get('/',(req,res,next)=>{
   res.send("main") 
 })
 
-// app.use(
-//   cors({
-//     origin:["http://localhost:3000"],
-//     credentials : true,
-//     methods:["GET","POST","OPTIONS"],
-//   })
-// )
 app.use(cookieParser())
 
 const HTTP_PORT = process.env.HTTP_PORT|| 4000
 
 app.listen(HTTP_PORT, () => {
-  console.log(`[RUN] StatesAirline Server... | http://localhost:${HTTP_PORT}`);
+  console.log(`[RUN] Animal Palm Server... | http://localhost:${HTTP_PORT}`);
 });
 
 
