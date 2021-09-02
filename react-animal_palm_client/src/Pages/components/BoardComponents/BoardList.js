@@ -20,6 +20,7 @@ export default function BoardList({animalId}) {
             { withCredentials: true }
         )
         .then(data => {
+            console.log(data.data)
             setContentList(data.data.data)
         })
         .catch((err)=>{
@@ -36,7 +37,7 @@ export default function BoardList({animalId}) {
                 <thead>
                     <tr>
                         <th className="col5">번호</th>
-                        {/* <th className="col15">태그</th> */}
+                        <th className="col15">태그</th>
                         <th className="col60">제목</th>
                         <th className="col12">작성자</th>
                         <th className="col8">날짜</th>
@@ -48,7 +49,7 @@ export default function BoardList({animalId}) {
                             <tr className="boardContent" 
                                 onClick={()=>{history.push({pathname:'board/post',state:{postId:el.id, animalId: location}})}}>
                                 <td className="col5" >{el.id}</td>
-                                {/* <td className="col15" >{el.hashtag.map(el=>''+el).join(',')}</td> */}
+                                <td className="col15" >{el.hashtag.map(el=>''+el).join(',')}</td>
                                 <td className="col60" >{el.title}</td>
                                 <td className="col12" >{el.userId}</td>
                                 <td className="col8" >{el.createdAt}</td>

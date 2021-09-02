@@ -2,6 +2,7 @@ import './Navigationbar.css';
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from "react-router-dom";
 import axios from 'axios';
+import logo from '../../images/logo.PNG'
 const { test, real } = require('../Dummy/url');
 
 
@@ -32,10 +33,12 @@ export default function Navigaitionbar({ isLogin,handleLogout }) {
   }
   
   return (
-    <nav className={scrollPosition < 100? "Navigationbar" : "Navigationbar hide"}>
+    <nav className="Navigationbar" >
       <ul className="nav-container">
         <Link to='/'>
-          <li><a className="logo">logo</a></li>
+          <li>
+            <img className="logo-img" src={logo} alt="" />
+            </li>
         </Link>
         <a className='right-top'>
         {isLogin? 
