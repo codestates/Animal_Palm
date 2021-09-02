@@ -24,7 +24,7 @@ function App() {
 
   return (
     <BrowserRouter>
-    <div className="App">
+    <div className="App">{console.log(userInfo)}
       <Route exact path="/">
           <Mainpage
             isLogin={isLogin}

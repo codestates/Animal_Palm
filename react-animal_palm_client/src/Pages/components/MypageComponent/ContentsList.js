@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router';
+import { getParsedDate } from '../../function/DateFormat';
 import BoardPost from '../BoardComponents/BoardPost';
 
 
@@ -21,20 +22,20 @@ export const ContentsList = ({
   } //onClick={show==='comment'?() => clickPostHandler(item.postId, userInfo.animalId): null}
   return (
     <>
-          {list.map((item) => (
+          {list.map((item, i) => (
             <tr
               className='row'
               key={item.id}
               onClick={show === 'post'? ()=>clickPostHandler(item.id, item.animalId)
-              : null}
+              :null}
             >
-              <td onClick={show==='comment'?() => clickPostHandler(item.postId, userInfo.animalId): null}>{item.id}</td>
+              <td onClick={show==='comment'?() => clickPostHandler(item.postId, userInfo.animalId): null}>{i + 1}</td>
               {show === 'post'?
                 <td>{item.animalId}</td>
                 : null
               }
               <td onClick={show==='comment'?() => clickPostHandler(item.postId, userInfo.animalId): null}>{show === 'post'? item.title:item.content}</td>
-              <td onClick={show==='comment'?() => clickPostHandler(item.postId, userInfo.animalId): null}>{item.createdAt}</td>
+              <td onClick={show==='comment'?() => clickPostHandler(item.postId, userInfo.animalId): null}>{getParsedDate(item.createdAt)}</td>
               {show === 'comment'?
                 <td>
                   <button

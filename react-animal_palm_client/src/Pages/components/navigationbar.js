@@ -2,7 +2,6 @@ import './Navigationbar.css';
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from "react-router-dom";
 import axios from 'axios';
-const { test, real } = require('../Dummy/url');
 
 
 export default function Navigaitionbar({ isLogin,handleLogout }) {
@@ -15,7 +14,7 @@ export default function Navigaitionbar({ isLogin,handleLogout }) {
       window.addEventListener('scroll', updateScroll);
   });
   const logoutHandler = () => {
-    const signOutURL = `${test}/user/signout`;
+    const signOutURL = `${process.env.REACT_APP_API_URL}/user/signout`;
     axios.put(signOutURL, null, { withCredentials : true })
     .then((res) => {
       const message = res.data;

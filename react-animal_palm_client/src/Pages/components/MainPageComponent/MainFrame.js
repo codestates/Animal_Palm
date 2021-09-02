@@ -55,9 +55,11 @@ export const MainFrame = () => {
     <div className='main-page'>
       <header className="header">
         <div className="global-width">
-          <h1 class="page-title">제목</h1>
+          <div className={scrollY <= 100?'tracking-in-expand page-title' : 'page-title'}>Animal Palm</div>
+          {/* <div class="page-title">제목</div> */}
           <p>
-            홈페이지 설명<br/>밑으로 스크롤 해봅시다.<br/>
+            스크롤 해보세요!<br/>
+            <div className='dir'>|</div>
           </p>
         </div>
       </header>  

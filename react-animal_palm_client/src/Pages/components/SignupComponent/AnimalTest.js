@@ -60,7 +60,7 @@ export function AnimalTest({ setIsState }) {
         .post(
              `${process.env.REACT_APP_API_URL}/user/animal`,
              {
-                animal : parseInt(yourPersonality[0],32),
+                animalId : parseInt(yourPersonality[0],32),
                 userId : location.state.userId
             },
             { withCredentials: true }

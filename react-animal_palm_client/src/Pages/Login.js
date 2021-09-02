@@ -28,7 +28,6 @@ export function Login({
       withCredentials : true
     })
     .then((res) => {
-      console.log(res)
       const message = res.data.message;
 
       if(message === 'ok') {
