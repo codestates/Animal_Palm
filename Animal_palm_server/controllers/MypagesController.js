@@ -15,7 +15,6 @@ module.exports = {
     //업데이트 된 데이터 돌려줄 필요 X
     //비밀번호도 수정할 수 있으니까 body에 hashing된 비밀번호까지 받아도 되지 않을까?
     //hashing은 advanced에서 최우선으로
-    console.log('1234')
     
     const [accessToken, refreshToken] = await verifyToken(req);
     if(!accessToken) return res.status(401).send("invalid token");
@@ -27,7 +26,7 @@ module.exports = {
       else {
         //해당 유저가 존재하면 update
         for(let key in req.body) user.update({ [key] : req.body[key] });
-        console.log(user)
+
         return res.status(201)
           .cookie('accessToken', accessToken, { httpOnly: true })
           .cookie('refreshToken', refreshToken, { httpOnly: true })
@@ -47,7 +46,6 @@ module.exports = {
     if(!accessToken) return res.status(401).send("invalid token");
     else {
       const user = await decodeToken(accessToken);
-      console.log(user.dataValues);
 
       if(!user) return res.status(401).send("invalid token");
       else {
@@ -77,7 +75,6 @@ module.exports = {
 
       if(!user) return res.status(401).send("invalid token");
       else {
-        console.log(user)
         //해당 유저가 존재하면 -> client에서 필요한 정보만 뽑아서 넘김
         const userInfo = {
           id: user.id,

@@ -96,7 +96,6 @@ module.exports ={
   userDelete: async (req, res) => {
     //*DELETE / endpoint http://localhost:4000/user/userDelete
     //TODO: 회원 탈퇴 기능 구현
-
     //현재 로그인 되어있는 유저의 정보를 삭제
     //destroy method 사용
     //-> 현재 로그인 되어있는 유저를 DB에서 찾은 뒤 그 유저를 destory
@@ -127,7 +126,6 @@ module.exports ={
   MBTI_signUp: async (req, res) => {
     //*POST / endpoint http://localhost:4000/user/animal
     //TODO: 현재 가입중인 유저의 MBTI 정보 추가
-
     //req.body에 넘겨받은 아이디의 유저 탐색
     //해당 유저의 MBTI 정보 추가
 
@@ -144,7 +142,6 @@ module.exports ={
   userIdCheck: async (req, res) => {
     //*POST / endpoint http://localhost:4000/user/userid
     //TODO: 가입 중 아이디 중복체크
-
     //req.body로 넘겨받은 아이디가 user 테이블에 있는지 findOne으로 확인
     //있으면 409, 없으면 200
 

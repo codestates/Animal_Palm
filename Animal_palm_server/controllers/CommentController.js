@@ -14,7 +14,6 @@ module.exports ={
       const post = await models.posts.findOne({where:{
         id: postId
       }})
-      // if(!post||post.id !== postId) return res.status(401).send("invalid access");
       
         const data = await models.comments.findAll({where:{
           postId:postId
@@ -27,7 +26,7 @@ module.exports ={
       
     }
     //req.params에 담긴 현재 게시글의 id를 통해 탐색 가능
-    //comments.findAll({where: {post_Id = req.params.postId}})
+    //-> comments.findAll({where: {post_Id = req.params.postId}})
     //return값은 배열로 받게됨
     //해당 배열(=result)을 map해서 client에서 사용 가능한 형태로 body에 담아 응답
 
@@ -52,7 +51,6 @@ module.exports ={
       const post = await models.posts.findOne({where:{
         id: postId
       }})
-      // if(!post||post.id !== postId) return res.status(401).send("invalid access");
     
         await models.comments.create({
           content:content,
@@ -94,7 +92,6 @@ module.exports ={
         id:commentId,
         userId:user.id
       }})
-      // if(!userData || userData.id !== user.id) return res.status(401).json({message:"invalid access"});
       
         await models.comments.destroy({where:{id:commentId}})
         return res.status(200).json({message:"ok"});
