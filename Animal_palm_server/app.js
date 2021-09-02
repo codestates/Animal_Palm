@@ -16,8 +16,8 @@ const userRouter = require("./router/UserRouter")
 app.use(express.json())
 app.use(express.urlencoded({extended:false}));
 app.use(cors({
-  origin : ['http://localhost:3000', process.env.REACT_APP_API_URL],
-  credentials : true
+  origin : ['http://localhost:3000', process.env.REACT_APP_API_URL, ''],
+  credentials : true,
 }))
 app.use('/boards',boardRouter)
 app.use('/user',userRouter)
