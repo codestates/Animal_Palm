@@ -4,7 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import axios from 'axios';
 
 import logo from '../../images/logo.PNG'
-const { test, real } = require('../Dummy/url');
+
 
 
 
