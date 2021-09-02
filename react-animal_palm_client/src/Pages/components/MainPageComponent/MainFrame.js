@@ -1,16 +1,22 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom'
-import image1 from '../../../images/01.jpg'
-import image2 from '../../../images/02.jpg'
-import image3 from '../../../images/03.jpg'
+import { Link,useHistory } from 'react-router-dom'
+import image1 from '../../../images/04.jpg'
+import image2 from '../../../images/05.jpg'
+import image3 from '../../../images/06.jpg'
+import axios from 'axios'
 
-export const MainFrame = () => {
+export const MainFrame = ({
+  isLogin,
+  handleLogout
+}) => {
+  const history = useHistory()
   const [index,setIndex] = useState(0);
   const [bodyOffset,setBodyOffset] = useState(
     document.body.getBoundingClientRect()
   )
   const [scrollY,setScrollY] = useState(bodyOffset.top)
+
   const [randomPosts,setRandomPosts] = useState([])
   const loadRandomPosts = () => {
     axios
@@ -34,16 +40,15 @@ export const MainFrame = () => {
   
 
   const check = (scrollY)=>{
-    if(scrollY < 970) setIndex(0)
-    else if(scrollY < 1400) setIndex(1)
+    console.log(scrollY)
+    if(scrollY < 850) setIndex(0)
+    else if(scrollY < 1500) setIndex(1)
     else if(scrollY < 2000) setIndex(2)
   }
   const listener = e =>{
     setBodyOffset(document.body.getBoundingClientRect());
     setScrollY(-bodyOffset.top);
     check(scrollY)
-    //console.log(index)
-    //console.log(document.body.childNodes[3].childNodes[0].childNodes[0].childNodes[1].childNodes[1].childNodes[0].childNodes[index].getBoundingClientRect())
   }
   useEffect(() => {
     window.addEventListener("scroll", listener);
@@ -51,7 +56,27 @@ export const MainFrame = () => {
       window.removeEventListener("scroll", listener);
     };
   });
+    useEffect(()=>{
+      loadContentList()
+    },[])
+
+  const loadContentList = () => {
+        axios
+        .get(
+            `${process.env.REACT_APP_API_URL}/main`,
+            { withCredentials: true }
+        )
+        .then(data => {
+            console.log(data.data)
+            setConents(data.data.data)
+        })
+        .catch((err)=>{
+              alert(err)
+        })
+    }
+
   return (
+
     <div className='main-page'>
       <header className="header">
         <div className="global-width">
@@ -73,44 +98,26 @@ export const MainFrame = () => {
 		<div className="scroll-text global-width">
 			<div data-data="1" className="bubble">
 				<p>
-					간단한 설명
+        <br></br>
+        간단한테스트로 통해서 당신의 동물이 무엇인지 찾아보아요!!
+        <br></br><br></br>
+        혹시 '나와 같은 동물을 찾고 싶어' 라는 생각이 들었던 적이 있나요?
+        <br></br><br></br>
+        당신의 동물 당신의 동물친구을 찾아서 서로 소통 해봐요
+        <br></br><br></br>
         </p>
 			</div>
-			<div className="bubble">
-				<p>
-          {randomPosts[0]}
-				</p>
-			</div>
-			<div className="bubble">
-				<p>
-          {randomPosts[1]}
-				</p>
-			</div>
-			<div className="bubble">
-				<p>
-          {randomPosts[2]}
-				</p>
-			</div>
-			<div className="bubble">
-				<p>
-          {randomPosts[3]}
-				</p>
-			</div>
-			<div className="bubble">
-				<p>
-          {randomPosts[4]}
-				</p>
-			</div>
+
 		</div>
 	</section>
 	<section className="normal-content global-width">
-		<h2>자세한 설명</h2>
-		<p>원격근무 하시는 개발자 디자이너분들, 제주로 오세요. 진짜 좋아요. Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis ullam culpa ab, laborum repellat ut quae deleniti nostrum sapiente illum!</p>
-		<h2>자세한 설명2</h2>
-		<p>언택트(Untact)'란 '콘택트(contact: 접촉하다)'에서 부정의 의미인 '언(un-)을 합성한 말로, 기술의 발전을 통해 비대면으로 이루어지는 활동 경향을 의미한다. Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam provident voluptatum numquam dolorum, quod odio.</p>
-		<h2>내일은 어떤 모습일까</h2>
-		<p>똑같겠지 다를게 있나 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Qui impedit numquam atque quidem quos facere obcaecati deleniti labore culpa esse nostrum dicta earum rem ducimus, voluptates eligendi voluptate exercitationem dolorem!</p>
+	<h2>나는 어떤 동물일까?</h2>
+            <p>간단한 테스트를 통해 당신은 어떤 동물인지 알아보세요!<br></br><br></br> 같은 동물들끼리 이야기를 나눌 수 있어요.</p>
+        <h2>동물친구들을 찾아 보아요!</h2>
+            <p>모든 동물친구들이 모이는 게시판에서 동물친구들과 도란도란 함께 이야기 나눠요~<br></br> <br></br>동물마다 게시판이 있어요. 다른 동물들은 엿 볼 수 없으니 안심하세요!</p>
 	</section>	
     </div>
+
+    </>
   );
 };
