@@ -4,6 +4,15 @@
 .main-page  div, section, header, footer, p, h1, h2 {
 	box-sizing: border-box;
 }
+.main-page .header {
+    display: flex;
+    width: 100%;
+    min-height: 300px;
+    height: 25em;
+}
+.main-page .header .page-title{
+    font-size: 40pt;
+}
 a {
 	color: rgb(205, 144, 98);
 }
@@ -59,47 +68,38 @@ a {
     border-radius: 10px;
     box-shadow: rgba(0,0, 0, 0.3) 0 0 3px;
 }
-
-
-.welcome {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-     
+.tracking-in-expand {
     font-weight: bold;
-    text-decoration: none;
-    z-index: 100;
-    
-    color: rgba(0, 0, 0);
-    background-color: rgb(205, 144, 98);
-    border-radius: 10px;
-
-    width: 200px;
-    height: 100px;
-    
+	-webkit-animation: tracking-in-expand 0.9s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+	        animation: tracking-in-expand 0.9s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
 }
-.welcome:hover{
-    cursor: pointer;
-    
+ @-webkit-keyframes tracking-in-expand {
+    0% {
+      letter-spacing: -0.5em;
+      opacity: 0;
+    }
+    40% {
+      opacity: 0.6;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes tracking-in-expand {
+    0% {
+      letter-spacing: -0.5em;
+      opacity: 0;
+    }
+    40% {
+      opacity: 0.6;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+.main-page .dir {
+    font-weight: lighter;
+    font-size: 100pt;
 }
 
-
-
-/* a.button2:hover {
-	color: rgba(255, 255, 255, 0.85);
-	box-shadow: rgba(233, 212, 29, 0.85) 0 80px 0px 2px inset;
-}
-a.button2 {
-	-webkit-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
-	-moz-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
-	-ms-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
-	-o-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
-	transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
-	
-	margin: 20px auto;
-	max-width: 180px;
-	text-decoration: none;
-	border-radius: 4px;
-	padding: 20px 30px;
-} */

@@ -5,10 +5,10 @@ import BoardList from './components/BoardComponents/BoardList';
 import BoardPost from './components/BoardComponents/BoardPost';
 import BoardWrite from './components/BoardComponents/BoardWrite';
 
-export function Board({animalName}) {
+export function Board({animalName, isLogin}) {
   return (
     <div>    
-      <Navigaitionbar />
+      <Navigaitionbar isLogin={isLogin}/>
       <BrowserRouter>
         <div className="Board">
           <Switch>
@@ -26,8 +26,5 @@ export function Board({animalName}) {
         </div>
       </BrowserRouter>
     </div>
-
   );
 }
-
-

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link,useHistory } from 'react-router-dom'
 import image1 from '../../../images/04.jpg'
@@ -15,7 +16,27 @@ export const MainFrame = ({
     document.body.getBoundingClientRect()
   )
   const [scrollY,setScrollY] = useState(bodyOffset.top)
-  const [contents,setConents] = useState([])
+
+  const [randomPosts,setRandomPosts] = useState([])
+  const loadRandomPosts = () => {
+    axios
+    .get(
+      `${process.env.REACT_APP_API_URL}/main`,
+      { withCredentials: true }
+    )
+    .then(data => {
+      setRandomPosts(data.data.data.map(el=>{return (
+        <div>
+          <h4>{el.title}</h4>
+          <div>{el.content}</div>
+        </div>
+        )} ))
+    })
+  }
+  useEffect(()=>{
+    loadRandomPosts()
+  },[])
+
   
 
   const check = (scrollY)=>{
@@ -55,14 +76,18 @@ export const MainFrame = ({
     }
 
   return (
-    <>
-    <header>
-      {isLogin? <div className='welcome' onClick={()=>history.push('/board')}>
-                동물친구 만나러 가기
-                  </div> : null}
-    </header>
-  <div className='main-page'>
-    
+
+    <div className='main-page'>
+      <header className="header">
+        <div className="global-width">
+          <div className={scrollY <= 100?'tracking-in-expand page-title' : 'page-title'}>Animal Palm</div>
+          {/* <div class="page-title">제목</div> */}
+          <p>
+            스크롤 해보세요!<br/>
+            <div className='dir'>|</div>
+          </p>
+        </div>
+      </header>  
 	<section className="scroll-content">
 		<div className="scroll-graphic">
 			<div  className={index === 0 ? "graphic-item visivle" : "graphic-item"}><img className="scene-img" src={image1} alt="" /></div>
@@ -82,10 +107,7 @@ export const MainFrame = ({
         <br></br><br></br>
         </p>
 			</div>
-      {contents.map((el,idx)=>{
-        return(<div key={idx} className="bubble"> <p>{el.title} -{el.animalId}</p></div>)
-      })}
-			<div className="bubble"><p>당신의 발자국을 남겨주세요</p></div>
+
 		</div>
 	</section>
 	<section className="normal-content global-width">
