@@ -123,6 +123,7 @@ export default function BoardPost() {
         <div className="Board_post">
             <div className="Header">
                 <h1>{context.title}</h1>
+                <span>{context.userId}</span>
             </div>
             <button className="deleteContext" onClick={deleteContext}>글삭제</button>
             <div className="Container">

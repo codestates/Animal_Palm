@@ -131,6 +131,15 @@
 .Header {
     margin-bottom: 10px;
     border-bottom: 3px solid #ccc;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding-right: 6%;
+}
+
+.Header > span {
+    font-size: 14px;
+    font-weight: bold;
 }
 
 .Header > h1 {
