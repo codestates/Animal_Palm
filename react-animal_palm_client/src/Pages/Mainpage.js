@@ -66,11 +66,20 @@ export default function Mainpage  ({
       />
       </div>
   <div className='main-page'>
-    
-	<section className="scroll-content">
-    {isLogin? <div className='welcome ' onClick={()=>history.push('/board')}>
+  <header className={isLogin? "header" : "header default"}>
+        <div className="global-width">
+    {isLogin? <div className='welcome' onClick={()=>history.push('/board')}>
                 동물친구 만나러 가기
                   </div> : null}
+        <div className={scrollY <= 100?'tracking-in-expand page-title' : 'page-title'}>Animal Palm</div>
+          {/* <div class="page-title">제목</div> */}
+          <p>
+            스크롤 해보세요!<br/>
+            <div className='dir'>|</div>
+          </p>
+        </div>
+      </header>
+	<section className="scroll-content">
 		<div className="scroll-graphic">
     
 			<div  className={index === 0 ? "graphic-item visivle" : "graphic-item"}><img className="scene-img" src={image1} alt="" /></div>
@@ -79,7 +88,7 @@ export default function Mainpage  ({
 			
 		</div>
 		<div className="scroll-text global-width">
-			<div data-data="1" className="bubble">
+			<div data-data="1" className="bubble first">
 				<p>
         <br></br>
         간단한테스트로 통해서 당신의 동물이 무엇인지 찾아보아요!!
@@ -91,9 +100,11 @@ export default function Mainpage  ({
         </p>
 			</div>
       {contents.map((el,idx)=>{
-        return(<div key={idx} className="bubble"> <p>{el.title} -{el.animalId}</p></div>)
+        return(<div key={idx} className="bubble"> <div>{el.title} -{el.animalId}</div>
+        <div className='context'>{el.content}</div>
+        </div>)
       })}
-			<div className="bubble"><p>당신의 발자국을 남겨주세요</p></div>
+			<div className="bubble final"><p>당신의 발자국을 남겨주세요</p></div>
 		</div>
 	</section>
 	<section className="normal-content global-width">

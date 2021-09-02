@@ -29,13 +29,13 @@ export const ContentsList = ({
               onClick={show === 'post'? ()=>clickPostHandler(item.id, item.animalId)
               :null}
             >
-              <td onClick={show==='comment'?() => clickPostHandler(item.postId, userInfo.animalId): null}>{i + 1}</td>
+              <td onClick={show==='comment'?() => clickPostHandler(item.postId, item.animalId): null}>{i + 1}</td>
               {show === 'post'?
                 <td>{item.animalId}</td>
                 : null
               }
-              <td onClick={show==='comment'?() => clickPostHandler(item.postId, userInfo.animalId): null}>{show === 'post'? item.title:item.content}</td>
-              <td onClick={show==='comment'?() => clickPostHandler(item.postId, userInfo.animalId): null}>{getParsedDate(item.createdAt)}</td>
+              <td onClick={show==='comment'?() => clickPostHandler(item.postId, item.animalId): null}>{show === 'post'? item.title:item.content}</td>
+              <td onClick={show==='comment'?() => clickPostHandler(item.postId, item.animalId): null}>{getParsedDate(item.createdAt)}</td>
               {show === 'comment'?
                 <td>
                   <button
