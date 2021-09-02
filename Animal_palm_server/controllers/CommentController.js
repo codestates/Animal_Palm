@@ -2,6 +2,11 @@ const models = require('../models/')
 const {checkAnimal} = require('./check/')
 const {verifyToken,decodeToken} = require('./VerifyToken')
 
+const COOKIEOPTION = {
+  httpOnly: true,
+  sameSite: 'None'
+}
+
 module.exports ={
   comment:async (req,res) => {
     //*GET method / endpoint: http://localhost:4000/comments/:postid
@@ -35,8 +40,8 @@ module.exports ={
         
         
         return res.status(201)
-          .cookie('accessToken', accessToken, { httpOnly: true })
-          .cookie('refreshToken', refreshToken, { httpOnly: true })
+          .cookie('accessToken', accessToken, COOKIEOPTION)
+          .cookie('refreshToken', refreshToken, COOKIEOPTION)
           .json({data:arr});
       
     }
@@ -74,8 +79,8 @@ module.exports ={
           })
         
         return res.status(201)
-          .cookie('accessToken', accessToken, { httpOnly: true })
-          .cookie('refreshToken', refreshToken, { httpOnly: true })
+          .cookie('accessToken', accessToken, COOKIEOPTION)
+          .cookie('refreshToken', refreshToken, COOKIEOPTION)
           .json({message:"ok"});
       
     }

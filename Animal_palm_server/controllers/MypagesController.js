@@ -4,6 +4,10 @@ const Sequelize = require('sequelize');
 
 const { checkAnimal } = require('./check/');
 const { verifyToken, decodeToken } = require('./VerifyToken');
+const COOKIEOPTION = {
+  httpOnly: true,
+  sameSite: 'None'
+}
 
 module.exports = {
   update: async (req, res) => {
@@ -28,8 +32,8 @@ module.exports = {
         for(let key in req.body) user.update({ [key] : req.body[key] });
 
         return res.status(201)
-          .cookie('accessToken', accessToken, { httpOnly: true })
-          .cookie('refreshToken', refreshToken, { httpOnly: true })
+          .cookie('accessToken', accessToken, COOKIEOPTION)
+          .cookie('refreshToken', refreshToken, COOKIEOPTION)
           .send("update_data");
       }
     }
@@ -52,8 +56,8 @@ module.exports = {
         //해당 유저가 존재하면 -> body로 받은 password와 비교
         if(user.password === req.body.password) {
           return res.status(200)
-            .cookie('accessToken', accessToken, { httpOnly: true })
-            .cookie('refreshToken', refreshToken, { httpOnly: true })
+            .cookie('accessToken', accessToken, COOKIEOPTION)
+            .cookie('refreshToken', refreshToken, COOKIEOPTION)
             .send("correct passwd");
         } 
         else return res.status(202).send('일치하지 않는 경우 응답 내용');
@@ -85,8 +89,8 @@ module.exports = {
         }
 
         return res.status(200)
-          .cookie('accessToken', accessToken, { httpOnly: true })
-          .cookie('refreshToken', refreshToken, { httpOnly: true })
+          .cookie('accessToken', accessToken, COOKIEOPTION)
+          .cookie('refreshToken', refreshToken, COOKIEOPTION)
           .send({
             "message" : "ok",
             "data" : userInfo
@@ -128,8 +132,8 @@ module.exports = {
         })
 
         return res.status(200)
-        .cookie('accessToken', accessToken, { httpOnly: true })
-        .cookie('refreshToken', refreshToken, { httpOnly: true })
+        .cookie('accessToken', accessToken, COOKIEOPTION)
+        .cookie('refreshToken', refreshToken, COOKIEOPTION)
         .send({
           "message" : "ok",
           "data" : userComments
