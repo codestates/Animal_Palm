@@ -21,7 +21,6 @@ export default function BoardList({animalId}) {
             { withCredentials: true }
         )
         .then(data => {
-            console.log(data.data)
             setContentList(data.data.data)
         })
         .catch((err)=>{

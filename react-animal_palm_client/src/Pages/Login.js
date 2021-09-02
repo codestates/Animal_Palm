@@ -14,7 +14,6 @@ export function Login({
   })
   const handleInputValue = (e) => {
     setLoginInfo({...loginInfo, [e.target.name] : e.target.value})
-    // console.log(loginInfo)
   }
   const LoginHandler = () => {
     if(loginInfo.userId === '' || loginInfo.password === '') {

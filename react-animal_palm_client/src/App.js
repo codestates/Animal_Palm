@@ -24,7 +24,7 @@ function App() {
 
   return (
     <BrowserRouter>
-    <div className="App">{console.log(userInfo)}
+    <div className="App">
       <Route exact path="/">
           <Mainpage
             isLogin={isLogin}
@@ -48,7 +48,6 @@ function App() {
           <Signup />
         </Route>
         <Route path="/board">
-          {console.log(userInfo)}
           <Board animalName={userInfo.animalId} isLogin={isLogin} handleLogout={handleLogout}/>
         </Route>
         

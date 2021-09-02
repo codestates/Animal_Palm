@@ -13,7 +13,6 @@ export function Board({animalName, isLogin, handleLogout}) {
         <div className="Board">
           <Switch>
             <Route exact path="/board">
-              {console.log(animalName)}
               <BoardList animalId={animalName} />
             </Route>
             <Route path="/board/post">
