@@ -1,4 +1,6 @@
 const Users = require('../models/').users;
+const Posts = require('../models/').posts;
+const Comments = require('../models/').comments;
 const jwt = require('jsonwebtoken');
 
 const { verifyToken, decodeToken } = require('./VerifyToken');
@@ -107,6 +109,10 @@ module.exports ={
 
       if(!user) return res.status(401).send("invalid token");
       else {
+        const userComment = await Comments.findAll({ where : { userId : user.id } });
+        const userPost = await Posts.findAll({ where : { userId : user.id } });
+        userComment.forEach((comment) => { comment.destroy() });
+        userPost.forEach((post) => { post.destroy(); });
         user.destroy();
         
         res.status(200)
