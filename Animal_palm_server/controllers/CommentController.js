@@ -94,7 +94,7 @@ module.exports ={
         id:commentId,
         userId:user.id
       }})
-      console.log(user,userData)
+      
       if(userData === null) return res.status(401).json({message:"invalid user"});
 
       
