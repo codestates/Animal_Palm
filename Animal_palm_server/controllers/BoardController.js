@@ -1,16 +1,14 @@
 
 const models = require('../models/')
-const { post } = require('../router/BoardRouter')
+
 const {checkAnimal} = require('./check/')
 const {verifyToken,decodeToken} = require('./VerifyToken')
+
 
 module.exports ={
   getPostList:async (req, res) => {
     if(!req.headers.cookie) return res.status(401).json({message:"invalid authority"})
     //*GET / endpoint: http://localhost:4000/boards/:animalId 
-
-    
-
     //const data = await posts.findAll()
     //req.params에 담긴 id로 postDB 조회
     //post.board_name이 req.params.id와 같은 데이터 검색
@@ -86,19 +84,32 @@ module.exports ={
     const [accessToken, refreshToken] = await verifyToken(req);
     if(!accessToken) return res.status(401).send("invalid token");
     else {
-      const user = await decodeToken(accessToken);
+
       const data =await models.posts.findOne({where:{
         id:postId,
         animalId:animalId
         }})
-        
+      const user = await models.users.findOne({where:{
+        id:data.userId
+      }})
+      const arr = [{
+        id:data.id,
+        animalId:data.animalId,
+        content: data.content,
+        title:data.title,
+        createdAt:data.createdAt,
+        updatedAt:data.updatedAt,
+        userId:checkAnimal(user.animalId)
+      }]
+
+      
     // if(data === null ) return res.status(404).json({message:"invalid post"})    
     // if(user.id !== data.userId) return res.status(404).json({message:"invalid post"})    
     
       return res.status(200)
         .cookie('accessToken', accessToken, { httpOnly: true })
         .cookie('refreshToken', refreshToken, { httpOnly: true })
-        .json({data:data});
+        .json({data:arr});
       
     }    
   },
