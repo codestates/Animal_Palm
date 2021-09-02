@@ -94,10 +94,16 @@ module.exports ={
         id:commentId,
         userId:user.id
       }})
-      // if(!userData || userData.id !== user.id) return res.status(401).json({message:"invalid access"});
+      console.log(user,userData)
+      if(userData === null) return res.status(401).json({message:"invalid user"});
+
       
-        await models.comments.destroy({where:{id:commentId}})
-        return res.status(200).json({message:"ok"});
+        
+        if(userData.userId===user.id){
+          await models.comments.destroy({where:{id:commentId}})
+          return res.status(200).json({message:"ok"});
+        }
+        
       
     }
   }
